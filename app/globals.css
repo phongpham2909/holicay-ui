@@ -3,6 +3,101 @@
 @tailwind utilities;
 
 :root {
+  /* Brand color - Your brand color defines the interface's feel and elicits emotion, used consistently across interactive elements. */
+  /* Primary */
+  --color-primary-50: #FEF3F2;
+  --color-primary-100: #FEE4E2;
+  --color-primary-200: #FFCEC9;
+  --color-primary-300: #FDACA4;
+  --color-primary-400: #FA7B6F;
+  --color-primary-500: #F25142;
+  --color-primary-600: #DF3323;
+  --color-primary-700: #BC2719;
+  --color-primary-800: #9B2419;
+  --color-primary-900: #81241B;
+  /* Secondary */
+  --color-secondary-50: #EDFCFC;
+  --color-secondary-100: #D1F5F5;
+  --color-secondary-200: #A6E6EC;
+  --color-secondary-300: #6FBAC8;
+  --color-secondary-400: #408092;
+  --color-secondary-500: #133A4A;
+  --color-secondary-600: #0D2D3F;
+  --color-secondary-700: #092235;
+  --color-secondary-800: #06182A;
+  --color-secondary-900: #031123;
+  /* Neutral color - Neutral color is foundational in UI design, used for text, form fields, backgrounds, and dividers. */
+  /* Base */
+  --color-base-black: #000000;
+  --color-base-white: #FFFFFF;
+  --color-base-transparent: #FFFFFF00;
+  /* Gray */
+  --color-gray-50: #FAFAFA;
+  --color-gray-100: #F5F5F5;
+  --color-gray-200: #E9EAEB;
+  --color-gray-300: #D5D7DA;
+  --color-gray-400: #A4A7AE;
+  --color-gray-500: #717680;
+  --color-gray-600: #535862;
+  --color-gray-700: #414651;
+  --color-gray-800: #252B37;
+  --color-gray-900: #101828;
+  /* Semantic color - Highlight semantic states to provide visual feedback and warnings during interface use. */
+  /* Error */
+  --color-error-50: #FEF3F2;
+  --color-error-100: #FFCCC7;
+  --color-error-200: #FFA39E;
+  --color-error-300: #FF7875;
+  --color-error-400: #FF4D4F;
+  --color-error-500: #F5222D;
+  --color-error-600: #CF1322;
+  --color-error-700: #A8071A;
+  --color-error-800: #820014;
+  --color-error-900: #5C0011;
+  /* Warning */
+  --color-warning-50: #FFFBE6;
+  --color-warning-100: #FFF1B8;
+  --color-warning-200: #FFE58F;
+  --color-warning-300: #FFD666;
+  --color-warning-400: #FFC53D;
+  --color-warning-500: #FAAD14;
+  --color-warning-600: #D48806;
+  --color-warning-700: #AD6800;
+  --color-warning-800: #874D00;
+  --color-warning-900: #613400;
+  /* Success */
+  --color-success-50: #F7FFEF;
+  --color-success-100: #ECFCDE;
+  --color-success-200: #D6F9BF;
+  --color-success-300: #B6EF9B;
+  --color-success-400: #96E07E;
+  --color-success-500: #69CC55;
+  --color-success-600: #48AF3E;
+  --color-success-700: #2C922A;
+  --color-success-800: #1B7620;
+  --color-success-900: #10611B;
+  /* Information */
+  --color-info-50: #E8FAFF;
+  --color-info-100: #D3F6FF;
+  --color-info-200: #A9E8FF;
+  --color-info-300: #7ED5FF;
+  --color-info-400: #5DC2FF;
+  --color-info-500: #28A2FF;
+  --color-info-600: #1D7EDB;
+  --color-info-700: #145EB7;
+  --color-info-800: #0C4293;
+  --color-info-900: #072F7A;
+  /* Additional */
+  --color-additional-50: #F9F5FF;
+  --color-additional-100: #F4EBFF;
+  --color-additional-200: #E9D7FE;
+  --color-additional-300: #D6BBFB;
+  --color-additional-400: #B692F6;
+  --color-additional-500: #9E77ED;
+  --color-additional-600: #7F56D9;
+  --color-additional-700: #6941C6;
+  --color-additional-800: #53389E;
+  --color-additional-900: #42307D;
   --background: #ffffff;
   --foreground: #171717;
 }
