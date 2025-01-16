@@ -14,9 +14,9 @@ const meta = {
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+  // argTypes: {
+  //   backgroundColor: { control: 'color' },
+  // },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
@@ -27,27 +27,54 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
-    primary: true,
+    type: 'primary',
     label: 'Button',
   },
 };
 
 export const Secondary: Story = {
   args: {
+    type: 'secondary',
+    label: 'Button',
+  },
+};
+
+export const ExtraExtraLarge: Story = {
+  args: {
+    size: '2xl',
+    type: 'primary',
+    label: 'Button',
+  },
+};
+
+export const ExtraLarge: Story = {
+  args: {
+    size: 'xl',
+    type: 'primary',
     label: 'Button',
   },
 };
 
 export const Large: Story = {
   args: {
-    size: 'large',
+    size: 'lg',
+    type: 'primary',
+    label: 'Button',
+  },
+};
+
+export const Medium: Story = {
+  args: {
+    size: 'md',
+    type: 'primary',
     label: 'Button',
   },
 };
 
 export const Small: Story = {
   args: {
-    size: 'small',
+    size: 'sm',
+    type: 'primary',
     label: 'Button',
   },
 };

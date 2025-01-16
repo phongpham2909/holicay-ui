@@ -98,8 +98,16 @@
   --color-additional-700: #6941C6;
   --color-additional-800: #53389E;
   --color-additional-900: #42307D;
+  /* Others */
   --background: #ffffff;
   --foreground: #171717;
+  --surface-overlay-w: #FFFFFF80;
+  --surface-overlay-w_hover: #FFFFFFA6;
+  --surface-overlay-w_active: #FFFFFFB2;
+  --surface-overlay-w_disabled: #FFFFFF4D;
+
+  --elevation-shadow_low: rgba(16, 24, 40, 0.06);
+  --elevation-shadow_high: rgba(16, 24, 40, 0.18);
 }
 
 @media (prefers-color-scheme: dark) {
