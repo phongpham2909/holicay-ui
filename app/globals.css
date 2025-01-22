@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '../public/css/icons.css';
+
 :root {
   /* Brand color - Your brand color defines the interface's feel and elicits emotion, used consistently across interactive elements. */
   /* Primary */
