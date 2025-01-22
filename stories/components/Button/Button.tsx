@@ -5,46 +5,59 @@ import "./button.css";
 
 export interface ButtonProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, "type" | "color"> {
-  label: string;
+  label?: string;
   size?: "sm" | "md" | "lg" | "xl" | "2xl";
   type?: "primary" | "secondary" | "text" | "link";
   color?: "primary" | "gray";
+  danger?: boolean;
+  disabled?: boolean;
+  icon?: React.ReactElement;
   iconLeft?: React.ReactElement;
   iconRight?: React.ReactElement;
   htmlType?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
   onClick?: () => void;
 }
 
-/** Primary UI component for user interaction */
+/** A button triggers an event or action. They let users know what will happen next. */
 export const Button = ({
-  label,
   size = "md",
   type = "primary",
   color = "primary",
+  htmlType = "button",
+  label,
+  icon,
+  className,
   iconLeft,
   iconRight,
-  htmlType = "button",
-  className = "",
+  danger = false,
+  disabled = false,
   children,
-  ...props
+  ...rest
 }: ButtonProps) => {
+
   return (
     <button
-      {...props}
+      {...rest}
       type={htmlType}
+      disabled={disabled}
       className={clsx(
-        "btn-base",
-        `btn-${type}`,
-        `btn-color-${color}`,
-        `btn-${size}`,
+        "hlc-btn-base",
+        `hlc-btn-${type}`,
+        `hlc-btn-color-${color}`,
+        `hlc-btn-size-${size}`,
         {
-          "bth-icon-left": !!iconLeft,
-          "btn-icon-right": !!iconRight,
-          [className]: !!className,
+          "hlc-btn-icon-only": !children && !label,
+          "hlc-btn-icon hlc-btn-icon-left": !!iconLeft || !!icon,
+          "hlc-btn-icon hlc-btn-icon-right": !!iconRight,
+          "hlc-btn-danger": danger,
+          "hlc-btn-disabled": disabled,
+          [className as string]: !!className,
         }
       )}
     >
+      {icon || iconLeft}
       {children || label}
+      {iconRight &&  iconRight}
     </button>
   );
 };

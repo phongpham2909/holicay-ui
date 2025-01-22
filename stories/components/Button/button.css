@@ -1,55 +1,245 @@
-.storybook-button {
-  display: inline-block;
-  cursor: pointer;
-  border: 0;
-  border-radius: 3em;
-  font-weight: 700;
-  line-height: 1;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.storybook-button--primary {
-  background-color: #1ea7fd;
-  color: white;
-}
-.storybook-button--secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
-  color: #333;
-}
-.storybook-button--small {
-  padding: 10px 16px;
-  font-size: 12px;
-}
-.storybook-button--medium {
-  padding: 11px 20px;
-  font-size: 14px;
-}
-.storybook-button--large {
-  padding: 12px 24px;
-  font-size: 16px;
+.hlc-btn-base {
+  @apply cursor-pointer inline-block text-center select-none not-italic rounded-sm;
 }
 
-.btn-base {
-  @apply cursor-pointer inline-block border-none text-center select-none not-italic rounded-sm;
+.hlc-btn-disabled {
+  @apply cursor-not-allowed;
 }
-.btn-primary {
-  @apply bg-brand-red text-white;
+/* Button Size */
+.hlc-btn-size-sm {
+  @apply px-3.5 py-[7px] text-sm;
 }
-.btn-secondary {
-  @apply bg-surface-base-primary text-primary-500;
+.hlc-btn-size-md {
+  @apply px-xl py-[9px] text-sm;
 }
-.btn-secondary.btn-secondary-gray {
-  @apply bg-surface-base-primary text-gray-700;
+.hlc-btn-size-lg {
+  @apply px-xl py-[9px] text-base;
 }
-.btn-text {
-  @apply bg-surface-base-primary text-primary-500;
+.hlc-btn-size-xl {
+  @apply px-2xl py-[11px] text-base;
 }
-.btn-text.btn-text-gray {
-  @apply bg-surface-base-primary text-gray-700;
+.hlc-btn-size-2xl {
+  @apply px-3xl py-[13px] text-lg;
 }
-.btn-link {
-  @apply bg-surface-base-primary text-primary-500;
+/* Icon Only */
+.hlc-btn-icon-only {
+  @apply px-0 inline-flex items-center justify-center;
 }
-.btn-link.btn-link-gray {
-  @apply bg-surface-base-primary text-gray-700;
+.hlc-btn-size-sm.hlc-btn-icon-only {
+  @apply min-w-9;
+}
+.hlc-btn-size-md.hlc-btn-icon-only {
+  @apply min-w-10;
+}
+.hlc-btn-size-lg.hlc-btn-icon-only {
+  @apply min-w-[44px];
+}
+.hlc-btn-size-xl.hlc-btn-icon-only {
+  @apply min-w-12;
+}
+.hlc-btn-size-2xl.hlc-btn-icon-only {
+  @apply min-w-14;
+}
+/* Button Icon */
+.hlc-btn-icon:not(.hlc-btn-icon-only) {
+  @apply inline-flex items-center gap-x-md;
+}
+.hlc-btn-icon > .icon {
+  @apply text-[1.25rem];
+}
+.hlc-btn-icon.hlc-btn-size-2xl:not(.hlc-btn-icon-only) {
+  @apply gap-x-lg;
+}
+.hlc-btn-icon.hlc-btn-size-2xl > .icon {
+  @apply text-[1.5rem];
+}
+
+.hlc-btn-primary {
+  @apply relative bg-fill-brand-red-primary border text-white font-semibold shadow-xs transition-all duration-200 ease-out;
+  background-clip: padding-box;
+  border-color: transparent;
+}
+.hlc-btn-primary::before {
+  @apply absolute z-[-1] -m-[1px] inset-0;
+  content: "";
+  background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600)) border-box;
+  border-radius: inherit;
+}
+.hlc-btn-primary:hover {
+  @apply bg-fill-brand-red-primary_hover;
+}
+.hlc-btn-primary:hover::before {
+  background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-700)) border-box;
+}
+.hlc-btn-primary:active {
+  @apply bg-fill-brand-red-primary_active;
+}
+.hlc-btn-primary:active::before {
+  background: linear-gradient(to bottom, var(--color-primary-600), var(--color-primary-800)) border-box;
+}
+.hlc-btn-primary:focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-primary-400 bg-fill-brand-red-primary;
+}
+.hlc-btn-primary:focus-visible::before {
+  background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600)) border-box;
+}
+.hlc-btn-primary.hlc-btn-disabled {
+  @apply bg-surface-base-primary_disabled text-base-primary_disabled border-base-primary_disabled;
+}
+/* Button Primary + danger */
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled) {
+  @apply bg-fill-error-primary;
+}
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled)::before {
+  background: linear-gradient(to bottom, var(--color-error-400), var(--color-error-600)) border-box;
+}
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled):hover {
+  @apply bg-fill-error-primary_hover;
+}
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled):hover::before {
+  background: linear-gradient(to bottom, var(--color-error-500), var(--color-error-700)) border-box;
+}
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled):active {
+  @apply bg-fill-error-primary_active;
+}
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled):active::before {
+  background: linear-gradient(to bottom, var(--color-error-600), var(--color-error-800)) border-box;
+}
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled):focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-error-400 bg-fill-error-primary;
+}
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled):focus-visible::before {
+  background: linear-gradient(to bottom, var(--color-error-400), var(--color-error-600)) border-box;
+}
+
+.hlc-btn-secondary {
+  @apply bg-surface-base-primary text-brand-red-primary border border-brand-red-primary font-semibold shadow-xs;
+}
+.hlc-btn-secondary:hover {
+  @apply bg-surface-brand-red-primary_hover text-brand-red-primary_hover border-brand-red-primary_hover;
+}
+.hlc-btn-secondary:active {
+  @apply bg-surface-brand-red-primary_active text-brand-red-primary_active border-brand-red-primary_active;
+}
+.hlc-btn-secondary:focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-primary-400 bg-surface-base-primary text-brand-red-primary;
+}
+.hlc-btn-secondary.hlc-btn-disabled {
+  @apply bg-surface-base-primary text-base-primary_disabled border-base-primary_disabled;
+}
+/* Button Secondary + danger */
+.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-secondary.hlc-btn-disabled) {
+  @apply text-error-primary border-error-primary;
+}
+.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-secondary.hlc-btn-disabled):hover {
+  @apply bg-surface-error-primary_hover text-error_hover border-error_hover;
+}
+.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-secondary.hlc-btn-disabled):active {
+  @apply bg-surface-error-primary_active text-error_active border-error_hover;
+}
+.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-secondary.hlc-btn-disabled):focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-error-400 text-error-primary border-error-primary;
+}
+
+.hlc-btn-secondary.hlc-btn-color-gray {
+  @apply bg-surface-base-primary text-base-secondary border-base-primary;
+}
+.hlc-btn-secondary.hlc-btn-color-gray:hover {
+  @apply bg-surface-base-primary_hover text-base-secondary_hover border-base-primary_hover;
+}
+.hlc-btn-secondary.hlc-btn-color-gray:active {
+  @apply bg-surface-base-primary_active text-base-secondary_active border-base-primary_active;
+}
+.hlc-btn-secondary.hlc-btn-color-gray.hlc-btn-disabled {
+  @apply bg-surface-base-primary text-base-secondary_disabled border-base-primary_disabled;
+}
+
+.hlc-btn-text {
+  @apply bg-surface-base-primary text-brand-red-primary font-semibold;
+}
+.hlc-btn-text:hover {
+  @apply bg-surface-brand-red-primary_hover text-brand-red-primary_hover;
+}
+.hlc-btn-text:active {
+  @apply bg-surface-brand-red-primary_active text-brand-red-primary_active;
+}
+.hlc-btn-text:focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-primary-400 bg-surface-base-primary text-brand-red-primary;
+}
+.hlc-btn-text.hlc-btn-disabled {
+  @apply bg-surface-base-primary text-base-secondary_disabled;
+}
+/* Button Text + danger */
+.hlc-btn-text.hlc-btn-danger:not(.hlc-btn-text.hlc-btn-disabled) {
+  @apply text-error-primary;
+}
+.hlc-btn-text.hlc-btn-danger:not(.hlc-btn-text.hlc-btn-disabled):hover {
+  @apply bg-surface-error-primary_hover text-error_hover;
+}
+.hlc-btn-text.hlc-btn-danger:not(.hlc-btn-text.hlc-btn-disabled):active {
+  @apply bg-surface-error-primary_active text-error_active;
+}
+.hlc-btn-text.hlc-btn-danger:not(.hlc-btn-text.hlc-btn-disabled):focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-error-400 bg-surface-base-primary text-error-primary;
+}
+
+.hlc-btn-text.hlc-btn-color-gray {
+  @apply bg-surface-base-primary text-base-tertiary;
+}
+.hlc-btn-text.hlc-btn-color-gray:hover {
+  @apply bg-surface-base-primary_hover text-base-tertiary_hover;
+}
+.hlc-btn-text.hlc-btn-color-gray:active {
+  @apply bg-surface-base-primary_active text-base-tertiary_active;
+}
+.hlc-btn-text.hlc-btn-color-gray:focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-primary-400 bg-surface-base-primary text-base-tertiary;
+}
+.hlc-btn-text.hlc-btn-color-gray.hlc-btn-disabled {
+  @apply bg-surface-base-primary text-base-tertiary_disabled;
+}
+
+.hlc-btn-link {
+  @apply bg-surface-base-primary text-brand-red-primary font-semibold;
+}
+.hlc-btn-link:hover {
+  @apply text-brand-red-primary_hover;
+}
+.hlc-btn-link:active {
+  @apply text-brand-red-primary_active;
+}
+.hlc-btn-link:focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-primary-400 text-brand-red-primary;
+}
+.hlc-btn-link.hlc-btn-disabled {
+  @apply text-base-tertiary_disabled;
+}
+/* Button Link + danger */
+.hlc-btn-link.hlc-btn-danger:not(.hlc-btn-link.hlc-btn-disabled) {
+  @apply text-error-primary;
+}
+.hlc-btn-link.hlc-btn-danger:not(.hlc-btn-link.hlc-btn-disabled):hover {
+  @apply text-error_hover;
+}
+.hlc-btn-link.hlc-btn-danger:not(.hlc-btn-link.hlc-btn-disabled):active {
+  @apply text-error_active;
+}
+.hlc-btn-link.hlc-btn-danger:not(.hlc-btn-link.hlc-btn-disabled):focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-error-400 text-error-primary;
+}
+
+.hlc-btn-link.hlc-btn-color-gray {
+  @apply bg-surface-base-primary text-base-tertiary;
+}
+.hlc-btn-link.hlc-btn-color-gray:hover {
+  @apply text-base-tertiary_hover;
+}
+.hlc-btn-link.hlc-btn-color-gray:active {
+  @apply text-base-tertiary_active;
+}
+.hlc-btn-link.hlc-btn-color-gray:focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-primary-400 text-base-tertiary;
+}
+.hlc-btn-link.hlc-btn-color-gray.hlc-btn-disabled {
+  @apply text-base-tertiary_disabled;
 }

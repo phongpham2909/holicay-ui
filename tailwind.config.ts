@@ -556,13 +556,15 @@ export default {
       },
       boxShadow: {
         'xs': '0px 1px 2px 0px var(--elevation-shadow_low)', 
-        // 'sm': '30rem',
-        // 'md': '40rem',
-        // 'lg': '45rem',
-        // 'xl': '48rem',
+        'sm': '0px 1px 2px 0px var(--elevation-shadow_low), 0px 1px 3px 0px var(--elevation-shadow_low)',
+        'md': '0px 2px 4px -2px var(--elevation-shadow_low), 0px 4px 8px -2px var(--elevation-shadow_low)',
+        'lg': '0px 4px 6px -2px var(--elevation-shadow_low), 0px 12px 16px -4px var(--elevation-shadow_low)',
+        'xl': '0px 8px 8px -4px var(--elevation-shadow_low), 0px 20px 24px -4px var(--elevation-shadow_low)',
         '2xl': '0px 24px 48px -12px var(--elevation-shadow_high)',
         '3xl': '0px 32px 64px -12px var(--elevation-shadow_high)',
-      }
+        'focused': '0px 1px 2px 0px var(--elevation-shadow_low), 0px 0px 0px 2px var(--color-base-white), 0px 0px 0px 4px var(--color-primary-400)',
+        'danger-focused': '0px 1px 2px 0px var(--elevation-shadow_low), 0px 0px 0px 2px var(--color-base-white), 0px 0px 0px 4px var(--color-error-400)',
+      }     
     },
   },
   plugins: [],

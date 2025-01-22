@@ -1,0 +1,58 @@
+.hlc-input-wrapper {
+  @apply relative;
+}
+
+.hlc-input-label {
+  @apply block text-base-secondary text-sm font-medium mb-1.5;
+}
+
+.hlc-helper-text {
+  @apply text-base-tertiary text-sm font-medium mt-1.5;
+}
+
+.hlc-input {
+  @apply outline-none text-base-primary bg-surface-base-primary border border-base-primary font-normal rounded-md shadow-xs transition duration-200 ease-out;
+}
+
+.hlc-input::placeholder {
+  @apply text-base-subtle pl-[1.5px] caret-base-primary;
+}
+
+.hlc-input:hover {
+  @apply bg-surface-base-primary_hover border-base-primary_hover;
+}
+
+.hlc-input:focus {
+  @apply bg-surface-base-primary border-brand-red-primary_active;
+  box-shadow:
+    0px 1px 2px 0px var(--elevation-shadow_low),
+    0px 0px 0px 1px var(--color-primary-500);
+}
+
+.hlc-input.hlc-input-size-sm {
+  @apply py-[7px] px-lg text-sm;
+}
+
+.hlc-input.hlc-input-size-md {
+  @apply py-[9px] px-3.5 text-base;
+}
+
+.hlc-input.hlc-input-size-lg {
+  @apply py-[13px] px-xl text-base;
+}
+
+.hlc-input.hlc-input-readOnly {
+  @apply cursor-default text-base-primary bg-surface-base-primary_disabled border-base-primary_disabled;
+}
+
+.hlc-input.hlc-input-readOnly:focus {
+  @apply shadow-xs;
+}
+
+.hlc-input.hlc-input-disabled {
+  @apply cursor-not-allowed text-base-primary_disabled bg-surface-base-primary_disabled border-base-primary_disabled;
+}
+
+.hlc-input.hlc-input-disabled:focus {
+  @apply shadow-xs;
+}
