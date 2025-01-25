@@ -7,9 +7,6 @@
 @import "../public/css/typography.css";
 
 :root {
-  --font-sans: ui-sans-serif, system-ui, sans-serif, ClashGrotesk;
-  --font-serif: ui-serif, Inter, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-primary: Inter, ui-sans-serif, sans-serif;
   --font-display: ClashGrotesk, ui-serif, serif;
   /* Brand color - Your brand color defines the interface's feel and elicits emotion, used consistently across interactive elements. */
@@ -117,15 +114,4 @@
 
   --elevation-shadow_low: rgba(16, 24, 40, 0.06);
   --elevation-shadow_high: rgba(16, 24, 40, 0.18);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  font-family: var(--font-display);
 }

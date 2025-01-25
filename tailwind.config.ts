@@ -163,10 +163,6 @@ export default {
       additional_active: "var(--color-additional-700)",
       additional_disabled: "var(--color-additional-200)",
     },
-    fontFamily: {
-      sans: ["ClashGrotesk", "sans-serif"],
-      serif: ["Inter", "serif"],
-    },
     extend: {
       spacing: {
         none: "0rem", // 0px
