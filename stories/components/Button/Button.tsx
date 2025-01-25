@@ -41,7 +41,7 @@ export const Button = ({
       type={htmlType}
       disabled={disabled}
       className={clsx(
-        "hlc-btn-base",
+        "hlc-btn",
         `hlc-btn-${type}`,
         `hlc-btn-color-${color}`,
         `hlc-btn-size-${size}`,

@@ -6,19 +6,20 @@ Generated using nucleoapp.com
 -------------------------------- */
 
 @font-face {
-  font-family: 'HolicayIcons';
-  src: url('../fonts/HolicayIcons.eot');
-  src: url('../fonts/HolicayIcons.eot') format('embedded-opentype'),
-       url('../fonts/HolicayIcons.woff2') format('woff2'),
-       url('../fonts/HolicayIcons.woff') format('woff'),
-       url('../fonts/HolicayIcons.ttf') format('truetype'),
-       url('../fonts/HolicayIcons.svg') format('svg');
+  font-family: "HolicayIcons";
+  src: url("../fonts/HolicayIcons.eot");
+  src:
+    url("../fonts/HolicayIcons.eot") format("embedded-opentype"),
+    url("../fonts/HolicayIcons.woff2") format("woff2"),
+    url("../fonts/HolicayIcons.woff") format("woff"),
+    url("../fonts/HolicayIcons.ttf") format("truetype"),
+    url("../fonts/HolicayIcons.svg") format("svg");
 }
 
 /* base class */
 .icon {
   display: inline-block;
-  font: normal normal normal 1em/1 'HolicayIcons';
+  font: normal normal normal 1em/1 "HolicayIcons";
   color: inherit;
   flex-shrink: 0;
   -webkit-font-smoothing: antialiased;

@@ -1,5 +1,5 @@
-.hlc-btn-base {
-  @apply cursor-pointer inline-block text-center select-none not-italic rounded-sm;
+.hlc-btn {
+  @apply cursor-pointer inline-block text-center select-none not-italic font-primary font-semibold;
 }
 
 .hlc-btn-disabled {
@@ -7,19 +7,19 @@
 }
 /* Button Size */
 .hlc-btn-size-sm {
-  @apply px-3.5 py-[7px] text-sm;
+  @apply px-[13px] py-[7px] text-sm rounded-sm;
 }
 .hlc-btn-size-md {
-  @apply px-xl py-[9px] text-sm;
+  @apply px-[15px] py-[9px] text-sm rounded-sm;
 }
 .hlc-btn-size-lg {
-  @apply px-xl py-[9px] text-base;
+  @apply px-[15px] py-[9px] text-base rounded-md;
 }
 .hlc-btn-size-xl {
-  @apply px-2xl py-[11px] text-base;
+  @apply px-[19px] py-[11px] text-base rounded-md;
 }
 .hlc-btn-size-2xl {
-  @apply px-3xl py-[13px] text-lg;
+  @apply px-[23px] py-[13px] text-lg rounded-md;
 }
 /* Icon Only */
 .hlc-btn-icon-only {
@@ -55,7 +55,7 @@
 }
 
 .hlc-btn-primary {
-  @apply relative bg-fill-brand-red-primary border text-white font-semibold shadow-xs transition-all duration-200 ease-out;
+  @apply relative bg-fill-brand-red-primary border text-white shadow-xs transition-all duration-200 ease-out;
   background-clip: padding-box;
   border-color: transparent;
 }
@@ -113,7 +113,7 @@
 }
 
 .hlc-btn-secondary {
-  @apply bg-surface-base-primary text-brand-red-primary border border-brand-red-primary font-semibold shadow-xs;
+  @apply bg-surface-base-primary text-brand-red-primary border border-brand-red-primary shadow-xs;
 }
 .hlc-btn-secondary:hover {
   @apply bg-surface-brand-red-primary_hover text-brand-red-primary_hover border-brand-red-primary_hover;
@@ -155,7 +155,7 @@
 }
 
 .hlc-btn-text {
-  @apply bg-surface-base-primary text-brand-red-primary font-semibold;
+  @apply bg-surface-base-primary text-brand-red-primary;
 }
 .hlc-btn-text:hover {
   @apply bg-surface-brand-red-primary_hover text-brand-red-primary_hover;
@@ -199,8 +199,24 @@
   @apply bg-surface-base-primary text-base-tertiary_disabled;
 }
 
+.hlc-btn-text.hlc-btn-size-sm {
+  @apply px-3.5 py-md;
+}
+.hlc-btn-text.hlc-btn-size-md {
+  @apply px-xl py-2.5;
+}
+.hlc-btn-text.hlc-btn-size-lg {
+  @apply px-xl py-2.5;
+}
+.hlc-btn-text.hlc-btn-size-xl {
+  @apply px-2xl py-lg;
+}
+.hlc-btn-text.hlc-btn-size-2xl {
+  @apply px-3xl py-3.5;
+}
+
 .hlc-btn-link {
-  @apply bg-surface-base-primary text-brand-red-primary font-semibold;
+  @apply bg-surface-base-primary text-brand-red-primary p-0;
 }
 .hlc-btn-link:hover {
   @apply text-brand-red-primary_hover;
