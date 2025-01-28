@@ -4,11 +4,155 @@
 
 @import "../public/css/icons.css";
 @import "../public/css/fonts.css";
-@import "../public/css/typography.css";
+
+@layer base {
+  .display-custom {
+    @apply font-display font-weight-custom;
+  }
+  .display-xl {
+    @apply display-custom tracking-[-0.01em];
+    /* mobile defaults */
+    @apply text-[48px] leading-[56px];
+    /* desktop overrides */
+    @apply md:text-[64px] md:leading-[72px];
+  }
+
+  .display-lg {
+    @apply display-custom tracking-[-0.01em];
+    /* mobile defaults */
+    @apply text-[40px] leading-[48px];
+    /* desktop overrides */
+    @apply md:text-[52px] md:leading-[60px];
+  }
+
+  .display-md {
+    @apply display-custom tracking-[-0.01em];
+    /* mobile defaults */
+    @apply text-[34px] leading-[40px];
+    /* desktop overrides */
+    @apply md:text-[40px] md:leading-[48px];
+  }
+
+  .display-sm {
+    @apply display-custom;
+    /* mobile defaults */
+    @apply text-[28px] leading-[36px];
+    /* desktop overrides */
+    @apply md:text-[32px] md:leading-[40px];
+  }
+
+  .display-xs {
+    @apply display-custom text-2xl;
+  }
+
+  .heading-regular {
+    @apply font-primary font-normal;
+  }
+
+  .heading-medium {
+    @apply font-primary font-medium;
+  }
+
+  .heading-semibold {
+    @apply font-primary font-semibold;
+  }
+
+  .heading-bold {
+    @apply font-primary font-bold;
+  }
+
+  .heading-lg {
+    @apply tracking-[-0.02em];
+    /* mobile defaults */
+    @apply text-[34px] leading-[40px];
+    /* desktop overrides */
+    @apply md:text-[40px] md:leading-[48px];
+  }
+
+  .heading-md {
+    /* mobile defaults */
+    @apply text-[28px] leading-[36px];
+    /* desktop overrides */
+    @apply md:text-[32px] md:leading-[40px];
+  }
+
+  .heading-sm {
+    @apply text-2xl;
+  }
+
+  .heading-xs {
+    @apply text-[20px] leading-[30px];
+  }
+
+  .heading-lg-regular {
+    @apply heading-regular heading-lg;
+  }
+
+  .heading-md-regular {
+    @apply heading-regular heading-md;
+  }
+
+  .heading-sm-regular {
+    @apply heading-regular heading-sm;
+  }
+
+  .heading-xs-regular {
+    @apply heading-regular heading-xs;
+  }
+
+  .heading-lg-medium {
+    @apply heading-medium heading-lg;
+  }
+
+  .heading-md-medium {
+    @apply heading-medium heading-md;
+  }
+
+  .heading-sm-medium {
+    @apply heading-medium heading-sm;
+  }
+
+  .heading-xs-medium {
+    @apply heading-medium heading-xs;
+  }
+
+  .heading-lg-semibold {
+    @apply heading-semibold heading-lg;
+  }
+
+  .heading-md-semibold {
+    @apply heading-semibold heading-md;
+  }
+
+  .heading-sm-semibold {
+    @apply heading-semibold heading-sm;
+  }
+
+  .heading-xs-semibold {
+    @apply heading-semibold heading-xs;
+  }
+
+  .heading-lg-bold {
+    @apply heading-bold heading-lg;
+  }
+
+  .heading-md-bold {
+    @apply heading-bold heading-md;
+  }
+
+  .heading-sm-bold {
+    @apply heading-bold heading-sm;
+  }
+
+  .heading-xs-bold {
+    @apply heading-bold heading-xs;
+  }
+}
 
 :root {
   --font-primary: Inter, ui-sans-serif, sans-serif;
   --font-display: ClashGrotesk, ui-serif, serif;
+  --font-weight-custom: 520;
   /* Brand color - Your brand color defines the interface's feel and elicits emotion, used consistently across interactive elements. */
   /* Primary */
   --color-primary-50: #fef3f2;

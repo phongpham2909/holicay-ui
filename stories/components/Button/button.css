@@ -1,5 +1,5 @@
 .hlc-btn {
-  @apply cursor-pointer inline-block text-center select-none not-italic font-primary font-semibold;
+  @apply cursor-pointer inline-block text-center select-none not-italic heading-semibold;
 }
 
 .hlc-btn-disabled {

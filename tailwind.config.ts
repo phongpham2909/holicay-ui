@@ -553,8 +553,8 @@ export default {
         "weight-custom": "520",
       },
       fontFamily: {
-        sans: ['var(--font-primary)'],
-        serif: ['var(--font-display)'],
+        sans: ["var(--font-primary)"],
+        serif: ["var(--font-display)"],
         primary: ["var(--font-primary)"],
         display: ["var(--font-display)"],
       },
