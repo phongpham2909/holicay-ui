@@ -5,28 +5,28 @@ import "./input.css";
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "prefix"> {
-  name?: string;
   label?: string;
-  required?: boolean;
   size?: "sm" | "md" | "lg";
   status?: "error" | "warning";
+  helperText?: string;
+  isFloating?: boolean;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
-  helperText?: string;
 }
 
 /** A text field is an input that allows a user to write or edit text. */
 export const Input = ({
   name,
   label,
+  status,
+  size = "md",
   required = false,
   disabled = false,
   readOnly = false,
-  size = "md",
-  status,
-  placeholder,
+  isFloating = false,
   prefix,
   suffix,
+  placeholder,
   helperText,
   className,
   ...rest
@@ -34,8 +34,8 @@ export const Input = ({
   const input = (
     <input
       {...rest}
-      type="text"
       id={name}
+      type="text"
       readOnly={readOnly}
       disabled={disabled}
       placeholder={placeholder}

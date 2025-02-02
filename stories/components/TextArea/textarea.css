@@ -1,0 +1,62 @@
+.hlc-textarea-wrapper {
+  @apply relative;
+}
+
+.hlc-textarea-affix-wrapper {
+  @apply relative;
+}
+
+.hlc-textarea-wrapper .hlc-textarea-autoSize {
+  @apply w-full resize-none;
+}
+
+.hlc-textarea-affix-wrapper > .hlc-textarea {
+  @apply w-full resize-none;
+}
+
+.hlc-textarea-btn-resize {
+  @apply absolute bottom-1.5 right-1.5 w-3 h-3;
+}
+
+.hlc-textarea-label {
+  @apply block text-base-secondary text-sm font-medium mb-1.5;
+}
+
+.hlc-helper-text {
+  @apply text-base-tertiary text-sm font-normal mt-1.5;
+}
+
+.hlc-textarea {
+  @apply outline-none text-base-primary bg-surface-base-primary py-[9px] px-[13px] text-base border border-base-primary font-normal rounded-md align-bottom shadow-xs transition duration-200 ease-out;
+}
+
+.hlc-textarea::placeholder {
+  @apply text-base-subtle pl-[1.5px] caret-base-primary;
+}
+
+.hlc-textarea:hover {
+  @apply bg-surface-base-primary_hover border-base-primary_hover;
+}
+
+.hlc-textarea:focus {
+  @apply bg-surface-base-primary border-brand-red-primary_active;
+  box-shadow:
+    0px 1px 2px 0px var(--elevation-shadow_low),
+    0px 0px 0px 1px var(--color-primary-500);
+}
+
+.hlc-textarea.hlc-textarea-readOnly {
+  @apply cursor-default text-base-primary bg-surface-base-primary_disabled border-base-primary_disabled;
+}
+
+.hlc-textarea.hlc-textarea-readOnly:focus {
+  @apply shadow-xs;
+}
+
+.hlc-textarea.hlc-textarea-disabled {
+  @apply cursor-not-allowed text-base-primary_disabled bg-surface-base-primary_disabled border-base-primary_disabled;
+}
+
+.hlc-textarea.hlc-textarea-disabled:focus {
+  @apply shadow-xs;
+}
