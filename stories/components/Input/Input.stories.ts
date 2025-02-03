@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
 import { Input } from "./Input";
+import React from "react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -73,6 +74,7 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default: Story = {
   args: {
+    size: 'md',
     label: "Label",
     required: true,
     placeholder: "Placeholder",
@@ -82,34 +84,44 @@ export const Default: Story = {
 
 export const LeadingIcon: Story = {
   args: {
+    size: 'md',
     label: "Label",
     required: true,
     placeholder: "Placeholder",
     helperText: "Hint text",
+    prefix: React.createElement("i", { className: "icon icon-rocket-01" }, null),
   },
 };
 
 export const TrailingIcon: Story = {
   args: {
+    size: 'md',
     label: "Label",
     placeholder: "Placeholder",
     helperText: "Hint text",
+    suffix: React.createElement("i", { className: "icon icon-rocket-01" }, null),
   },
 };
 
 export const LeadingAndTrailingIcon: Story = {
   args: {
+    size: 'md',
     label: "Label",
     placeholder: "Placeholder",
     helperText: "Hint text",
+    prefix: React.createElement("i", { className: "icon icon-rocket-01" }, null),
+    suffix: React.createElement("i", { className: "icon icon-rocket-01" }, null),
   },
 };
 
 export const LeadingAndTrailingText: Story = {
   args: {
+    size: 'md',
     label: "Label",
     placeholder: "Placeholder",
     helperText: "Hint text",
+    prefix: '$',
+    suffix: 'per traveller',
   },
 };
 
