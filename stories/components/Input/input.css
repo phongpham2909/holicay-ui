@@ -63,8 +63,7 @@
 .hlc-input-affix-wrapper:hover:not(.hlc-input-affix-wrapper-focused) {
   @apply bg-surface-base-primary_hover border-base-primary_hover;
 }
-.hlc-input-affix-wrapper:hover:not(.hlc-input-affix-wrapper-focused)
-  > .hlc-input {
+.hlc-input-affix-wrapper:hover:not(.hlc-input-affix-wrapper-focused) > .hlc-input {
   @apply bg-surface-base-primary_hover;
 }
 .hlc-input-affix-wrapper-focused {

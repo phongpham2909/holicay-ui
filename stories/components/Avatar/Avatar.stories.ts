@@ -15,8 +15,8 @@ const meta = {
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-     // 👇 All Button stories expect a label arg
-     label: {
+    // 👇 All Button stories expect a label arg
+    label: {
       control: 'text',
       description: 'Overwritten description',
     },
@@ -36,7 +36,6 @@ export const Primary: Story = {
     color: 'primary',
     label: 'Button CTA',
     disabled: false,
-    htmlType: 'button'
+    htmlType: 'button',
   },
 };
-

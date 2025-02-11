@@ -1,20 +1,14 @@
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from "react";
-import clsx from "clsx";
-import { PREFIX_CLASS } from "@/stories/variables/app";
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import clsx from 'clsx';
+import { PREFIX_CLASS } from '@/stories/variables/app';
 
-import "./input.css";
+import './input.css';
 
 export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "prefix"> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {
   label?: string;
-  size?: "sm" | "md" | "lg";
-  status?: "error" | "warning";
+  size?: 'sm' | 'md' | 'lg';
+  status?: 'error' | 'warning';
   isFloating?: boolean;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
@@ -29,7 +23,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       name,
       label,
       status,
-      size = "md",
+      size = 'md',
       required = false,
       disabled = false,
       readOnly = false,
@@ -58,16 +52,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
-        if (
-          wrapperRef.current &&
-          !wrapperRef.current.contains(event.target as Node)
-        ) {
+        if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
           setIsFocused(false);
         }
       };
-      document.addEventListener("mousedown", handleClickOutside);
-      return () =>
-        document.removeEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
     const input = (
@@ -99,8 +89,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               [`${prefixCls}-input-required`]: required,
             })}
           >
-            {label}{" "}
-            {required && <span className="text-brand-red-primary">*</span>}
+            {label} {required && <span className="text-brand-red-primary">*</span>}
           </label>
         )}
         {!!prefix || !!suffix ? (

@@ -61,27 +61,31 @@
 }
 .hlc-btn-primary::before {
   @apply absolute z-[-1] -m-[1px] inset-0;
-  content: "";
-  background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600)) border-box;
+  content: '';
+  background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600))
+    border-box;
   border-radius: inherit;
 }
 .hlc-btn-primary:hover {
   @apply bg-fill-brand-red-primary_hover;
 }
 .hlc-btn-primary:hover::before {
-  background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-700)) border-box;
+  background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-700))
+    border-box;
 }
 .hlc-btn-primary:active {
   @apply bg-fill-brand-red-primary_active;
 }
 .hlc-btn-primary:active::before {
-  background: linear-gradient(to bottom, var(--color-primary-600), var(--color-primary-800)) border-box;
+  background: linear-gradient(to bottom, var(--color-primary-600), var(--color-primary-800))
+    border-box;
 }
 .hlc-btn-primary:focus-visible {
   @apply outline outline-2 outline-offset-2 outline-primary-400 bg-fill-brand-red-primary;
 }
 .hlc-btn-primary:focus-visible::before {
-  background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600)) border-box;
+  background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600))
+    border-box;
 }
 .hlc-btn-primary.hlc-btn-disabled {
   @apply bg-surface-base-primary_disabled text-base-primary_disabled border-base-primary_disabled;

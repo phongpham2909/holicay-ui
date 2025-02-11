@@ -1,20 +1,14 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useImperativeHandle,
-  forwardRef,
-} from "react";
-import clsx from "clsx";
-import { PREFIX_CLASS } from "@/stories/variables/app";
+import React, { useRef, useState, useEffect, useImperativeHandle, forwardRef } from 'react';
+import clsx from 'clsx';
+import { PREFIX_CLASS } from '@/stories/variables/app';
 
-import "./textarea.css";
+import './textarea.css';
 
 export interface TextAreaProps
-  extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "prefix"> {
+  extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'prefix'> {
   label?: string;
-  resize?: "vertical" | "horizontal" | "auto" | "none";
-  status?: "error" | "warning";
+  resize?: 'vertical' | 'horizontal' | 'auto' | 'none';
+  status?: 'error' | 'warning';
   autoSize?: Record<string, number> | boolean;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
@@ -38,7 +32,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       disabled = false,
       readOnly = false,
       autoSize,
-      resize = "vertical",
+      resize = 'vertical',
       rows = 4,
       prefix,
       suffix,
@@ -58,18 +52,18 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       width: 300,
       height: rows * LINE_HEIGHT + PADDING_TB,
     });
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState('');
 
     // Expose textareaRef to parent
     useImperativeHandle(ref, () => textareaRef.current!);
 
     useEffect(() => {
       if (textareaRef.current && !!autoSize) {
-        textareaRef.current.style.height = "auto"; // Reset height
+        textareaRef.current.style.height = 'auto'; // Reset height
         const scrollHeight = textareaRef.current.scrollHeight;
         textareaRef.current.style.height = `${scrollHeight}px`; // Set new height
       }
-    }, [value]); // Update height on value change
+    }, [value, autoSize]); // Update height on value change
 
     const handleMouseDown = (event: React.MouseEvent) => {
       event.preventDefault();
@@ -84,22 +78,19 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         if (isResizing.current) {
           setSize({
             width: Math.max(150, startWidth + (e.clientX - startX)), // Prevent shrinking too much
-            height: Math.max(
-              LINE_HEIGHT * 2 + PADDING_TB,
-              startHeight + (e.clientY - startY)
-            ),
+            height: Math.max(LINE_HEIGHT * 2 + PADDING_TB, startHeight + (e.clientY - startY)),
           });
         }
       };
 
       const handleMouseUp = () => {
         isResizing.current = false;
-        document.removeEventListener("mousemove", handleMouseMove);
-        document.removeEventListener("mouseup", handleMouseUp);
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
       };
 
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
     };
 
     const getStyles = () => {
@@ -107,13 +98,13 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         ...rest.style,
       };
       if (!!autoSize) {
-        if (typeof autoSize === "boolean") {
+        if (typeof autoSize === 'boolean') {
           style = {
             ...style,
             minHeight: `${rows * LINE_HEIGHT}px`,
           };
         }
-        if (typeof autoSize === "object") {
+        if (typeof autoSize === 'object') {
           style = {
             ...style,
             minHeight: `${autoSize?.minRows * LINE_HEIGHT}px`, // Adjust for default line height
@@ -122,19 +113,19 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         }
         return style;
       }
-      if (resize === "vertical") {
+      if (resize === 'vertical') {
         style = {
           ...style,
           height: size.height,
         };
       }
-      if (resize === "horizontal") {
+      if (resize === 'horizontal') {
         style = {
           ...style,
           width: size.width,
         };
       }
-      if (resize === "auto") {
+      if (resize === 'auto') {
         style = {
           ...style,
           width: size.width,
@@ -146,11 +137,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const inputStyle = getStyles();
 
-    const inputRows = !autoSize
-      ? rows
-      : typeof autoSize === "boolean"
-        ? rows
-        : autoSize?.minRows;
+    const inputRows = !autoSize ? rows : typeof autoSize === 'boolean' ? rows : autoSize?.minRows;
 
     const input = (
       <textarea
@@ -166,12 +153,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           [`${prefixCls}-textarea-disabled`]: disabled,
           [`${prefixCls}-textarea-readOnly`]: readOnly,
           [`${prefixCls}-textarea-autoSize`]: !!autoSize,
-          "overflow-y-hidden": typeof autoSize === "boolean",
+          'overflow-y-hidden': typeof autoSize === 'boolean',
           [className as string]: !!className,
         })}
         onChange={(e) => {
           setValue(e.target.value);
-          onChange && onChange(e);
+          !!onChange && onChange(e);
         }}
       />
     );
@@ -179,9 +166,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const btnResize = (
       <button
         className={clsx(`${prefixCls}-textarea-btn-resize`, {
-          "cursor-nwse-resize": resize === "auto",
-          "cursor-ns-resize": resize === "vertical",
-          "cursor-ew-resize": resize === "horizontal",
+          'cursor-nwse-resize': resize === 'auto',
+          'cursor-ns-resize': resize === 'vertical',
+          'cursor-ew-resize': resize === 'horizontal',
         })}
         onMouseDown={handleMouseDown}
       >
@@ -222,11 +209,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
               [`${prefixCls}-textarea-required`]: required,
             })}
           >
-            {label}{" "}
-            {required && <span className="text-brand-red-primary">*</span>}
+            {label} {required && <span className="text-brand-red-primary">*</span>}
           </label>
         )}
-        {resize !== "none" && !autoSize ? (
+        {resize !== 'none' && !autoSize ? (
           <div className={clsx(`${prefixCls}-textarea-affix-wrapper`)}>
             {input}
             {btnResize}
