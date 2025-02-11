@@ -6,6 +6,7 @@ import React, {
   forwardRef,
 } from "react";
 import clsx from "clsx";
+import { PREFIX_CLASS } from "@/stories/variables/app";
 
 import "./textarea.css";
 
@@ -17,6 +18,7 @@ export interface TextAreaProps
   autoSize?: Record<string, number> | boolean;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
+  prefixCls?: string;
   helperText?: string;
   wrapperClassName?: string;
 }
@@ -40,6 +42,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       rows = 4,
       prefix,
       suffix,
+      prefixCls = PREFIX_CLASS,
       placeholder,
       helperText,
       className,
@@ -159,10 +162,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         readOnly={readOnly}
         disabled={disabled}
         placeholder={placeholder}
-        className={clsx("hlc-textarea", {
-          "hlc-textarea-disabled": disabled,
-          "hlc-textarea-readOnly": readOnly,
-          "hlc-textarea-autoSize": !!autoSize,
+        className={clsx(`${prefixCls}-textarea`, {
+          [`${prefixCls}-textarea-disabled`]: disabled,
+          [`${prefixCls}-textarea-readOnly`]: readOnly,
+          [`${prefixCls}-textarea-autoSize`]: !!autoSize,
           "overflow-y-hidden": typeof autoSize === "boolean",
           [className as string]: !!className,
         })}
@@ -175,7 +178,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const btnResize = (
       <button
-        className={clsx("hlc-textarea-btn-resize", {
+        className={clsx(`${prefixCls}-textarea-btn-resize`, {
           "cursor-nwse-resize": resize === "auto",
           "cursor-ns-resize": resize === "vertical",
           "cursor-ew-resize": resize === "horizontal",
@@ -207,16 +210,16 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     return (
       <div
-        className={clsx("hlc-textarea-wrapper", {
-          [`hlc-textarea-status-${status}`]: !!status,
+        className={clsx(`${prefixCls}-textarea-wrapper`, {
+          [`${prefixCls}-textarea-status-${status}`]: !!status,
           [wrapperClassName as string]: !!wrapperClassName,
         })}
       >
         {label && (
           <label
             htmlFor={name}
-            className={clsx("hlc-textarea-label", {
-              "hlc-textarea-required": required,
+            className={clsx(`${prefixCls}-textarea-label`, {
+              [`${prefixCls}-textarea-required`]: required,
             })}
           >
             {label}{" "}
@@ -224,14 +227,14 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           </label>
         )}
         {resize !== "none" && !autoSize ? (
-          <div className={clsx("hlc-textarea-affix-wrapper")}>
+          <div className={clsx(`${prefixCls}-textarea-affix-wrapper`)}>
             {input}
             {btnResize}
           </div>
         ) : (
           <>{input}</>
         )}
-        {helperText && <p className="hlc-helper-text">{helperText}</p>}
+        {helperText && <p className={`${prefixCls}-helper-text`}>{helperText}</p>}
       </div>
     );
   }

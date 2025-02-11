@@ -6,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import clsx from "clsx";
+import { PREFIX_CLASS } from "@/stories/variables/app";
 
 import "./input.css";
 
@@ -14,10 +15,11 @@ export interface InputProps
   label?: string;
   size?: "sm" | "md" | "lg";
   status?: "error" | "warning";
-  helperText?: string;
   isFloating?: boolean;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
+  prefixCls?: string;
+  helperText?: string;
 }
 
 /** A text field is an input that allows a user to write or edit text. */
@@ -34,6 +36,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       isFloating = false,
       prefix,
       suffix,
+      prefixCls = PREFIX_CLASS,
       placeholder,
       helperText,
       className,
@@ -76,24 +79,24 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         readOnly={readOnly}
         disabled={disabled}
         placeholder={placeholder}
-        className={clsx("hlc-input", `hlc-input-size-${size}`, {
-          "hlc-input-disabled": disabled,
-          "hlc-input-readOnly": readOnly,
+        className={clsx(`${prefixCls}-input`, `${prefixCls}-input-size-${size}`, {
+          [`${prefixCls}-input-disabled`]: disabled,
+          [`${prefixCls}-input-readOnly`]: readOnly,
           [className as string]: !!className,
         })}
       />
     );
     return (
       <div
-        className={clsx("hlc-input-wrapper", {
-          [`hlc-input-status-${status}`]: !!status,
+        className={clsx(`${prefixCls}-input-wrapper`, {
+          [`${prefixCls}-input-status-${status}`]: !!status,
         })}
       >
         {label && (
           <label
             htmlFor={name}
-            className={clsx("hlc-input-label", {
-              "hlc-input-required": required,
+            className={clsx(`${prefixCls}-input-label`, {
+              [`${prefixCls}-input-required`]: required,
             })}
           >
             {label}{" "}
@@ -104,22 +107,22 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <div
             ref={wrapperRef}
             className={clsx(
-              "hlc-input-affix-wrapper",
-              `hlc-input-affix-wrapper-${size}`,
+              `${prefixCls}-input-affix-wrapper`,
+              `${prefixCls}-input-affix-wrapper-${size}`,
               {
-                "hlc-input-affix-wrapper-focused": isFocused,
+                [`${prefixCls}-input-affix-wrapper-focused`]: isFocused,
               }
             )}
             onClick={handleFocus}
           >
-            {prefix && <span className="hlc-input-prefix">{prefix}</span>}
+            {prefix && <span className={`${prefixCls}-input-prefix`}>{prefix}</span>}
             {input}
-            {suffix && <span className="hlc-input-suffix">{suffix}</span>}
+            {suffix && <span className={`${prefixCls}-input-suffix`}>{suffix}</span>}
           </div>
         ) : (
           <>{input}</>
         )}
-        {helperText && <p className="hlc-helper-text">{helperText}</p>}
+        {helperText && <p className={`${prefixCls}-helper-text`}>{helperText}</p>}
       </div>
     );
   }
