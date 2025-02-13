@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 
 import './toggle.css';
 import clsx from 'clsx';
-import { PREFIX_CLASS } from '@/stories/variables/app';
-import useMergedState from '@/stories/hooks/useMergedState';
+import { PREFIX_CLASS } from '@/variables/app';
+import useMergedState from '@/hooks/useMergedState';
 
 export type ToggleChangeEventHandler = (
   checked: boolean,
