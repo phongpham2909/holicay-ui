@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import clsx from 'clsx';
-import { PREFIX_CLASS } from '@/stories/variables/app';
+import { PREFIX_CLASS } from '@/variables/app';
 
 import './input.css';
 
