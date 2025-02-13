@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { PREFIX_CLASS } from '@/stories/variables/app';
+import { PREFIX_CLASS } from '@/variables/app';
 
 import './button.css';
 
@@ -14,8 +14,8 @@ export interface ButtonProps
   disabled?: boolean;
   prefixCls?: string;
   icon?: React.ReactElement;
-  iconLeft?: React.ReactElement;
-  iconRight?: React.ReactElement;
+  prefixIcon?: React.ReactElement;
+  suffixIcon?: React.ReactElement;
   htmlType?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   onClick?: () => void;
 }
@@ -30,8 +30,8 @@ export const Button = ({
   label,
   icon,
   className,
-  iconLeft,
-  iconRight,
+  prefixIcon,
+  suffixIcon,
   danger = false,
   disabled = false,
   children,
@@ -49,17 +49,17 @@ export const Button = ({
         `${prefixCls}-btn-size-${size}`,
         {
           [`${prefixCls}-btn-icon-only`]: !children && !label,
-          [`${prefixCls}-btn-icon ${prefixCls}-btn-icon-left`]: !!iconLeft || !!icon,
-          [`${prefixCls}-btn-icon ${prefixCls}-btn-icon-right`]: !!iconRight,
+          [`${prefixCls}-btn-icon ${prefixCls}-btn-icon-left`]: !!icon || !!prefixIcon,
+          [`${prefixCls}-btn-icon ${prefixCls}-btn-icon-right`]: !!suffixIcon,
           [`${prefixCls}-btn-danger`]: danger,
           [`${prefixCls}-btn-disabled`]: disabled,
           [className as string]: !!className,
         }
       )}
     >
-      {icon || iconLeft}
+      {icon || prefixIcon}
       {children || label}
-      {iconRight && iconRight}
+      {suffixIcon}
     </button>
   );
 };

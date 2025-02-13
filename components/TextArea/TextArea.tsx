@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import clsx from 'clsx';
-import { PREFIX_CLASS } from '@/stories/variables/app';
+import { PREFIX_CLASS } from '@/variables/app';
 
 import './textarea.css';
 

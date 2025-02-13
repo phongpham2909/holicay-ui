@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from '@/stories/components';
+import { Button } from '@/components';
 import './header.css';
 
 type User = {
