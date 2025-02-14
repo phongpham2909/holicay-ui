@@ -19,17 +19,21 @@ export interface SelectProps {
   type?: 'icon' | 'dot' | 'avatar';
   mode: 'single' | 'multiple' | 'tags';
   status?: 'error' | 'warning';
+  size?: 'sm' | 'md' | 'lg';
   name?: string;
   label?: string;
   placeholder?: string;
   helperText?: string;
   prefixCls?: string;
   disabled?: boolean;
+  readOnly?: boolean;
   required?: boolean;
   allowClear?: boolean;
   clearIcon?: React.ReactElement;
   showArrow?: boolean;
   showSearch?: boolean;
+  dropdownShowSearch?: boolean;
+  dropdownSearchPlaceholder?: string;
   value?: string;
   options: Option[];
   onChange?: (value: string) => void;
@@ -47,9 +51,12 @@ export const Select = ({
   label,
   helperText,
   disabled = false,
+  readOnly = false,
   required = false,
   showArrow = true,
-  showSearch = false,
+  showSearch = true,
+  dropdownShowSearch = false,
+  dropdownSearchPlaceholder = 'Search...',
   placeholder = 'Select...',
   prefixCls = PREFIX_CLASS,
 }: SelectProps) => {
@@ -72,13 +79,15 @@ export const Select = ({
   };
 
   const handleSearch = (val: string) => {
-    setValueSearch(val);
+    setValueSearch(val.trimStart());
     const filteredOptions = options.filter(
       (option) =>
         option.label.toLowerCase().includes(val.toLowerCase()) ||
         option?.subLabel?.toLowerCase().includes(val.toLowerCase())
     );
-    setIsOpen(!isEmpty(filteredOptions));
+    if (!dropdownShowSearch) {
+      setIsOpen(!isEmpty(filteredOptions));
+    }
     setOptionsFromProp(filteredOptions);
     onSearch?.(val);
   };
@@ -93,10 +102,9 @@ export const Select = ({
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        selectRef.current &&
-        !selectRef.current.contains(event.target as Node) &&
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
+        (!selectRef.current?.contains(event.target as Node) &&
+          !dropdownRef.current?.contains(event.target as Node)) ||
+        (!selectRef.current?.contains(event.target as Node) && !dropdownRef.current)
       ) {
         resetStates();
       }
@@ -115,7 +123,9 @@ export const Select = ({
         width: rect.width + 'px',
         zIndex: 1000,
       });
-      setOptionsFromProp(options);
+      if (!valueSearch) {
+        setOptionsFromProp(options);
+      }
     }
   }, [isOpen]);
 
@@ -125,14 +135,14 @@ export const Select = ({
     resetStates();
   };
 
-  const itemSelected = optionsFromProp.find((o) => o.value === selectedValue);
+  const itemSelected = options.find((o) => o.value === selectedValue);
 
   return (
     <>
       <div
         className={clsx(`${prefixCls}-select-wrapper`, {
           [`${prefixCls}-select-status-${status}`]: !!status,
-          [`${prefixCls}-select-wrapper-disabled`]: disabled,
+          [`${prefixCls}-select-wrapper-disabled`]: disabled && !readOnly,
         })}
       >
         {label && (
@@ -146,7 +156,7 @@ export const Select = ({
             {required && (
               <span
                 className={clsx('text-brand-red-primary', {
-                  'text-brand-red-primary_disabled': disabled,
+                  'text-brand-red-primary_disabled': disabled && !readOnly,
                 })}
               >
                 *
@@ -159,28 +169,31 @@ export const Select = ({
           className={clsx(`${prefixCls}-select`, {
             [`${prefixCls}-select-open`]: isOpen,
             [`${prefixCls}-select-focused`]: isFocused,
-            [`${prefixCls}-select-disabled`]: disabled,
+            [`${prefixCls}-select-disabled`]: disabled && !readOnly,
+            [`${prefixCls}-select-readOnly`]: readOnly,
             [`${prefixCls}-select-single`]: mode === 'single',
             [`${prefixCls}-select-multiple`]: mode === 'multiple' || mode === 'tags',
             [`${prefixCls}-select-show-arrow`]: showArrow,
-            [`${prefixCls}-select-show-search`]: showSearch,
+            [`${prefixCls}-select-show-search`]: showSearch && !dropdownShowSearch,
           })}
         >
           <div className={`${prefixCls}-select-selector`} onClick={handleFocus}>
-            <span className={`${prefixCls}-select-selection-search`}>
-              <input
-                type="text"
-                autoComplete="off"
-                disabled={disabled}
-                value={valueSearch}
-                onChange={(e) => handleSearch(e.target.value)}
-                className={`${prefixCls}-select-selection-search-input`}
-              />
-            </span>
+            {showSearch && !dropdownShowSearch && (
+              <span className={`${prefixCls}-select-selection-search`}>
+                <input
+                  type="text"
+                  autoComplete="off"
+                  disabled={disabled || readOnly}
+                  value={valueSearch}
+                  onChange={(e) => handleSearch(e.target.value)}
+                  className={`${prefixCls}-select-selection-search-input`}
+                />
+              </span>
+            )}
             {!!itemSelected && (
               <span
                 className={clsx(`${prefixCls}-select-selection-item`, {
-                  invisible: !!valueSearch,
+                  invisible: !!valueSearch && !dropdownShowSearch,
                 })}
               >
                 {itemSelected?.subLabel ? (
@@ -200,7 +213,7 @@ export const Select = ({
             {placeholder && !itemSelected && (
               <span
                 className={clsx(`${prefixCls}-select-selection-placeholder`, {
-                  invisible: !!valueSearch,
+                  invisible: !!valueSearch && !dropdownShowSearch,
                 })}
               >
                 {placeholder}
@@ -220,6 +233,24 @@ export const Select = ({
         createPortal(
           <div className={`${prefixCls}-select-dropdown`} ref={dropdownRef} style={dropdownStyle}>
             <ul className={`${prefixCls}-select-menu`}>
+              {((dropdownShowSearch && !showSearch) || (dropdownShowSearch && showSearch)) && (
+                <li
+                  key={`${prefixCls}-select-menu-item-search`}
+                  className={clsx(`${prefixCls}-select-menu-item-search`)}
+                >
+                  <span className={`${prefixCls}-select-menu-item-search-icon`}>
+                    <i className="icon icon-search-md" />
+                  </span>
+                  <input
+                    type="text"
+                    autoComplete="off"
+                    placeholder={dropdownSearchPlaceholder}
+                    value={valueSearch}
+                    onChange={(e) => handleSearch(e.target.value)}
+                    className={`${prefixCls}-select-menu-item-search-input`}
+                  />
+                </li>
+              )}
               {optionsFromProp.map((option) => (
                 <li
                   key={option.value}
@@ -246,6 +277,15 @@ export const Select = ({
                   )}
                 </li>
               ))}
+
+              {isEmpty(optionsFromProp) && (
+                <li
+                  key={`${prefixCls}-select-menu-empty-state`}
+                  className={clsx(`${prefixCls}-select-menu-empty-state`)}
+                >
+                  <p>No results</p>
+                </li>
+              )}
             </ul>
           </div>,
           document.body

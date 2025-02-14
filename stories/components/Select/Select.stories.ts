@@ -49,8 +49,8 @@ type Story = StoryObj<typeof meta>;
 
 const options = [
   { label: 'Holicay Team', subLabel: '@holicay', value: 'option1' },
-  { label: 'Holicay Team 2', subLabel: '@holicay', value: 'option2', disabled: true },
-  { label: 'Holicay Team 3', value: 'option3', disabled: true },
+  { label: 'Holicay Team 2', subLabel: '@holicay', value: 'option2', disabled: false },
+  { label: 'Holicay Team 3', value: 'option3', disabled: false },
   { label: 'Holicay Team 4', value: 'option4' },
   { label: 'Holicay Team 5', value: 'option5' },
   { label: 'Holicay Team 6', value: 'option6' },
@@ -68,7 +68,26 @@ export const Primary: Story = {
     label: 'Select Label',
     required: true,
     disabled: false,
-    value: 'option2',
+    readOnly: false,
+    showSearch: true,
+    dropdownShowSearch: false,
+    // value: 'option2',
+    placeholder: 'Placeholder',
+    helperText: 'Hint text',
+  },
+};
+
+export const SearchHeaderInDropdown: Story = {
+  args: {
+    mode: 'single',
+    options,
+    label: 'Select Label',
+    required: true,
+    disabled: false,
+    readOnly: false,
+    showSearch: false,
+    dropdownShowSearch: true,
+    // value: 'option2',
     placeholder: 'Placeholder',
     helperText: 'Hint text',
   },

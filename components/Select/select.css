@@ -49,7 +49,7 @@
   > .hlc-select-selector
   > .hlc-select-selection-item
   > .hlc-select-selection-item-content {
-  @apply flex-auto overflow-hidden whitespace-nowrap text-ellipsis font-primary text-base;
+  @apply overflow-hidden whitespace-nowrap text-ellipsis font-primary text-base;
 }
 
 .hlc-select
@@ -66,10 +66,12 @@
     0px 1px 2px 0px var(--elevation-shadow_low),
     0px 0px 0px 1px var(--color-primary-500);
 }
-.hlc-select.hlc-select-focused > .hlc-select-selector > .hlc-select-selection-item {
+.hlc-select.hlc-select-show-search.hlc-select-focused
+  > .hlc-select-selector
+  > .hlc-select-selection-item {
   @apply text-base-subtle;
 }
-.hlc-select.hlc-select-focused
+.hlc-select.hlc-select-show-search.hlc-select-focused
   > .hlc-select-selector
   > .hlc-select-selection-item
   > .hlc-select-selection-item-content
@@ -89,52 +91,83 @@
   @apply py-xs;
 }
 
-.hlc-select-menu-item {
+.hlc-select-menu > .hlc-select-menu-item {
   @apply flex items-center gap-x-md text-base-primary bg-surface-base-primary rounded-sm px-md py-2.5 mx-sm my-[1px] transition-colors duration-300 ease-in-out;
 }
 
-.hlc-select-menu-item:hover {
+.hlc-select-menu > .hlc-select-menu-item:hover {
   @apply bg-surface-base-primary_hover;
 }
 
-.hlc-select-menu-item.hlc-select-menu-item-selected {
+.hlc-select-menu > .hlc-select-menu-item.hlc-select-menu-item-selected {
   @apply bg-surface-base-secondary;
 }
-.hlc-select-menu-item.hlc-select-menu-item-selected:hover {
+.hlc-select-menu > .hlc-select-menu-item.hlc-select-menu-item-selected:hover {
   @apply bg-surface-base-secondary_hover;
 }
 
-.hlc-select-menu-item.hlc-select-menu-item-disabled {
+.hlc-select-menu > .hlc-select-menu-item.hlc-select-menu-item-disabled {
   @apply cursor-not-allowed bg-surface-base-primary;
 }
-.hlc-select-menu-item.hlc-select-menu-item-selected.hlc-select-menu-item-disabled {
+.hlc-select-menu
+  > .hlc-select-menu-item.hlc-select-menu-item-selected.hlc-select-menu-item-disabled {
   @apply bg-surface-base-secondary;
 }
-.hlc-select-menu-item.hlc-select-menu-item-selected.hlc-select-menu-item-disabled
+.hlc-select-menu
+  > .hlc-select-menu-item.hlc-select-menu-item-selected.hlc-select-menu-item-disabled
   > .hlc-select-menu-item-state {
   @apply text-base-primary_disabled;
 }
-.hlc-select-menu-item.hlc-select-menu-item-disabled > .hlc-select-menu-item-content,
-.hlc-select-menu-item.hlc-select-menu-item-disabled
+.hlc-select-menu
+  > .hlc-select-menu-item.hlc-select-menu-item-disabled
+  > .hlc-select-menu-item-content,
+.hlc-select-menu
+  > .hlc-select-menu-item.hlc-select-menu-item-disabled
   > .hlc-select-menu-item-content
   > .hlc-select-menu-item-content-sub {
   @apply cursor-not-allowed text-base-tertiary_disabled;
 }
 
-.hlc-select-menu-item > .hlc-select-menu-item-content {
+.hlc-select-menu > .hlc-select-menu-item > .hlc-select-menu-item-content {
   @apply cursor-pointer flex-auto overflow-hidden whitespace-nowrap text-ellipsis font-primary text-base font-medium text-base-primary rounded-sm;
 }
 
-.hlc-select-menu-item > .hlc-select-menu-item-content > .hlc-select-menu-item-content-sub {
+.hlc-select-menu
+  > .hlc-select-menu-item
+  > .hlc-select-menu-item-content
+  > .hlc-select-menu-item-content-sub {
   @apply font-normal text-base-secondary;
 }
 
-.hlc-select-menu-item > .hlc-select-menu-item-state {
+.hlc-select-menu > .hlc-select-menu-item > .hlc-select-menu-item-state {
   @apply select-none text-brand-red-primary flex items-center w-5 h-5 justify-center;
 }
 
-.hlc-select-menu-item > .hlc-select-menu-item-state > .icon {
+.hlc-select-menu > .hlc-select-menu-item > .hlc-select-menu-item-state > .icon {
   @apply text-[20px];
+}
+
+.hlc-select-menu > .hlc-select-menu-item-search {
+  @apply flex items-center gap-x-md border-b-2 border-brand-red-primary_active py-2.5 px-lg;
+}
+
+.hlc-select-menu > .hlc-select-menu-item-search > .hlc-select-menu-item-search-icon {
+  @apply text-[20px] text-base-subtle w-5 h-5 flex items-center justify-center;
+}
+
+.hlc-select-menu > .hlc-select-menu-item-search > .hlc-select-menu-item-search-input {
+  @apply outline-none w-full h-5;
+}
+.hlc-select-menu > .hlc-select-menu-item-search > input::placeholder {
+  @apply caret-base-primary font-primary text-sm text-base-placeholder pl-[1.5px];
+}
+
+.hlc-select-menu > .hlc-select-menu-empty-state {
+  @apply px-md py-2.5 mx-sm my-[1px];
+}
+
+.hlc-select-menu > .hlc-select-menu-empty-state > p {
+  @apply font-primary text-base text-base-primary;
 }
 
 .hlc-select-wrapper-disabled > .hlc-select-label {
@@ -145,11 +178,13 @@
   @apply text-base-tertiary_disabled;
 }
 
-.hlc-select-disabled > .hlc-select-selector {
+.hlc-select-disabled > .hlc-select-selector,
+.hlc-select-readOnly > .hlc-select-selector {
   @apply cursor-not-allowed bg-surface-base-primary_disabled border-base-primary_disabled;
 }
 
-.hlc-select-disabled > .hlc-select-selector:hover {
+.hlc-select-disabled > .hlc-select-selector:hover,
+.hlc-select-readOnly > .hlc-select-selector:hover {
   @apply bg-surface-base-primary_disabled border-base-primary_disabled;
 }
 
