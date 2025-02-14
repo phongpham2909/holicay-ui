@@ -86,6 +86,33 @@
 .hlc-select-dropdown {
   @apply mt-1.5 border border-base-secondary bg-surface-base-primary rounded-md shadow-md overflow-y-auto overflow-x-hidden max-h-80 transition-all;
 }
+.hlc-select-dropdown.hlc-select-dropdown-show-search {
+  @apply overflow-y-hidden;
+}
+.hlc-select-dropdown.hlc-select-dropdown-show-search > .hlc-select-menu {
+  @apply overflow-y-auto overflow-x-hidden max-h-[calc(320px-44px)];
+}
+
+.hlc-select-dropdown.hlc-select-dropdown-show-search > .hlc-select-dropdown-search-box {
+  @apply flex items-center gap-x-md border-b-2 border-brand-red-primary_active py-2.5 px-lg;
+}
+
+.hlc-select-dropdown.hlc-select-dropdown-show-search
+  > .hlc-select-dropdown-search-box
+  > .hlc-select-dropdown-search-icon {
+  @apply text-[20px] text-base-subtle w-5 h-5 flex items-center justify-center;
+}
+
+.hlc-select-dropdown.hlc-select-dropdown-show-search
+  > .hlc-select-dropdown-search-box
+  > .hlc-select-dropdown-search-input {
+  @apply outline-none w-full h-5;
+}
+.hlc-select-dropdown.hlc-select-dropdown-show-search
+  > .hlc-select-dropdown-search-box
+  > input::placeholder {
+  @apply caret-base-primary font-primary text-sm text-base-placeholder pl-[1.5px];
+}
 
 .hlc-select-menu {
   @apply py-xs;
@@ -145,21 +172,6 @@
 
 .hlc-select-menu > .hlc-select-menu-item > .hlc-select-menu-item-state > .icon {
   @apply text-[20px];
-}
-
-.hlc-select-menu > .hlc-select-menu-item-search {
-  @apply flex items-center gap-x-md border-b-2 border-brand-red-primary_active py-2.5 px-lg;
-}
-
-.hlc-select-menu > .hlc-select-menu-item-search > .hlc-select-menu-item-search-icon {
-  @apply text-[20px] text-base-subtle w-5 h-5 flex items-center justify-center;
-}
-
-.hlc-select-menu > .hlc-select-menu-item-search > .hlc-select-menu-item-search-input {
-  @apply outline-none w-full h-5;
-}
-.hlc-select-menu > .hlc-select-menu-item-search > input::placeholder {
-  @apply caret-base-primary font-primary text-sm text-base-placeholder pl-[1.5px];
 }
 
 .hlc-select-menu > .hlc-select-menu-empty-state {

@@ -99,6 +99,28 @@ export const Select = ({
     setOptionsFromProp(options);
   };
 
+  const updateDropdownPosition = () => {
+    if (selectRef.current) {
+      const rect = selectRef.current.getBoundingClientRect();
+      setDropdownStyle({
+        position: 'absolute',
+        top: rect.bottom + window.scrollY + 'px',
+        left: rect.left + window.scrollX + 'px',
+        width: rect.width + 'px',
+        zIndex: 1000,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen && !valueSearch) {
+      setOptionsFromProp(options);
+    }
+    updateDropdownPosition();
+    window.addEventListener('resize', updateDropdownPosition);
+    return () => window.removeEventListener('resize', updateDropdownPosition);
+  }, [isOpen]);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -112,22 +134,6 @@ export const Select = ({
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  useEffect(() => {
-    if (isOpen && selectRef.current) {
-      const rect = selectRef.current.getBoundingClientRect();
-      setDropdownStyle({
-        position: 'absolute',
-        top: rect.bottom + window.scrollY + 'px',
-        left: rect.left + window.scrollX + 'px',
-        width: rect.width + 'px',
-        zIndex: 1000,
-      });
-      if (!valueSearch) {
-        setOptionsFromProp(options);
-      }
-    }
-  }, [isOpen]);
 
   const handleSelect = (val: string) => {
     setSelectedValue(val);
@@ -231,26 +237,30 @@ export const Select = ({
 
       {isOpen &&
         createPortal(
-          <div className={`${prefixCls}-select-dropdown`} ref={dropdownRef} style={dropdownStyle}>
-            <ul className={`${prefixCls}-select-menu`}>
-              {((dropdownShowSearch && !showSearch) || (dropdownShowSearch && showSearch)) && (
-                <li
-                  key={`${prefixCls}-select-menu-item-search`}
-                  className={clsx(`${prefixCls}-select-menu-item-search`)}
-                >
-                  <span className={`${prefixCls}-select-menu-item-search-icon`}>
-                    <i className="icon icon-search-md" />
-                  </span>
-                  <input
-                    type="text"
-                    autoComplete="off"
-                    placeholder={dropdownSearchPlaceholder}
-                    value={valueSearch}
-                    onChange={(e) => handleSearch(e.target.value)}
-                    className={`${prefixCls}-select-menu-item-search-input`}
-                  />
-                </li>
-              )}
+          <div
+            ref={dropdownRef}
+            style={dropdownStyle}
+            className={clsx(`${prefixCls}-select-dropdown`, 'scroller', {
+              [`${prefixCls}-select-dropdown-show-search`]:
+                (dropdownShowSearch && !showSearch) || (dropdownShowSearch && showSearch),
+            })}
+          >
+            {((dropdownShowSearch && !showSearch) || (dropdownShowSearch && showSearch)) && (
+              <div className={clsx(`${prefixCls}-select-dropdown-search-box`)}>
+                <span className={`${prefixCls}-select-dropdown-search-icon`}>
+                  <i className="icon icon-search-md" />
+                </span>
+                <input
+                  type="text"
+                  autoComplete="off"
+                  placeholder={dropdownSearchPlaceholder}
+                  value={valueSearch}
+                  onChange={(e) => handleSearch(e.target.value)}
+                  className={`${prefixCls}-select-dropdown-search-input`}
+                />
+              </div>
+            )}
+            <ul className={clsx(`${prefixCls}-select-menu`, 'scroller')}>
               {optionsFromProp.map((option) => (
                 <li
                   key={option.value}
