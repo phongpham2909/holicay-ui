@@ -1,9 +1,9 @@
-import useMergedState from '@/stories/hooks/useMergedState';
-import { PREFIX_CLASS } from '@/stories/variables/app';
 import clsx from 'clsx';
 import * as React from 'react';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import './checkbox.css';
+import { PREFIX_CLASS } from '@/variables/app';
+import useMergedState from '@/hooks/useMergedState';
 
 export interface CheckboxChangeEvent {
   target: CheckboxChangeEventTarget;
@@ -47,8 +47,8 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
     indeterminate,
     type = 'checkbox',
     title,
-    label = 'Remember me',
-    helperText = 'Save my login details for next time',
+    label,
+    helperText,
     onChange,
     ...inputProps
   } = props;
