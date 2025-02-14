@@ -95,7 +95,7 @@ export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
       onClick?.(ret, e);
     }
 
-    const toggleClassName = clsx(`${prefixCls}-toggle`, className, {
+    const toggleClasses = clsx(`${prefixCls}-toggle`, className, {
       [`${prefixCls}-toggle-md`]: size === 'md',
       [`${prefixCls}-toggle-sm`]: size === 'sm',
       [`${prefixCls}-toggle-checked`]: innerChecked,
@@ -103,12 +103,12 @@ export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
       [`${prefixCls}-toggle-loading`]: loading,
     });
 
-    const toggleLabelClassName = clsx(`${prefixCls}-toggle-label`, {
+    const toggleLabelClasses = clsx(`${prefixCls}-toggle-label`, {
       [`${prefixCls}-toggle-label-md`]: size === 'md',
       [`${prefixCls}-toggle-label-sm`]: size === 'sm',
     });
 
-    const toggleHelperTextClassName = clsx(`${prefixCls}-toggle-helper-text`, {
+    const toggleHelperTextClasses = clsx(`${prefixCls}-toggle-helper-text`, {
       [`${prefixCls}-toggle-helper-text-md`]: size === 'md',
       [`${prefixCls}-toggle-helper-text-sm`]: size === 'sm',
     });
@@ -121,7 +121,7 @@ export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
           role="switch"
           aria-checked={innerChecked}
           disabled={disabled || loading}
-          className={toggleClassName}
+          className={toggleClasses}
           ref={ref}
           onClick={onInternalClick}
         >
@@ -129,8 +129,8 @@ export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
         </button>
         {(label || helperText) && (
           <div className="flex flex-col">
-            {label && <span className={toggleLabelClassName}>{label}</span>}
-            {helperText && <span className={toggleHelperTextClassName}>{helperText}</span>}
+            {label && <span className={toggleLabelClasses}>{label}</span>}
+            {helperText && <span className={toggleHelperTextClasses}>{helperText}</span>}
           </div>
         )}
       </div>

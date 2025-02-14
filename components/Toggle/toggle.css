@@ -14,14 +14,6 @@
   @apply outline-offset-2 outline outline-2 outline-secondary-400 transition-[outline-offset] duration-0;
 }
 
-.hlc-toggle-md {
-  @apply h-6 min-w-11;
-}
-
-.hlc-toggle-sm {
-  @apply h-5 min-w-9;
-}
-
 .hlc-toggle-handle {
   @apply absolute flex items-center justify-center start-0.5 top-0.5 size-5 transition-all duration-200 ease-in-out before:content-[''] before:absolute before:top-0 before:bottom-0 before:shadow-sm before:start-0 before:end-0 before:bg-white before:rounded-full before:transition-all before:duration-200 before:ease-in-out;
 }
@@ -30,40 +22,42 @@
   @apply inline w-4 h-4 animate-spin dark:text-white fill-base-tertiary_disabled;
 }
 
-.hlc-toggle-label-sm {
-  @apply text-sm font-medium text-gray-700;
+.hlc-toggle-label {
+  @apply text-gray-700;
+}
+
+.hlc-toggle-helper-text {
+  @apply text-gray-600;
+}
+
+/* Toggle - Medium */
+.hlc-toggle-md {
+  @apply h-6 min-w-11;
 }
 
 .hlc-toggle-label-md {
-  @apply text-base font-medium text-gray-700;
-}
-
-.hlc-toggle-helper-text-sm {
-  @apply text-sm font-normal text-gray-600;
+  @apply text-base font-medium;
 }
 
 .hlc-toggle-helper-text-md {
-  @apply text-sm font-normal text-gray-600;
+  @apply text-base font-normal;
+}
+
+/* Toggle - Small */
+.hlc-toggle-sm {
+  @apply h-5 min-w-9;
+}
+
+.hlc-toggle-label-sm {
+  @apply text-sm font-medium;
+}
+
+.hlc-toggle-helper-text-sm {
+  @apply text-sm font-normal;
 }
 
 .hlc-toggle:not(.hlc-toggle-sm).hlc-toggle-checked .hlc-toggle-handle {
   @apply start-[calc(100%-22px)];
-}
-
-.hlc-toggle.hlc-toggle-disabled {
-  @apply cursor-not-allowed bg-fill-base-tertiary_disabled;
-}
-
-.hlc-toggle.hlc-toggle-loading {
-  @apply cursor-not-allowed;
-}
-
-.hlc-toggle.hlc-toggle-checked:not(.hlc-toggle-disabled) {
-  @apply bg-fill-brand-green-primary;
-}
-
-.hlc-toggle.hlc-toggle-checked:not(.hlc-toggle-disabled) .hlc-toggle-loading-icon {
-  @apply fill-brand-green-primary_hover;
 }
 
 .hlc-toggle.hlc-toggle-sm .hlc-toggle-handle {
@@ -76,4 +70,22 @@
 
 .hlc-toggle.hlc-toggle-sm.hlc-toggle-checked .hlc-toggle-handle {
   @apply start-[calc(100%-18px)];
+}
+
+/* Toggle - Disabled */
+.hlc-toggle.hlc-toggle-disabled {
+  @apply cursor-not-allowed bg-fill-base-tertiary_disabled;
+}
+
+.hlc-toggle.hlc-toggle-checked:not(.hlc-toggle-disabled) {
+  @apply bg-fill-brand-green-primary;
+}
+
+.hlc-toggle.hlc-toggle-checked:not(.hlc-toggle-disabled) .hlc-toggle-loading-icon {
+  @apply fill-brand-green-primary_hover;
+}
+
+/* Toggle - Disabled - Loading*/
+.hlc-toggle.hlc-toggle-loading {
+  @apply cursor-not-allowed;
 }
