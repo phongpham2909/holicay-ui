@@ -2,7 +2,7 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { Button } from './Button';
+import { Button } from '@/components';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -40,11 +40,11 @@ const meta = {
       control: 'object',
       description: 'Set the icon component of button',
     },
-    iconLeft: {
+    prefixIcon: {
       control: 'object',
       description: 'Set the left icon component of button',
     },
-    iconRight: {
+    suffixIcon: {
       control: 'object',
       description: 'Set the right icon component of button',
     },
