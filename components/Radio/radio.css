@@ -1,0 +1,101 @@
+.hlc-radio-wrapper {
+  @apply cursor-pointer inline-flex items-start gap-x-2;
+}
+
+.hlc-radio-wrapper-with-label .hlc-radio {
+  @apply mt-0.5;
+}
+
+.hlc-radio {
+  @apply relative rounded-full;
+}
+
+.hlc-radio-input {
+  @apply absolute inset-0 cursor-pointer opacity-0 m-0;
+}
+
+.hlc-radio .hlc-radio-inner {
+  @apply block border border-base-primary border-separate rounded-full bg-white transition-all duration-300;
+}
+
+.hlc-radio .hlc-radio-inner .hlc-radio-icon {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-full opacity-0;
+}
+
+.hlc-radio-label {
+  @apply text-gray-700;
+}
+
+.hlc-radio-helper-text {
+  @apply text-gray-600;
+}
+
+.hlc-radio-checked .hlc-radio-inner {
+  @apply bg-fill-brand-green-primary border-brand-green-primary_active;
+}
+
+.hlc-radio-checked .hlc-radio-inner .hlc-radio-icon {
+  @apply opacity-100 text-white font-bold;
+}
+
+/* Checkbox - Focus-visible */
+.hlc-radio-wrapper:focus-visible {
+  @apply outline-none;
+}
+
+.hlc-radio-wrapper:focus-visible .hlc-radio-inner {
+  @apply outline-offset-2 outline outline-2 outline-secondary-400 transition-[outline-offset] duration-0;
+}
+
+/* Checkbox - Hover */
+.hlc-radio-wrapper:not(.hlc-radio-wrapper-disabled):not(.hlc-radio-wrapper-checked):hover
+  .hlc-radio-inner {
+  @apply bg-surface-base-primary_hover;
+}
+
+/* Checkbox - Disabled */
+.hlc-radio-wrapper.hlc-radio-wrapper-disabled {
+  @apply cursor-not-allowed;
+}
+
+.hlc-radio-disabled .hlc-radio-inner {
+  @apply cursor-not-allowed border-base-primary_disabled bg-surface-base-primary_disabled;
+}
+
+.hlc-radio-disabled .hlc-radio-inner .hlc-radio-icon {
+  @apply bg-gray-300;
+}
+
+/* Checkbox - Size Medium */
+.hlc-radio.hlc-radio-md .hlc-radio-inner {
+  @apply size-5;
+}
+
+.hlc-radio.hlc-radio-md .hlc-radio-inner .hlc-radio-icon {
+  @apply size-2;
+}
+
+.hlc-radio-label-md {
+  @apply text-base font-medium;
+}
+
+.hlc-radio-helper-text-md {
+  @apply text-base font-normal;
+}
+
+/* Checkbox - Size Small */
+.hlc-radio.hlc-radio-sm .hlc-radio-inner {
+  @apply size-4;
+}
+
+.hlc-radio.hlc-radio-sm .hlc-radio-inner .hlc-radio-icon {
+  @apply size-1.5;
+}
+
+.hlc-radio-label-sm {
+  @apply text-sm font-medium;
+}
+
+.hlc-radio-helper-text-sm {
+  @apply text-sm font-normal;
+}
