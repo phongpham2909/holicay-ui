@@ -49,6 +49,12 @@ const meta = {
       control: 'text',
       description: 'The additional class to Switch',
     },
+    onChange: {
+      description: 'Trigger when the checked state is changing',
+    },
+    onClick: {
+      description: 'Trigger when clicked',
+    },
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onClick: fn() },
@@ -78,16 +84,16 @@ export const CheckedAndDisabled: Story = {
   },
 };
 
-export const Loading: Story = {
-  args: {
-    checked: true,
-    loading: true,
-  },
-};
-
 export const LabelAndHelperText: Story = {
   args: {
     label: 'Remember Me',
     helperText: 'Save my login details for next time',
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    checked: true,
+    loading: true,
   },
 };
