@@ -62,7 +62,9 @@ export const Select = ({
 }: SelectProps) => {
   // * Hooks
   const selectRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const optionRefs = useRef<(HTMLLIElement | HTMLDivElement | null)[]>([]);
   // * States
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -70,12 +72,14 @@ export const Select = ({
   const [selectedValue, setSelectedValue] = useState(value || '');
   const [optionsFromProp, setOptionsFromProp] = useState<Option[]>([]);
   const [dropdownStyle, setDropdownStyle] = useState({});
+  const [highlightedIndex, setHighlightedIndex] = useState(-1); // Track highlighted option
 
   const handleFocus = () => {
     if (disabled) return;
     setIsOpen(!isOpen);
     setIsFocused(true);
-    selectRef?.current?.focus();
+    selectRef.current?.focus();
+    inputRef.current?.focus();
   };
 
   const handleSearch = (val: string) => {
@@ -97,6 +101,8 @@ export const Select = ({
     setIsFocused(false);
     setValueSearch('');
     setOptionsFromProp(options);
+    setHighlightedIndex(-1);
+    inputRef.current?.blur();
   };
 
   const updateDropdownPosition = () => {
@@ -113,15 +119,6 @@ export const Select = ({
   };
 
   useEffect(() => {
-    if (isOpen && !valueSearch) {
-      setOptionsFromProp(options);
-    }
-    updateDropdownPosition();
-    window.addEventListener('resize', updateDropdownPosition);
-    return () => window.removeEventListener('resize', updateDropdownPosition);
-  }, [isOpen]);
-
-  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         (!selectRef.current?.contains(event.target as Node) &&
@@ -131,9 +128,77 @@ export const Select = ({
         resetStates();
       }
     };
+
+    if (isOpen && !valueSearch) {
+      setOptionsFromProp(options);
+    }
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+
+    updateDropdownPosition();
+    window.addEventListener('resize', updateDropdownPosition);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('resize', updateDropdownPosition);
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    // ✅ Arrow Down (↓) → Moves the selection down
+    // ✅ Arrow Up (↑) → Moves the selection up
+    // ✅ Enter (↵) → Selects the highlighted option
+    // ✅ Escape (Esc) → Closes the dropdown
+    // ✅ Loop Navigation → When at the bottom, pressing ↓ moves to the top; when at the top, pressing ↑ moves to the bottom
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!isOpen) return;
+
+      switch (event.key) {
+        case 'ArrowDown':
+          // Move down
+          setHighlightedIndex((prev) => {
+            const newIndex = (prev + 1) % options.length;
+            scrollToHighlighted(newIndex);
+            return newIndex;
+          });
+          break;
+        case 'ArrowUp':
+          // Move up
+          setHighlightedIndex((prev) => {
+            const newIndex = (prev - 1 + options.length) % options.length;
+            scrollToHighlighted(newIndex);
+            return newIndex;
+          });
+          break;
+        case 'Enter':
+          if (highlightedIndex >= 0) {
+            if (optionsFromProp[highlightedIndex].disabled) return;
+            handleSelect(optionsFromProp[highlightedIndex].value);
+          }
+          break;
+        case 'Escape':
+          resetStates();
+          break;
+        default:
+          break;
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, highlightedIndex, optionsFromProp]);
+
+  const scrollToHighlighted = (index: number) => {
+    if (optionRefs.current[index]) {
+      optionRefs.current[index]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+    }
+  };
 
   const handleSelect = (val: string) => {
     setSelectedValue(val);
@@ -187,6 +252,7 @@ export const Select = ({
             {showSearch && !dropdownShowSearch && (
               <span className={`${prefixCls}-select-selection-search`}>
                 <input
+                  ref={inputRef}
                   type="text"
                   autoComplete="off"
                   disabled={disabled || readOnly}
@@ -261,13 +327,20 @@ export const Select = ({
               </div>
             )}
             <ul className={clsx(`${prefixCls}-select-menu`, 'scroller')}>
-              {optionsFromProp.map((option) => (
+              {optionsFromProp.map((option, optionIndex) => (
                 <li
                   key={option.value}
+                  title={option.label}
+                  ref={(el) => {
+                    optionRefs.current[optionIndex] = el;
+                  }}
                   className={clsx(`${prefixCls}-select-menu-item`, {
                     [`${prefixCls}-select-menu-item-selected`]: selectedValue === option.value,
                     [`${prefixCls}-select-menu-item-disabled`]: option?.disabled,
+                    [`${prefixCls}-select-menu-item-highlighted`]: highlightedIndex === optionIndex,
                   })}
+                  onMouseEnter={() => setHighlightedIndex(optionIndex)}
+                  onMouseLeave={() => setHighlightedIndex(-1)}
                   onClick={() => !option?.disabled && handleSelect(option.value)}
                 >
                   {!!option?.subLabel ? (

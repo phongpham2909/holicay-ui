@@ -122,29 +122,37 @@
   @apply flex items-center gap-x-md text-base-primary bg-surface-base-primary rounded-sm px-md py-2.5 mx-sm my-[1px] transition-colors duration-300 ease-in-out;
 }
 
-.hlc-select-menu > .hlc-select-menu-item:hover {
+.hlc-select-menu
+  > .hlc-select-menu-item.hlc-select-menu-item-highlighted:not(.hlc-select-menu-item-disabled) {
   @apply bg-surface-base-primary_hover;
 }
 
 .hlc-select-menu > .hlc-select-menu-item.hlc-select-menu-item-selected {
   @apply bg-surface-base-secondary;
 }
-.hlc-select-menu > .hlc-select-menu-item.hlc-select-menu-item-selected:hover {
+
+.hlc-select-menu
+  > .hlc-select-menu-item.hlc-select-menu-item-selected.hlc-select-menu-item-highlighted:not(
+    .hlc-select-menu-item-disabled
+  ) {
   @apply bg-surface-base-secondary_hover;
 }
 
 .hlc-select-menu > .hlc-select-menu-item.hlc-select-menu-item-disabled {
   @apply cursor-not-allowed bg-surface-base-primary;
 }
+
 .hlc-select-menu
   > .hlc-select-menu-item.hlc-select-menu-item-selected.hlc-select-menu-item-disabled {
   @apply bg-surface-base-secondary;
 }
+
 .hlc-select-menu
   > .hlc-select-menu-item.hlc-select-menu-item-selected.hlc-select-menu-item-disabled
   > .hlc-select-menu-item-state {
   @apply text-base-primary_disabled;
 }
+
 .hlc-select-menu
   > .hlc-select-menu-item.hlc-select-menu-item-disabled
   > .hlc-select-menu-item-content,

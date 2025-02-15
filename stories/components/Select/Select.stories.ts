@@ -49,7 +49,7 @@ type Story = StoryObj<typeof meta>;
 
 const options = [
   { label: 'Holicay Team', subLabel: '@holicay', value: 'option1' },
-  { label: 'Holicay Team 2', subLabel: '@holicay', value: 'option2', disabled: false },
+  { label: 'Holicay Team 2', subLabel: '@holicay', value: 'option2', disabled: true },
   { label: 'Holicay Team 3', value: 'option3', disabled: false },
   { label: 'Holicay Team 4', value: 'option4' },
   { label: 'Holicay Team 5', value: 'option5' },
