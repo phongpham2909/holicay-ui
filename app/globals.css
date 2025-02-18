@@ -181,8 +181,8 @@
 }
 
 :root {
-  --font-primary: Inter, ui-sans-serif, sans-serif;
-  --font-display: ClashGrotesk, ui-serif, serif;
+  --font-primary: Inter, sans-serif;
+  --font-display: ClashGrotesk, serif;
   --font-weight-custom: 520;
   /* Brand color - Your brand color defines the interface's feel and elicits emotion, used consistently across interactive elements. */
   /* Primary */

@@ -155,23 +155,31 @@
 
 .hlc-select-menu
   > .hlc-select-menu-item.hlc-select-menu-item-disabled
-  > .hlc-select-menu-item-content,
+  .hlc-select-menu-item-content,
 .hlc-select-menu
   > .hlc-select-menu-item.hlc-select-menu-item-disabled
-  > .hlc-select-menu-item-content
-  > .hlc-select-menu-item-content-sub {
+  .hlc-select-menu-item-content
+  .hlc-select-menu-item-content-sub {
   @apply cursor-not-allowed text-base-tertiary_disabled;
 }
 
-.hlc-select-menu > .hlc-select-menu-item > .hlc-select-menu-item-content {
+.hlc-select-menu > .hlc-select-menu-item .hlc-select-menu-item-content {
   @apply cursor-pointer flex-auto overflow-hidden whitespace-nowrap text-ellipsis font-primary text-base font-medium text-base-primary rounded-sm;
 }
 
 .hlc-select-menu
   > .hlc-select-menu-item
-  > .hlc-select-menu-item-content
-  > .hlc-select-menu-item-content-sub {
+  .hlc-select-menu-item-content
+  .hlc-select-menu-item-content-sub {
   @apply font-normal text-base-secondary;
+}
+
+.hlc-select-menu > .hlc-select-menu-item > .hlc-checkbox-wrapper {
+  @apply items-center;
+}
+
+.hlc-select-menu > .hlc-select-menu-item > .hlc-checkbox-wrapper > .hlc-select-menu-item-content {
+  @apply rounded-none;
 }
 
 .hlc-select-menu > .hlc-select-menu-item > .hlc-select-menu-item-state {

@@ -4,5 +4,6 @@ export * from './Checkbox';
 export * from './Input';
 export * from './Radio';
 export * from './Select';
+export * from './Tag';
 export * from './TextArea';
 export * from './Toggle';

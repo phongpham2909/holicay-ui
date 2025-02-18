@@ -5,21 +5,34 @@ import { isEmpty } from 'lodash';
 import { PREFIX_CLASS } from '@/variables/app';
 
 import './select.css';
+import { Checkbox } from '../Checkbox';
+
+type RawValue = string | number;
+
+export interface LabeledValue {
+  key?: string;
+  value: RawValue;
+  label: React.ReactNode;
+}
+
+export type SelectValue = RawValue | RawValue[] | undefined;
 
 export type Option = {
   label: string;
   value: string;
   subLabel?: string;
+  avatar?: string;
+  icon?: string;
+  dot?: string | boolean;
   disabled?: boolean;
-  suffix?: React.ReactElement;
-  prefix?: React.ReactElement;
+  suffix?: React.ReactNode;
+  prefix?: React.ReactNode;
 };
 
 export interface SelectProps {
-  type?: 'icon' | 'dot' | 'avatar';
   mode: 'single' | 'multiple' | 'tags';
   status?: 'error' | 'warning';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md';
   name?: string;
   label?: string;
   placeholder?: string;
@@ -34,9 +47,11 @@ export interface SelectProps {
   showSearch?: boolean;
   dropdownShowSearch?: boolean;
   dropdownSearchPlaceholder?: string;
-  value?: string;
+  dropdownClassName?: string;
+  className?: string;
+  value?: SelectValue;
   options: Option[];
-  onChange?: (value: string) => void;
+  onChange?: (value: SelectValue) => void;
   onSearch?: (value: string) => void;
 }
 
@@ -46,6 +61,7 @@ export const Select = ({
   onSearch,
   options = [],
   mode = 'single',
+  size = 'md',
   status,
   name,
   label,
@@ -58,6 +74,8 @@ export const Select = ({
   dropdownShowSearch = false,
   dropdownSearchPlaceholder = 'Search...',
   placeholder = 'Select...',
+  className,
+  dropdownClassName,
   prefixCls = PREFIX_CLASS,
 }: SelectProps) => {
   // * Hooks
@@ -70,6 +88,7 @@ export const Select = ({
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [valueSearch, setValueSearch] = useState('');
   const [selectedValue, setSelectedValue] = useState(value || '');
+  const [selectedValues, setSelectedValues] = useState(value || []);
   const [optionsFromProp, setOptionsFromProp] = useState<Option[]>([]);
   const [dropdownStyle, setDropdownStyle] = useState({});
   const [highlightedIndex, setHighlightedIndex] = useState(-1); // Track highlighted option
@@ -206,7 +225,22 @@ export const Select = ({
     resetStates();
   };
 
+  const handleMultipleSelect = (val: any) => {
+    const _selectedValues = selectedValues as RawValue[];
+
+    const newSelectedValues = _selectedValues.includes(val)
+      ? _selectedValues.filter((v) => v !== val)
+      : [..._selectedValues, val];
+
+    console.log(newSelectedValues);
+
+    setSelectedValues(newSelectedValues);
+    onChange?.(newSelectedValues);
+  };
+
   const itemSelected = options.find((o) => o.value === selectedValue);
+  const showSearchInDropdown =
+    (dropdownShowSearch && !showSearch) || (dropdownShowSearch && showSearch);
 
   return (
     <>
@@ -246,6 +280,7 @@ export const Select = ({
             [`${prefixCls}-select-multiple`]: mode === 'multiple' || mode === 'tags',
             [`${prefixCls}-select-show-arrow`]: showArrow,
             [`${prefixCls}-select-show-search`]: showSearch && !dropdownShowSearch,
+            [className as string]: !!className,
           })}
         >
           <div className={`${prefixCls}-select-selector`} onClick={handleFocus}>
@@ -307,11 +342,11 @@ export const Select = ({
             ref={dropdownRef}
             style={dropdownStyle}
             className={clsx(`${prefixCls}-select-dropdown`, 'scroller', {
-              [`${prefixCls}-select-dropdown-show-search`]:
-                (dropdownShowSearch && !showSearch) || (dropdownShowSearch && showSearch),
+              [`${prefixCls}-select-dropdown-show-search`]: showSearchInDropdown,
+              [dropdownClassName as string]: !!dropdownClassName,
             })}
           >
-            {((dropdownShowSearch && !showSearch) || (dropdownShowSearch && showSearch)) && (
+            {showSearchInDropdown && (
               <div className={clsx(`${prefixCls}-select-dropdown-search-box`)}>
                 <span className={`${prefixCls}-select-dropdown-search-icon`}>
                   <i className="icon icon-search-md" />
@@ -327,39 +362,96 @@ export const Select = ({
               </div>
             )}
             <ul className={clsx(`${prefixCls}-select-menu`, 'scroller')}>
-              {optionsFromProp.map((option, optionIndex) => (
-                <li
-                  key={option.value}
-                  title={option.label}
-                  ref={(el) => {
-                    optionRefs.current[optionIndex] = el;
-                  }}
-                  className={clsx(`${prefixCls}-select-menu-item`, {
-                    [`${prefixCls}-select-menu-item-selected`]: selectedValue === option.value,
-                    [`${prefixCls}-select-menu-item-disabled`]: option?.disabled,
-                    [`${prefixCls}-select-menu-item-highlighted`]: highlightedIndex === optionIndex,
-                  })}
-                  onMouseEnter={() => setHighlightedIndex(optionIndex)}
-                  onMouseLeave={() => setHighlightedIndex(-1)}
-                  onClick={() => !option?.disabled && handleSelect(option.value)}
-                >
-                  {!!option?.subLabel ? (
-                    <div className={clsx(`${prefixCls}-select-menu-item-content`, 'flex gap-x-md')}>
-                      <span>{option.label}</span>
-                      <span className={`${prefixCls}-select-menu-item-content-sub`}>
-                        {option?.subLabel}
-                      </span>
-                    </div>
-                  ) : (
-                    <div className={`${prefixCls}-select-menu-item-content`}>{option.label}</div>
-                  )}
-                  {selectedValue === option.value && (
-                    <span className={`${prefixCls}-select-menu-item-state`}>
-                      <i className="icon icon-check" />
-                    </span>
-                  )}
-                </li>
-              ))}
+              {mode === 'single' && (
+                <>
+                  {optionsFromProp.map((option, optionIndex) => (
+                    <li
+                      key={option.value}
+                      title={option.label}
+                      ref={(el) => {
+                        optionRefs.current[optionIndex] = el;
+                      }}
+                      className={clsx(`${prefixCls}-select-menu-item`, {
+                        [`${prefixCls}-select-menu-item-selected`]: selectedValue === option.value,
+                        [`${prefixCls}-select-menu-item-disabled`]: option?.disabled,
+                        [`${prefixCls}-select-menu-item-highlighted`]:
+                          highlightedIndex === optionIndex,
+                      })}
+                      onMouseEnter={() => setHighlightedIndex(optionIndex)}
+                      onMouseLeave={() => setHighlightedIndex(-1)}
+                      onClick={() => !option?.disabled && handleSelect(option.value)}
+                    >
+                      {!!option?.subLabel ? (
+                        <div
+                          className={clsx(`${prefixCls}-select-menu-item-content`, 'flex gap-x-md')}
+                        >
+                          <span>{option.label}</span>
+                          <span className={`${prefixCls}-select-menu-item-content-sub`}>
+                            {option?.subLabel}
+                          </span>
+                        </div>
+                      ) : (
+                        <div className={`${prefixCls}-select-menu-item-content`}>
+                          {option.label}
+                        </div>
+                      )}
+                      {selectedValue === option.value && (
+                        <span className={`${prefixCls}-select-menu-item-state`}>
+                          <i className="icon icon-check" />
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </>
+              )}
+
+              {mode === 'multiple' && (
+                <>
+                  {optionsFromProp.map((option, optionIndex) => (
+                    <li
+                      key={option.value}
+                      title={option.label}
+                      ref={(el) => {
+                        optionRefs.current[optionIndex] = el;
+                      }}
+                      className={clsx(`${prefixCls}-select-menu-item`, {
+                        [`${prefixCls}-select-menu-item-selected`]: selectedValue === option.value,
+                        [`${prefixCls}-select-menu-item-disabled`]: option?.disabled,
+                        [`${prefixCls}-select-menu-item-highlighted`]:
+                          highlightedIndex === optionIndex,
+                      })}
+                      onMouseEnter={() => setHighlightedIndex(optionIndex)}
+                      onMouseLeave={() => setHighlightedIndex(-1)}
+                    >
+                      <Checkbox
+                        size={size}
+                        value={option.value}
+                        checked={(selectedValues as RawValue[]).includes(option.value)}
+                        disabled={option.disabled}
+                        onChange={(e) => handleMultipleSelect(e.target.value)}
+                      >
+                        {!!option?.subLabel ? (
+                          <span
+                            className={clsx(
+                              `${prefixCls}-select-menu-item-content`,
+                              'flex gap-x-md'
+                            )}
+                          >
+                            <span>{option.label}</span>
+                            <span className={`${prefixCls}-select-menu-item-content-sub`}>
+                              {option?.subLabel}
+                            </span>
+                          </span>
+                        ) : (
+                          <span className={`${prefixCls}-select-menu-item-content`}>
+                            {option.label}
+                          </span>
+                        )}
+                      </Checkbox>
+                    </li>
+                  ))}
+                </>
+              )}
 
               {isEmpty(optionsFromProp) && (
                 <li

@@ -31,6 +31,7 @@ const eslintConfig = [
       '@typescript-eslint/no-require-imports': 'warn',
       'no-unused-expressions': 'off',
       '@typescript-eslint/no-unused-expressions': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'off',
       'unused-imports/no-unused-vars': [

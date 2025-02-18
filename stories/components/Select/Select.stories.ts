@@ -61,7 +61,7 @@ const options = [
 ];
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Primary: Story = {
+export const SingleSelect: Story = {
   args: {
     mode: 'single',
     options,
@@ -76,7 +76,7 @@ export const Primary: Story = {
   },
 };
 
-export const SearchHeaderInDropdown: Story = {
+export const SearchInDropdown: Story = {
   args: {
     mode: 'single',
     options,
@@ -84,8 +84,35 @@ export const SearchHeaderInDropdown: Story = {
     required: true,
     disabled: false,
     readOnly: false,
-    showSearch: false,
     dropdownShowSearch: true,
+    placeholder: 'Placeholder',
+    helperText: 'Hint text',
+  },
+};
+
+export const MultipleSelect: Story = {
+  args: {
+    mode: 'multiple',
+    options,
+    label: 'Select Label',
+    required: true,
+    disabled: false,
+    readOnly: false,
+    showSearch: true,
+    placeholder: 'Placeholder',
+    helperText: 'Hint text',
+  },
+};
+
+export const MultipleSelectSearchInDropdown: Story = {
+  args: {
+    mode: 'multiple',
+    options,
+    label: 'Select Label',
+    required: true,
+    disabled: false,
+    readOnly: false,
+    showSearch: true,
     placeholder: 'Placeholder',
     helperText: 'Hint text',
   },
