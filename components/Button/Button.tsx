@@ -11,11 +11,13 @@ export interface ButtonProps
   type?: 'primary' | 'secondary' | 'text' | 'link';
   color?: 'primary' | 'gray';
   danger?: boolean;
+  loading?: boolean;
   disabled?: boolean;
   prefixCls?: string;
-  icon?: React.ReactElement;
-  prefixIcon?: React.ReactElement;
-  suffixIcon?: React.ReactElement;
+  icon?: React.ReactNode;
+  prefixIcon?: React.ReactNode;
+  suffixIcon?: React.ReactNode;
+  loadingIcon?: React.ReactNode;
   htmlType?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   onClick?: () => void;
 }
@@ -32,6 +34,8 @@ export const Button = ({
   className,
   prefixIcon,
   suffixIcon,
+  loadingIcon = <i className="icon icon-loading-01 animate-spin" />,
+  loading = false,
   danger = false,
   disabled = false,
   children,
@@ -41,7 +45,7 @@ export const Button = ({
     <button
       {...rest}
       type={htmlType}
-      disabled={disabled}
+      disabled={disabled || loading}
       className={clsx(
         `${prefixCls}-btn`,
         `${prefixCls}-btn-${type}`,
@@ -49,15 +53,19 @@ export const Button = ({
         `${prefixCls}-btn-size-${size}`,
         {
           [`${prefixCls}-btn-icon-only`]: !children && !label,
-          [`${prefixCls}-btn-icon ${prefixCls}-btn-icon-left`]: !!icon || !!prefixIcon,
+          [`${prefixCls}-btn-icon ${prefixCls}-btn-icon-left`]: !!icon || !!prefixIcon || loading,
           [`${prefixCls}-btn-icon ${prefixCls}-btn-icon-right`]: !!suffixIcon,
           [`${prefixCls}-btn-danger`]: danger,
-          [`${prefixCls}-btn-disabled`]: disabled,
+          [`${prefixCls}-btn-disabled`]: disabled || loading,
           [className as string]: !!className,
         }
       )}
     >
-      {icon || prefixIcon}
+      {loading ? (
+        <span className={`${prefixCls}-btn-icon-loading`}>{loadingIcon}</span>
+      ) : (
+        icon || prefixIcon
+      )}
       {children || label}
       {suffixIcon}
     </button>
