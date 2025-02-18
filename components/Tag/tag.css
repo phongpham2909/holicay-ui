@@ -1,0 +1,51 @@
+.hlc-tag {
+  @apply cursor-default inline-flex items-center font-primary text-base-secondary border border-base-primary bg-surface-base-primary align-middle transition-all duration-200 ease-out;
+}
+
+.hlc-tag:hover {
+  @apply text-base-secondary_hover border-base-primary_hover bg-surface-base-primary_hover;
+}
+
+.hlc-tag:active {
+  @apply text-brand-green-primary_active border-base-primary_active bg-surface-base-primary_active;
+}
+
+.hlc-tag-sm {
+  @apply text-xs font-medium rounded-sm px-sm h-3xl;
+}
+.hlc-tag-md {
+  @apply text-sm font-medium rounded-sm px-md h-3xl;
+}
+.hlc-tag-lg {
+  @apply text-sm font-medium rounded-md px-lg h-4xl;
+}
+
+.hlc-tag > .hlc-tag-prefix-icon,
+.hlc-tag > .hlc-tag-suffix-icon,
+.hlc-tag > .hlc-tag-close-icon {
+  @apply inline-flex m-[3px] ms-[3px] transition-all duration-200 ease-out;
+}
+
+.hlc-tag > .hlc-tag-prefix-icon,
+.hlc-tag.hlc-tag-md > .hlc-tag-prefix-icon {
+  @apply me-xs;
+}
+.hlc-tag.hlc-tag-lg > .hlc-tag-prefix-icon {
+  @apply me-sm;
+}
+
+.hlc-tag > .hlc-tag-close-icon {
+  @apply cursor-pointer;
+}
+
+.hlc-tag.hlc-tag-sm:has(.hlc-tag-close-icon) {
+  @apply pl-sm pr-xs;
+}
+
+.hlc-tag.hlc-tag-md:has(.hlc-tag-close-icon) {
+  @apply pl-[9px] pr-xs;
+}
+
+.hlc-tag.hlc-tag-lg:has(.hlc-tag-close-icon) {
+  @apply pl-md pr-sm;
+}
