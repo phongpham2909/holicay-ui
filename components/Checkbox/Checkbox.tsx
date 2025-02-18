@@ -24,13 +24,14 @@ export interface CheckboxRef {
 }
 
 export interface CheckboxProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'size'> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'size' | 'value'> {
   prefixCls?: string;
   rootClassName?: string;
   label?: string;
   size?: 'md' | 'sm';
   helperText?: string;
   indeterminate?: boolean;
+  value?: any;
   onChange?: (e: CheckboxChangeEvent) => void;
 }
 
@@ -49,7 +50,9 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
     title,
     label,
     helperText,
+    value,
     onChange,
+    children,
     ...inputProps
   } = props;
 
@@ -133,17 +136,21 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
       <span className={checkboxClasses} title={title} style={style} ref={holderRef}>
         <input
           {...inputProps}
-          className={`${prefixCls}-checkbox-input`}
           ref={inputRef}
-          onChange={handleChange}
-          disabled={disabled}
-          checked={!!rawValue || !!indeterminate}
           type={type}
+          value={value}
+          disabled={disabled}
+          onChange={handleChange}
+          checked={!!rawValue || !!indeterminate}
+          className={`${prefixCls}-checkbox-input`}
         />
         <span className={`${prefixCls}-checkbox-inner`}>
           <span className={checkboxIconClasses} />
         </span>
       </span>
+
+      {children}
+
       {(label || helperText) && (
         <div className="flex flex-col">
           {label && <span className={checkboxLabelClasses}>{label}</span>}
