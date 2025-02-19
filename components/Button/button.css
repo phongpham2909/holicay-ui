@@ -65,6 +65,10 @@
   @apply text-[1.25rem] w-5 h-5;
 }
 
+.hlc-btn-icon > .hlc-btn-icon-loading > .icon {
+  @apply animate-spin;
+}
+
 .hlc-btn-primary {
   @apply relative bg-fill-brand-red-primary border text-white shadow-xs transition-all duration-200 ease-out;
   background-clip: padding-box;

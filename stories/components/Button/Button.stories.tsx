@@ -3,11 +3,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 import { Button, ButtonProps } from '@/components';
+import { ButtonColor, ButtonSize, ButtonType } from '@/components/Button/constants';
 
 const meta = {
   title: 'Components/Button',
   component: Button,
   parameters: {
+    layout: 'centered',
     chromatic: { disableSnapshot: false },
   },
   args: {
@@ -149,13 +151,13 @@ export const Variants = {
                   let props: ButtonProps = {
                     size: 'md',
                     color: 'primary',
-                    type: variant as ButtonProps['type'],
+                    type: variant as ButtonType,
                   };
                   if (variant.includes('gray')) {
                     props = {
                       ...props,
-                      type: variant.split(' ')[0] as ButtonProps['type'],
-                      color: variant.split(' ')[1] as ButtonProps['color'],
+                      type: variant.split(' ')[0] as ButtonType,
+                      color: variant.split(' ')[1] as ButtonColor,
                     };
                   }
                   if (['disabled', 'loading'].includes(opt)) {
@@ -163,7 +165,7 @@ export const Variants = {
                   }
 
                   if (opt.startsWith('size')) {
-                    props.size = opt.split(' ')[1] as ButtonProps['size'];
+                    props.size = opt.split(' ')[1] as ButtonSize;
                   }
 
                   if (['prefixIcon', 'suffixIcon'].includes(opt)) {
@@ -205,15 +207,15 @@ export const Variants = {
                 {OPTIONS.map((opt) => {
                   const props: ButtonProps = {
                     danger: true,
-                    type: variant as ButtonProps['type'],
                     size: 'md',
+                    type: variant as ButtonType,
                   };
                   if (['disabled', 'loading'].includes(opt)) {
                     props[opt as keyof ButtonProps] = true;
                   }
 
                   if (opt.startsWith('size')) {
-                    props.size = opt.split(' ')[1] as ButtonProps['size'];
+                    props.size = opt.split(' ')[1] as ButtonSize;
                   }
 
                   if (['prefixIcon', 'suffixIcon'].includes(opt)) {
