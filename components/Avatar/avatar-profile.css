@@ -1,0 +1,55 @@
+.hlc-avatar-profile-wrapper {
+  @apply relative inline-block;
+}
+
+.hlc-avatar-profile {
+  @apply relative inline-flex items-center justify-center overflow-hidden text-center align-middle rounded-[100%] bg-fill-base-tertiary text-base-subtle outline outline-4 outline-white shadow-lg;
+}
+
+.hlc-avatar-profile-image {
+  @apply bg-[transparent];
+}
+
+/* Avatar - With Image */
+.hlc-avatar-profile > img {
+  @apply block size-full object-cover;
+}
+
+/* Avatar - Size Large */
+.hlc-avatar-profile-lg {
+  @apply size-40;
+}
+
+.hlc-avatar-profile-lg.hlc-avatar-profile-icon {
+  @apply text-[80px];
+}
+
+.hlc-avatar-profile-lg:not(.hlc-avatar-profile-icon) {
+  @apply display-xl;
+}
+
+/* Avatar - Size Medium */
+.hlc-avatar-profile-md {
+  @apply size-24;
+}
+
+.hlc-avatar-profile-md.hlc-avatar-profile-icon {
+  @apply text-[48px];
+}
+
+.hlc-avatar-profile-md:not(.hlc-avatar-profile-icon) {
+  @apply heading-lg;
+}
+
+/* Avatar - Size Small */
+.hlc-avatar-profile-sm {
+  @apply size-[72px];
+}
+
+.hlc-avatar-profile-sm.hlc-avatar-profile-icon {
+  @apply text-[36px];
+}
+
+.hlc-avatar-profile-sm:not(.hlc-avatar-profile-icon) {
+  @apply heading-lg;
+}

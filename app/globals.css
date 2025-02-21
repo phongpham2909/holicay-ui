@@ -153,6 +153,10 @@
   --font-primary: Inter, ui-sans-serif, sans-serif;
   --font-display: ClashGrotesk, ui-serif, serif;
   --font-weight-custom: 520;
+
+  /* Rgb */
+  --color-rgb-base-black: 0 0 0;
+
   /* Brand color - Your brand color defines the interface's feel and elicits emotion, used consistently across interactive elements. */
   /* Primary */
   --color-primary-50: #fef3f2;
@@ -178,7 +182,7 @@
   --color-secondary-900: #031123;
   /* Neutral color - Neutral color is foundational in UI design, used for text, form fields, backgrounds, and dividers. */
   /* Base */
-  --color-base-black: #000000;
+  --color-base-black: 0 0 0;
   --color-base-white: #ffffff;
   --color-base-transparent: #ffffff00;
   /* Gray */

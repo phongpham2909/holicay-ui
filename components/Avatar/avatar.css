@@ -1,0 +1,94 @@
+.hlc-avatar-wrapper {
+  @apply relative inline-block;
+}
+
+.hlc-avatar {
+  @apply relative inline-flex items-center justify-center overflow-hidden text-center align-middle rounded-full bg-fill-base-tertiary text-base-subtle border-[0.75px] border-black/[0.09];
+}
+
+.hlc-avatar-image {
+  @apply bg-[transparent] border-none;
+}
+
+/* Avatar - With Image */
+.hlc-avatar > img {
+  @apply block size-full object-cover;
+}
+
+/* Avatar - Size Double Extra Large */
+.hlc-avatar-2xl {
+  @apply size-16;
+}
+
+.hlc-avatar-2xl.hlc-avatar-icon {
+  @apply text-[32px];
+}
+
+.hlc-avatar-2xl:not(.hlc-avatar-icon) {
+  @apply heading-sm-medium;
+}
+
+/* Avatar - Size Extra Large */
+.hlc-avatar-xl {
+  @apply size-14;
+}
+
+.hlc-avatar-xl.hlc-avatar-icon {
+  @apply text-[32px];
+}
+
+.hlc-avatar-xl:not(.hlc-avatar-icon) {
+  @apply heading-xs-medium;
+}
+
+/* Avatar - Size Large */
+.hlc-avatar-lg {
+  @apply size-12;
+}
+
+.hlc-avatar-lg.hlc-avatar-icon {
+  @apply text-[28px];
+}
+
+.hlc-avatar-lg:not(.hlc-avatar-icon) {
+  @apply text-lg font-medium;
+}
+
+/* Avatar - Size Medium */
+.hlc-avatar-md {
+  @apply size-10;
+}
+
+.hlc-avatar-md.hlc-avatar-icon {
+  @apply text-[24px];
+}
+
+.hlc-avatar-md:not(.hlc-avatar-icon) {
+  @apply text-base font-medium;
+}
+
+/* Avatar - Size Small */
+.hlc-avatar-sm {
+  @apply size-9;
+}
+
+.hlc-avatar-sm.hlc-avatar-icon {
+  @apply text-[20px];
+}
+
+.hlc-avatar-sm:not(.hlc-avatar-icon) {
+  @apply text-sm font-medium;
+}
+
+/* Avatar - Size Extra Small */
+.hlc-avatar-xs {
+  @apply size-8;
+}
+
+.hlc-avatar-xs.hlc-avatar-icon {
+  @apply text-[16px];
+}
+
+.hlc-avatar-xs:not(.hlc-avatar-icon) {
+  @apply text-xs font-medium;
+}
