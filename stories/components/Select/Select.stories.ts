@@ -56,12 +56,13 @@ const options = [
   { label: 'Holicay Team 6', value: 'option6' },
   { label: 'Holicay Team 7', value: 'option7' },
   { label: 'Holicay Team 8', value: 'option8' },
-  { label: 'Holicay Team 9', value: 'option9' },
-  { label: 'Holicay Team 10', value: 'option10' },
+  { label: 'Holicay', value: 'option9' },
+  { label: 'Holicay', value: 'option10' },
 ];
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const SingleSelect: Story = {
+  name: 'Base - Single Select',
   args: {
     mode: 'single',
     options,
@@ -76,7 +77,8 @@ export const SingleSelect: Story = {
   },
 };
 
-export const SearchInDropdown: Story = {
+export const SingleSelectSearchInDropdown: Story = {
+  name: 'Single Select - Search In Dropdown',
   args: {
     mode: 'single',
     options,
@@ -105,6 +107,7 @@ export const MultipleSelect: Story = {
 };
 
 export const MultipleSelectSearchInDropdown: Story = {
+  name: 'Multiple Select - Search In Dropdown',
   args: {
     mode: 'multiple',
     options,

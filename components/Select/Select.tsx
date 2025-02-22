@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import { isEmpty } from 'lodash';
 import { PREFIX_CLASS } from '@/variables/app';
 
-import './select.css';
 import { Checkbox } from '../Checkbox';
+import { Tag } from '../Tag';
+
+import './select.css';
 
 type RawValue = string | number;
 
@@ -82,6 +84,8 @@ export const Select = ({
   const selectRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const tagsRef = useRef<HTMLDivElement>(null);
+  const selectedTagsRef = useRef<(HTMLDivElement | null)[]>([]);
   const optionRefs = useRef<(HTMLLIElement | HTMLDivElement | null)[]>([]);
   // * States
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -89,55 +93,124 @@ export const Select = ({
   const [valueSearch, setValueSearch] = useState('');
   const [selectedValue, setSelectedValue] = useState(value || '');
   const [selectedValues, setSelectedValues] = useState(value || []);
+  const [visibleTags, setVisibleTags] = useState<RawValue[]>([]);
+  const [hiddenTagCount, setHiddenTagCount] = useState(0); // Dynamically updated
   const [optionsFromProp, setOptionsFromProp] = useState<Option[]>([]);
   const [dropdownStyle, setDropdownStyle] = useState({});
   const [highlightedIndex, setHighlightedIndex] = useState(-1); // Track highlighted option
 
-  const handleFocus = () => {
-    if (disabled) return;
-    setIsOpen(!isOpen);
-    setIsFocused(true);
-    selectRef.current?.focus();
-    inputRef.current?.focus();
-  };
-
-  const handleSearch = (val: string) => {
-    setValueSearch(val.trimStart());
-    const filteredOptions = options.filter(
-      (option) =>
-        option.label.toLowerCase().includes(val.toLowerCase()) ||
-        option?.subLabel?.toLowerCase().includes(val.toLowerCase())
-    );
-    if (!dropdownShowSearch) {
-      setIsOpen(!isEmpty(filteredOptions));
-    }
-    setOptionsFromProp(filteredOptions);
-    onSearch?.(val);
-  };
-
-  const resetStates = () => {
-    setIsOpen(false);
-    setIsFocused(false);
-    setValueSearch('');
-    setOptionsFromProp(options);
-    setHighlightedIndex(-1);
-    inputRef.current?.blur();
-  };
-
-  const updateDropdownPosition = () => {
-    if (selectRef.current) {
-      const rect = selectRef.current.getBoundingClientRect();
-      setDropdownStyle({
-        position: 'absolute',
-        top: rect.bottom + window.scrollY + 'px',
-        left: rect.left + window.scrollX + 'px',
-        width: rect.width + 'px',
-        zIndex: 1000,
-      });
-    }
-  };
+  const selectedOptions = useMemo(() => {
+    const _selectedValues = selectedValues as RawValue[];
+    const _selectedOptions: Option[] = [];
+    _selectedValues.forEach((v) => {
+      const selectedOption = options.find((o) => o.value === v);
+      if (!!selectedOption) _selectedOptions.push(selectedOption);
+    });
+    return _selectedOptions;
+  }, [options, selectedValues]);
 
   useEffect(() => {
+    if (mode === 'multiple' || mode === 'tags') {
+      const updateVisibleTags = () => {
+        if (!tagsRef.current || !selectedTagsRef.current) return;
+
+        const containerWidth = tagsRef.current.getBoundingClientRect().width;
+        const selectedTags = selectedTagsRef.current as HTMLElement[];
+
+        let totalTagsWidth = 0;
+        let visibleCount = 0;
+
+        // Get the width of the hidden count indicator (if present)
+        const hiddenTagIndicator = tagsRef.current.querySelector(
+          '.hlc-select-selection-overflow-item-rest'
+        ) as HTMLElement;
+        const hiddenTagIndicatorWidth = hiddenTagIndicator?.getBoundingClientRect().width || 0;
+
+        // Get the width of the search indicator (if present)
+        const searchIndicator = tagsRef.current.querySelector(
+          '.hlc-select-selection-overflow-item-suffix'
+        ) as HTMLElement;
+        searchIndicator.style.width = '4px';
+        const searchIndicatorWidth = searchIndicator?.getBoundingClientRect().width || 0;
+
+        for (const tag of selectedTags) {
+          const tagWidth = tag.getBoundingClientRect().width;
+          // Check if the next tag can fit within the available space
+          if (
+            totalTagsWidth + tagWidth + hiddenTagIndicatorWidth + searchIndicatorWidth >
+            containerWidth
+          ) {
+            break;
+          }
+          totalTagsWidth += tagWidth;
+          visibleCount++;
+        }
+
+        const selectedTagValues = (selectedValues as RawValue[]) || [];
+        setVisibleTags(selectedTagValues.slice(0, visibleCount));
+        setHiddenTagCount(selectedTagValues.length - visibleCount);
+      };
+
+      updateVisibleTags();
+      window.addEventListener('resize', updateVisibleTags);
+
+      return () => window.removeEventListener('resize', updateVisibleTags);
+    }
+  }, [selectedValues]);
+
+  useEffect(() => {
+    if (mode === 'multiple' || mode === 'tags') {
+      const updateSearchIndicator = () => {
+        if (!tagsRef.current || !selectedTagsRef.current) return;
+
+        const containerWidth = tagsRef.current.getBoundingClientRect().width;
+        const selectedTags = selectedTagsRef.current as HTMLElement[];
+
+        // Get the width of the search indicator (if present)
+        const searchIndicator = tagsRef.current.querySelector(
+          '.hlc-select-selection-overflow-item-suffix'
+        ) as HTMLElement;
+
+        if (searchIndicator) {
+          let totalTagsWidth = 0;
+
+          // Get the width of the hidden count indicator (if present)
+          const hiddenTagIndicator = tagsRef.current.querySelector(
+            '.hlc-select-selection-overflow-item-rest'
+          ) as HTMLElement;
+          const hiddenTagIndicatorWidth = hiddenTagIndicator?.getBoundingClientRect().width || 0;
+          const searchIndicatorWidth = searchIndicator?.getBoundingClientRect().width || 0;
+
+          for (const tag of selectedTags) {
+            const tagWidth = tag.getBoundingClientRect().width;
+            // Check if the next tag can fit within the available space
+            if (
+              totalTagsWidth + tagWidth + hiddenTagIndicatorWidth + searchIndicatorWidth >
+              containerWidth
+            ) {
+              break;
+            }
+            totalTagsWidth += tagWidth;
+          }
+
+          if (hiddenTagIndicator) {
+            searchIndicator.style.width = `${containerWidth - (totalTagsWidth + hiddenTagIndicatorWidth)}px`;
+          }
+          if (!hiddenTagIndicator) {
+            searchIndicator.style.width = `${containerWidth - totalTagsWidth}px`;
+          }
+        }
+      };
+
+      updateSearchIndicator();
+    }
+  }, [visibleTags]);
+
+  useEffect(() => {
+    if (isOpen && !valueSearch) {
+      setOptionsFromProp(options);
+    }
+
     const handleClickOutside = (event: MouseEvent) => {
       if (
         (!selectRef.current?.contains(event.target as Node) &&
@@ -148,13 +221,21 @@ export const Select = ({
       }
     };
 
-    if (isOpen && !valueSearch) {
-      setOptionsFromProp(options);
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
+    const updateDropdownPosition = () => {
+      if (selectRef.current) {
+        const rect = selectRef.current.getBoundingClientRect();
+        setDropdownStyle({
+          position: 'absolute',
+          top: rect.bottom + window.scrollY + 'px',
+          left: rect.left + window.scrollX + 'px',
+          width: rect.width + 'px',
+          zIndex: 1000,
+        });
+      }
+    };
 
     updateDropdownPosition();
+    document.addEventListener('mousedown', handleClickOutside);
     window.addEventListener('resize', updateDropdownPosition);
 
     return () => {
@@ -192,7 +273,20 @@ export const Select = ({
         case 'Enter':
           if (highlightedIndex >= 0) {
             if (optionsFromProp[highlightedIndex].disabled) return;
-            handleSelect(optionsFromProp[highlightedIndex].value);
+            if (mode === 'single') {
+              handleSelect(optionsFromProp[highlightedIndex].value);
+            }
+            if (mode === 'multiple' || mode === 'tags') {
+              handleMultipleSelect(optionsFromProp[highlightedIndex].value);
+            }
+          }
+          break;
+        case 'Backspace':
+          if (!isEmpty(selectedValues) && (mode === 'multiple' || mode === 'tags')) {
+            setSelectedValues((prevState) => {
+              const _selectedValues = prevState as RawValue[];
+              return _selectedValues.splice(0, _selectedValues.length - 1);
+            });
           }
           break;
         case 'Escape':
@@ -208,7 +302,38 @@ export const Select = ({
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, highlightedIndex, optionsFromProp]);
+  }, [isOpen, highlightedIndex, optionsFromProp, selectedValues]);
+
+  const handleFocus = () => {
+    if (disabled) return;
+    setIsOpen(!isOpen);
+    setIsFocused(true);
+    selectRef.current?.focus();
+    inputRef.current?.focus();
+  };
+
+  const handleSearch = (val: string) => {
+    setValueSearch(val.trimStart());
+    const filteredOptions = options.filter(
+      (option) =>
+        option.label.toLowerCase().includes(val.toLowerCase()) ||
+        option?.subLabel?.toLowerCase().includes(val.toLowerCase())
+    );
+    if (!dropdownShowSearch) {
+      setIsOpen(!isEmpty(filteredOptions));
+    }
+    setOptionsFromProp(filteredOptions);
+    onSearch?.(val);
+  };
+
+  const resetStates = () => {
+    setIsOpen(false);
+    setIsFocused(false);
+    setValueSearch('');
+    setOptionsFromProp(options);
+    setHighlightedIndex(-1);
+    inputRef.current?.blur();
+  };
 
   const scrollToHighlighted = (index: number) => {
     if (optionRefs.current[index]) {
@@ -227,20 +352,145 @@ export const Select = ({
 
   const handleMultipleSelect = (val: any) => {
     const _selectedValues = selectedValues as RawValue[];
-
     const newSelectedValues = _selectedValues.includes(val)
       ? _selectedValues.filter((v) => v !== val)
       : [..._selectedValues, val];
 
-    console.log(newSelectedValues);
+    inputRef.current?.focus();
 
     setSelectedValues(newSelectedValues);
     onChange?.(newSelectedValues);
   };
 
+  const removeSelected = (val: string) => {
+    const _selectedValues = selectedValues as RawValue[];
+    const newSelectedValues = _selectedValues.filter((v) => v !== val);
+
+    setSelectedValues(newSelectedValues);
+    onChange?.(newSelectedValues);
+  };
+
+  const renderTags = () => {
+    const tags: React.JSX.Element[] = selectedOptions.map((tag, tagIndex) => {
+      const isVisible = visibleTags.includes(tag.value);
+      return (
+        <div
+          key={tagIndex}
+          ref={(el) => {
+            if (el) {
+              selectedTagsRef.current[tagIndex] = el;
+            }
+          }}
+          style={
+            isVisible
+              ? {
+                  opacity: 1,
+                  order: tagIndex,
+                }
+              : {
+                  opacity: 0,
+                  order: tagIndex,
+                  height: 0,
+                  overflowY: 'hidden',
+                  pointerEvents: 'none',
+                  position: 'absolute',
+                }
+          }
+          className={`${prefixCls}-select-selection-overflow-item`}
+        >
+          <Tag
+            size="md"
+            label={tag.label}
+            title={tag.label}
+            closable
+            onClose={(e) => {
+              e.stopPropagation();
+              removeSelected(tag.value);
+            }}
+            className={`${prefixCls}-select-selection-item`}
+          />
+        </div>
+      );
+    });
+    return tags;
+  };
+
   const itemSelected = options.find((o) => o.value === selectedValue);
   const showSearchInDropdown =
     (dropdownShowSearch && !showSearch) || (dropdownShowSearch && showSearch);
+
+  const renderSearch = showSearch && !dropdownShowSearch && (
+    <div className={`${prefixCls}-select-selection-search`}>
+      <input
+        ref={inputRef}
+        type="text"
+        autoComplete="off"
+        disabled={disabled || readOnly}
+        value={valueSearch}
+        onChange={(e) => handleSearch(e.target.value)}
+        className={`${prefixCls}-select-selection-search-input`}
+      />
+    </div>
+  );
+
+  const renderPlaceholder = placeholder && !itemSelected && isEmpty(selectedValues) && (
+    <span
+      className={clsx(`${prefixCls}-select-selection-placeholder`, {
+        invisible: !!valueSearch && !dropdownShowSearch,
+      })}
+    >
+      {placeholder}
+    </span>
+  );
+
+  const renderItemSelected = !!itemSelected && (
+    <span
+      className={clsx(`${prefixCls}-select-selection-item`, {
+        invisible: !!valueSearch && !dropdownShowSearch,
+      })}
+    >
+      {itemSelected?.subLabel ? (
+        <span className={clsx(`${prefixCls}-select-selection-item-content`, 'flex gap-x-md')}>
+          <span>{itemSelected?.label}</span>
+          <span className={`${prefixCls}-select-selection-item-content-sub`}>
+            {itemSelected?.subLabel}
+          </span>
+        </span>
+      ) : (
+        itemSelected?.label
+      )}
+    </span>
+  );
+
+  const renderItemsSelected = !isEmpty(selectedValues) && renderTags();
+
+  const renderArrow = showArrow && (
+    <span className={`${prefixCls}-select-arrow`} aria-hidden="true">
+      <i className="icon icon-chevron-down" />
+    </span>
+  );
+
+  const renderLabel = label && (
+    <label
+      htmlFor={name}
+      className={clsx(`${prefixCls}-select-label`, {
+        [`${prefixCls}-select-required`]: required,
+      })}
+    >
+      {label}{' '}
+      {required && (
+        <span
+          className={clsx('text-brand-red-primary', {
+            'text-brand-red-primary_disabled': disabled && !readOnly,
+          })}
+        >
+          *
+        </span>
+      )}
+    </label>
+  );
+
+  const renderHint = helperText && <p className={`${prefixCls}-helper-text`}>{helperText}</p>;
 
   return (
     <>
@@ -250,25 +500,8 @@ export const Select = ({
           [`${prefixCls}-select-wrapper-disabled`]: disabled && !readOnly,
         })}
       >
-        {label && (
-          <label
-            htmlFor={name}
-            className={clsx(`${prefixCls}-select-label`, {
-              [`${prefixCls}-select-required`]: required,
-            })}
-          >
-            {label}{' '}
-            {required && (
-              <span
-                className={clsx('text-brand-red-primary', {
-                  'text-brand-red-primary_disabled': disabled && !readOnly,
-                })}
-              >
-                *
-              </span>
-            )}
-          </label>
-        )}
+        {renderLabel}
+
         <div
           ref={selectRef}
           className={clsx(`${prefixCls}-select`, {
@@ -284,56 +517,50 @@ export const Select = ({
           })}
         >
           <div className={`${prefixCls}-select-selector`} onClick={handleFocus}>
-            {showSearch && !dropdownShowSearch && (
-              <span className={`${prefixCls}-select-selection-search`}>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  autoComplete="off"
-                  disabled={disabled || readOnly}
-                  value={valueSearch}
-                  onChange={(e) => handleSearch(e.target.value)}
-                  className={`${prefixCls}-select-selection-search-input`}
-                />
-              </span>
-            )}
-            {!!itemSelected && (
-              <span
-                className={clsx(`${prefixCls}-select-selection-item`, {
-                  invisible: !!valueSearch && !dropdownShowSearch,
-                })}
-              >
-                {itemSelected?.subLabel ? (
-                  <span
-                    className={clsx(`${prefixCls}-select-selection-item-content`, 'flex gap-x-md')}
+            {mode === 'single' && renderSearch}
+
+            {mode === 'single' && renderItemSelected}
+
+            {mode === 'multiple' && (
+              <div ref={tagsRef} className={`${prefixCls}-select-selection-overflow`}>
+                {renderItemsSelected}
+
+                {hiddenTagCount > 0 && (
+                  <div
+                    style={{ order: selectedOptions.length + 1 }}
+                    className={clsx(
+                      `${prefixCls}-select-selection-overflow-item`,
+                      `${prefixCls}-select-selection-overflow-item-rest`
+                    )}
                   >
-                    <span>{itemSelected?.label}</span>
-                    <span className={`${prefixCls}-select-selection-item-content-sub`}>
-                      {itemSelected?.subLabel}
-                    </span>
-                  </span>
-                ) : (
-                  itemSelected?.label
+                    <Tag
+                      size="md"
+                      label={`+${hiddenTagCount}`}
+                      title={`+${hiddenTagCount}`}
+                      className={`${prefixCls}-select-selection-item`}
+                    />
+                  </div>
                 )}
-              </span>
+
+                <div
+                  style={{ opacity: 1, order: selectedOptions.length + 2, width: 4 }}
+                  className={clsx(
+                    `${prefixCls}-select-selection-overflow-item`,
+                    `${prefixCls}-select-selection-overflow-item-suffix`
+                  )}
+                >
+                  {renderSearch}
+                </div>
+              </div>
             )}
-            {placeholder && !itemSelected && (
-              <span
-                className={clsx(`${prefixCls}-select-selection-placeholder`, {
-                  invisible: !!valueSearch && !dropdownShowSearch,
-                })}
-              >
-                {placeholder}
-              </span>
-            )}
+
+            {renderPlaceholder}
           </div>
-          {showArrow && (
-            <span className={`${prefixCls}-select-arrow`} aria-hidden="true">
-              <i className="icon icon-chevron-down" />
-            </span>
-          )}
+
+          {renderArrow}
         </div>
-        {helperText && <p className={`${prefixCls}-helper-text`}>{helperText}</p>}
+
+        {renderHint}
       </div>
 
       {isOpen &&

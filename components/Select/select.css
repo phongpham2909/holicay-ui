@@ -28,11 +28,11 @@
   @apply text-[20px];
 }
 
-.hlc-select > .hlc-select-selector > .hlc-select-selection-search {
+.hlc-select.hlc-select-single > .hlc-select-selector > .hlc-select-selection-search {
   @apply absolute top-0 inset-[13px] h-full;
 }
 
-.hlc-select > .hlc-select-selector > .hlc-select-selection-search > input {
+.hlc-select > .hlc-select-selector .hlc-select-selection-search > input {
   @apply cursor-auto caret-base-primary m-0 p-0 outline-none border-none appearance-none w-full h-full;
   background: transparent;
 }
@@ -60,6 +60,38 @@
   @apply font-normal text-base-secondary;
 }
 
+.hlc-select-multiple > .hlc-select-selector {
+  @apply relative flex flex-wrap items-center;
+}
+
+.hlc-select-multiple > .hlc-select-selector > .hlc-select-selection-overflow {
+  @apply relative flex flex-[auto] flex-nowrap max-w-full;
+}
+
+.hlc-select-multiple
+  > .hlc-select-selector
+  > .hlc-select-selection-overflow
+  .hlc-select-selection-overflow-item {
+  @apply flex-none self-center max-w-full;
+}
+
+.hlc-select-multiple
+  > .hlc-select-selector
+  > .hlc-select-selection-overflow
+  .hlc-select-selection-overflow-item
+  .hlc-select-selection-item {
+  @apply me-1 my-xxs;
+}
+
+.hlc-select-multiple.hlc-select-show-arrow > .hlc-select-selector {
+  @apply pr-[41px];
+}
+
+.hlc-select-multiple > .hlc-select-selector > .hlc-select-selection-placeholder {
+  @apply absolute top-1/2 right-[13px] left-[13px];
+  transform: translateY(-50%);
+}
+
 .hlc-select.hlc-select-focused > .hlc-select-selector {
   @apply bg-surface-base-primary border-brand-red-primary_active;
   box-shadow:
@@ -79,7 +111,9 @@
   @apply text-base-subtle;
 }
 
-.hlc-select-show-arrow > .hlc-select-selector > .hlc-select-selection-search {
+.hlc-select.hlc-select-single.hlc-select-show-arrow
+  > .hlc-select-selector
+  > .hlc-select-selection-search {
   @apply right-[33px];
 }
 
@@ -223,7 +257,7 @@
   @apply text-base-primary_disabled;
 }
 
-.hlc-select-disabled > .hlc-select-selector > .hlc-select-selection-search > input {
+.hlc-select-disabled > .hlc-select-selector .hlc-select-selection-search > input {
   @apply cursor-not-allowed;
 }
 

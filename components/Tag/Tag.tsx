@@ -6,7 +6,7 @@ import './tag.css';
 
 type PropsWithOptionalChildren<P = unknown> = P & { children?: React.ReactNode };
 
-export interface TagProps {
+export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
   label?: string;
   size?: 'sm' | 'md' | 'lg';
   bordered?: boolean;
@@ -29,8 +29,10 @@ export const Tag = ({
   prefixIcon,
   suffixIcon,
   prefixCls = PREFIX_CLASS,
+  className,
   onClose,
   children,
+  ...rest
 }: PropsWithOptionalChildren<TagProps>) => {
   const withPrefixIcon = (icon || prefixIcon) && (
     <span className={`${prefixCls}-tag-prefix-icon`}>{icon || prefixIcon}</span>
@@ -46,8 +48,10 @@ export const Tag = ({
 
   return (
     <span
+      {...rest}
       className={clsx(`${prefixCls}-tag`, `${prefixCls}-tag-${size}`, {
         [`${prefixCls}-tag-borderless`]: !bordered,
+        [className as string]: !!className,
       })}
     >
       {withPrefixIcon}
