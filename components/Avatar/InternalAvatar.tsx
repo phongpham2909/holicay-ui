@@ -108,4 +108,5 @@ const InternalAvatar = React.forwardRef<HTMLSpanElement, AvatarProps>((props, re
   );
 });
 
+InternalAvatar.displayName = 'Avatar';
 export default InternalAvatar;
