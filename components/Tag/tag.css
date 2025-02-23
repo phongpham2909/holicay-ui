@@ -1,5 +1,5 @@
 .hlc-tag {
-  @apply cursor-default inline-flex items-center font-primary text-base-secondary border border-base-primary bg-surface-base-primary align-middle transition-all duration-200 ease-out;
+  @apply cursor-default inline-flex items-center font-primary text-base-secondary border border-base-primary bg-surface-base-primary align-bottom transition-all duration-200 ease-out;
 }
 
 .hlc-tag:hover {

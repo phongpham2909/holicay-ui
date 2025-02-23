@@ -8,11 +8,11 @@
 
 .hlc-select {
   width: 320px;
-  @apply font-primary relative;
+  @apply relative;
 }
 
 .hlc-select > .hlc-select-selector {
-  @apply select-none cursor-pointer border border-base-primary rounded-md bg-surface-base-primary shadow-xs transition duration-200 ease-out;
+  @apply select-none cursor-pointer font-primary border border-base-primary rounded-md bg-surface-base-primary shadow-xs transition duration-200 ease-out;
   padding: 9px 13px;
 }
 
@@ -20,12 +20,28 @@
   @apply bg-surface-base-primary_hover border-base-primary_hover;
 }
 
-.hlc-select > .hlc-select-arrow {
-  @apply select-none pointer-events-none absolute right-[13px] top-[50%] -mt-2.5 flex items-center justify-center w-5 h-5 text-base-primary;
+.hlc-select.hlc-select-show-arrow > .hlc-select-arrow {
+  @apply select-none pointer-events-none absolute right-[13px] top-[50%] -mt-2.5 flex items-center justify-center w-5 h-5 rounded-md text-base-primary;
 }
 
-.hlc-select > .hlc-select-arrow > .icon {
+.hlc-select.hlc-select-show-arrow > .hlc-select-arrow > .icon {
   @apply text-[20px];
+}
+
+.hlc-select.hlc-select-allow-clear > .hlc-select-clear {
+  @apply cursor-pointer select-none absolute right-[13px] top-[50%] z-[1] -mt-2.5 flex items-center justify-center w-5 h-5 rounded-md text-base-subtle bg-white opacity-0 transition-opacity ease-in-out;
+}
+
+.hlc-select.hlc-select-allow-clear > .hlc-select-clear > .icon {
+  @apply text-[20px];
+}
+
+.hlc-select.hlc-select-allow-clear:hover > .hlc-select-clear {
+  @apply opacity-100 bg-surface-base-primary_hover;
+}
+
+.hlc-select.hlc-select-focused.hlc-select-allow-clear > .hlc-select-clear {
+  @apply bg-surface-base-primary;
 }
 
 .hlc-select.hlc-select-single > .hlc-select-selector > .hlc-select-selection-search {
@@ -80,11 +96,11 @@
   > .hlc-select-selection-overflow
   .hlc-select-selection-overflow-item
   .hlc-select-selection-item {
-  @apply me-1 my-xxs;
+  @apply me-1;
 }
 
 .hlc-select-multiple.hlc-select-show-arrow > .hlc-select-selector {
-  @apply pr-[41px];
+  @apply pe-[41px];
 }
 
 .hlc-select-multiple > .hlc-select-selector > .hlc-select-selection-placeholder {

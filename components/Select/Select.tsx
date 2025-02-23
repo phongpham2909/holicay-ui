@@ -68,6 +68,8 @@ export const Select = ({
   name,
   label,
   helperText,
+  clearIcon,
+  allowClear = false,
   disabled = false,
   readOnly = false,
   required = false,
@@ -99,15 +101,8 @@ export const Select = ({
   const [dropdownStyle, setDropdownStyle] = useState({});
   const [highlightedIndex, setHighlightedIndex] = useState(-1); // Track highlighted option
 
-  const selectedOptions = useMemo(() => {
-    const _selectedValues = selectedValues as RawValue[];
-    const _selectedOptions: Option[] = [];
-    _selectedValues.forEach((v) => {
-      const selectedOption = options.find((o) => o.value === v);
-      if (!!selectedOption) _selectedOptions.push(selectedOption);
-    });
-    return _selectedOptions;
-  }, [options, selectedValues]);
+  const showSearchInDropdown =
+    (dropdownShowSearch && !showSearch) || (dropdownShowSearch && showSearch);
 
   useEffect(() => {
     if (mode === 'multiple' || mode === 'tags') {
@@ -282,7 +277,11 @@ export const Select = ({
           }
           break;
         case 'Backspace':
-          if (!isEmpty(selectedValues) && (mode === 'multiple' || mode === 'tags')) {
+          if (
+            !showSearchInDropdown &&
+            !isEmpty(selectedValues) &&
+            (mode === 'multiple' || mode === 'tags')
+          ) {
             setSelectedValues((prevState) => {
               const _selectedValues = prevState as RawValue[];
               return _selectedValues.splice(0, _selectedValues.length - 1);
@@ -302,7 +301,25 @@ export const Select = ({
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, highlightedIndex, optionsFromProp, selectedValues]);
+  }, [isOpen, highlightedIndex, optionsFromProp, selectedValues, showSearchInDropdown]);
+
+  const resetStates = () => {
+    setIsOpen(false);
+    setIsFocused(false);
+    setValueSearch('');
+    setOptionsFromProp(options);
+    setHighlightedIndex(-1);
+    inputRef.current?.blur();
+  };
+
+  const scrollToHighlighted = (index: number) => {
+    if (optionRefs.current[index]) {
+      optionRefs.current[index]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+    }
+  };
 
   const handleFocus = () => {
     if (disabled) return;
@@ -326,24 +343,6 @@ export const Select = ({
     onSearch?.(val);
   };
 
-  const resetStates = () => {
-    setIsOpen(false);
-    setIsFocused(false);
-    setValueSearch('');
-    setOptionsFromProp(options);
-    setHighlightedIndex(-1);
-    inputRef.current?.blur();
-  };
-
-  const scrollToHighlighted = (index: number) => {
-    if (optionRefs.current[index]) {
-      optionRefs.current[index]?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-      });
-    }
-  };
-
   const handleSelect = (val: string) => {
     setSelectedValue(val);
     onChange?.(val);
@@ -362,7 +361,7 @@ export const Select = ({
     onChange?.(newSelectedValues);
   };
 
-  const removeSelected = (val: string) => {
+  const handleRemoveSelected = (val: string) => {
     const _selectedValues = selectedValues as RawValue[];
     const newSelectedValues = _selectedValues.filter((v) => v !== val);
 
@@ -370,54 +369,32 @@ export const Select = ({
     onChange?.(newSelectedValues);
   };
 
-  const renderTags = () => {
-    const tags: React.JSX.Element[] = selectedOptions.map((tag, tagIndex) => {
-      const isVisible = visibleTags.includes(tag.value);
-      return (
-        <div
-          key={tagIndex}
-          ref={(el) => {
-            if (el) {
-              selectedTagsRef.current[tagIndex] = el;
-            }
-          }}
-          style={
-            isVisible
-              ? {
-                  opacity: 1,
-                  order: tagIndex,
-                }
-              : {
-                  opacity: 0,
-                  order: tagIndex,
-                  height: 0,
-                  overflowY: 'hidden',
-                  pointerEvents: 'none',
-                  position: 'absolute',
-                }
-          }
-          className={`${prefixCls}-select-selection-overflow-item`}
-        >
-          <Tag
-            size="md"
-            label={tag.label}
-            title={tag.label}
-            closable
-            onClose={(e) => {
-              e.stopPropagation();
-              removeSelected(tag.value);
-            }}
-            className={`${prefixCls}-select-selection-item`}
-          />
-        </div>
-      );
-    });
-    return tags;
+  const handleClearAll = () => {
+    resetStates();
+    setVisibleTags([]);
+    setHiddenTagCount(0);
+
+    setSelectedValues([]);
+    onChange?.([]);
   };
 
-  const itemSelected = options.find((o) => o.value === selectedValue);
-  const showSearchInDropdown =
-    (dropdownShowSearch && !showSearch) || (dropdownShowSearch && showSearch);
+  const selectedOptions = useMemo(() => {
+    const _selectedValues = selectedValues as RawValue[];
+    const _selectedOptions: Option[] = [];
+
+    if (!isEmpty(_selectedValues)) {
+      _selectedValues.forEach((v) => {
+        const selectedOption = options.find((o) => o.value === v);
+        if (!!selectedOption) _selectedOptions.push(selectedOption);
+      });
+    }
+
+    return _selectedOptions;
+  }, [options, selectedValues]);
+
+  const itemSelected = useMemo(() => {
+    return options.find((o) => o.value === selectedValue);
+  }, [options, selectedValue]);
 
   const renderSearch = showSearch && !dropdownShowSearch && (
     <div className={`${prefixCls}-select-selection-search`}>
@@ -433,7 +410,7 @@ export const Select = ({
     </div>
   );
 
-  const renderPlaceholder = placeholder && !itemSelected && isEmpty(selectedValues) && (
+  const renderPlaceholder = !!placeholder && !itemSelected && isEmpty(selectedValues) && (
     <span
       className={clsx(`${prefixCls}-select-selection-placeholder`, {
         invisible: !!valueSearch && !dropdownShowSearch,
@@ -462,15 +439,75 @@ export const Select = ({
     </span>
   );
 
-  const renderItemsSelected = !isEmpty(selectedValues) && renderTags();
+  const renderItemsSelected = useMemo(() => {
+    if (!isEmpty(selectedOptions)) {
+      const tags: React.JSX.Element[] = selectedOptions.map((tag, tagIndex) => {
+        const isVisible = visibleTags.includes(tag.value);
+        return (
+          <div
+            key={tagIndex}
+            ref={(el) => {
+              if (el) {
+                selectedTagsRef.current[tagIndex] = el;
+              }
+            }}
+            style={
+              isVisible
+                ? {
+                    opacity: 1,
+                    order: tagIndex,
+                  }
+                : {
+                    opacity: 0,
+                    order: tagIndex,
+                    height: 0,
+                    overflowY: 'hidden',
+                    pointerEvents: 'none',
+                    position: 'absolute',
+                  }
+            }
+            className={`${prefixCls}-select-selection-overflow-item`}
+          >
+            <Tag
+              size="md"
+              label={tag.label}
+              title={tag.label}
+              closable
+              onClose={(e) => {
+                e.stopPropagation();
+                handleRemoveSelected(tag.value);
+              }}
+              className={`${prefixCls}-select-selection-item`}
+            />
+          </div>
+        );
+      });
+      return tags;
+    }
+    return <></>;
+  }, [selectedOptions, visibleTags, handleRemoveSelected]);
 
   const renderArrow = showArrow && (
-    <span className={`${prefixCls}-select-arrow`} aria-hidden="true">
+    <span aria-hidden="true" className={`${prefixCls}-select-arrow`}>
       <i className="icon icon-chevron-down" />
     </span>
   );
 
-  const renderLabel = label && (
+  const renderClearIcon = allowClear && !isEmpty(selectedValues) && (
+    <span
+      title="Clear"
+      aria-hidden="true"
+      className={`${prefixCls}-select-clear`}
+      onClick={(e) => {
+        e.stopPropagation();
+        handleClearAll();
+      }}
+    >
+      {clearIcon || <i className="icon icon-x-close" />}
+    </span>
+  );
+
+  const renderLabel = !!label && (
     <label
       htmlFor={name}
       className={clsx(`${prefixCls}-select-label`, {
@@ -490,7 +527,7 @@ export const Select = ({
     </label>
   );
 
-  const renderHint = helperText && <p className={`${prefixCls}-helper-text`}>{helperText}</p>;
+  const renderHint = !!helperText && <p className={`${prefixCls}-helper-text`}>{helperText}</p>;
 
   return (
     <>
@@ -512,6 +549,7 @@ export const Select = ({
             [`${prefixCls}-select-single`]: mode === 'single',
             [`${prefixCls}-select-multiple`]: mode === 'multiple' || mode === 'tags',
             [`${prefixCls}-select-show-arrow`]: showArrow,
+            [`${prefixCls}-select-allow-clear`]: allowClear,
             [`${prefixCls}-select-show-search`]: showSearch && !dropdownShowSearch,
             [className as string]: !!className,
           })}
@@ -522,7 +560,7 @@ export const Select = ({
             {mode === 'single' && renderItemSelected}
 
             {mode === 'multiple' && (
-              <div ref={tagsRef} className={`${prefixCls}-select-selection-overflow`}>
+              <div ref={tagsRef} className={clsx(`${prefixCls}-select-selection-overflow`)}>
                 {renderItemsSelected}
 
                 {hiddenTagCount > 0 && (
@@ -549,7 +587,7 @@ export const Select = ({
                     `${prefixCls}-select-selection-overflow-item-suffix`
                   )}
                 >
-                  {renderSearch}
+                  <div className="h-6">{renderSearch}</div>
                 </div>
               </div>
             )}
@@ -558,6 +596,8 @@ export const Select = ({
           </div>
 
           {renderArrow}
+
+          {renderClearIcon}
         </div>
 
         {renderHint}
