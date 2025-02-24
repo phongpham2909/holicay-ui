@@ -1,0 +1,38 @@
+import { Meta, Canvas, ArgTypes, Controls } from '@storybook/blocks';
+import * as SelectStories from './Select.stories';
+
+<Meta of={SelectStories} />
+
+# Select
+
+- [Overview](#overview)
+- [Usage](#usage)
+- [Props](#props)
+- [Variants](#variants)
+
+## Overview
+
+Select components are used for collecting user provided information from a list of options. They can be configured to
+allow single or multiple selections.
+
+## Usage
+
+```js
+import { Single } from '@holicay-ui/design-system';
+```
+
+<Canvas of={SelectStories.Base} />
+
+## Props
+
+### Select
+
+<Controls of={SelectStories.SelectProps} />
+
+### SingleSelect
+
+<Controls of={SelectStories.SingleSelectProps} />
+
+### MultiSelect
+
+<Controls of={SelectStories.MultipleSelectProps} />

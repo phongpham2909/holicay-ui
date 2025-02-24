@@ -1,12 +1,11 @@
+import { Radio } from '@/components/Radio';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { Toggle } from '@/components';
-
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'Components/Toggle',
-  component: Toggle,
+  title: 'Components/Radio',
+  component: Radio,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
@@ -15,7 +14,7 @@ const meta = {
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    // 👇 All Toggle stories expect a label arg
+    // 👇 All Checkbox stories expect a label arg
     label: {
       control: 'text',
       description: 'Customize label',
@@ -26,7 +25,7 @@ const meta = {
     },
     checked: {
       control: 'boolean',
-      description: 'Determine whether the Switch is checked',
+      description: 'Determine whether the Checkbox is checked',
     },
     defaultChecked: {
       control: 'boolean',
@@ -35,30 +34,23 @@ const meta = {
     size: {
       control: 'inline-radio',
       options: ['sm', 'md'],
-      description: 'The size of the Switch',
-    },
-    loading: {
-      control: 'boolean',
-      description: 'Loading state of switch',
+      description: 'The size of the Checkbox',
     },
     disabled: {
       control: 'boolean',
-      description: 'Disable switch',
+      description: 'Disable checkbox',
     },
     className: {
       control: 'text',
-      description: 'The additional class to Switch',
+      description: 'The additional class to Checkbox',
     },
     onChange: {
-      description: 'Trigger when the checked state is changing',
-    },
-    onClick: {
-      description: 'Trigger when clicked',
+      description: 'The callback function that is triggered when the state changes',
     },
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onChange: fn() },
-} satisfies Meta<typeof Toggle>;
+} satisfies Meta<typeof Radio>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -88,12 +80,5 @@ export const LabelAndHelperText: Story = {
   args: {
     label: 'Remember Me',
     helperText: 'Save my login details for next time',
-  },
-};
-
-export const Loading: Story = {
-  args: {
-    checked: true,
-    loading: true,
   },
 };

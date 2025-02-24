@@ -8,11 +8,11 @@
 
 .hlc-select {
   width: 320px;
-  @apply font-primary relative;
+  @apply relative;
 }
 
 .hlc-select > .hlc-select-selector {
-  @apply select-none cursor-pointer border border-base-primary rounded-md bg-surface-base-primary shadow-xs transition duration-200 ease-out;
+  @apply select-none cursor-pointer font-primary border border-base-primary rounded-md bg-surface-base-primary shadow-xs transition duration-200 ease-out;
   padding: 9px 13px;
 }
 
@@ -20,19 +20,35 @@
   @apply bg-surface-base-primary_hover border-base-primary_hover;
 }
 
-.hlc-select > .hlc-select-arrow {
-  @apply select-none pointer-events-none absolute right-[13px] top-[50%] -mt-2.5 flex items-center justify-center w-5 h-5 text-base-primary;
+.hlc-select.hlc-select-show-arrow > .hlc-select-arrow {
+  @apply select-none pointer-events-none absolute right-[13px] top-[50%] -mt-2.5 flex items-center justify-center w-5 h-5 rounded-md text-base-primary;
 }
 
-.hlc-select > .hlc-select-arrow > .icon {
+.hlc-select.hlc-select-show-arrow > .hlc-select-arrow > .icon {
   @apply text-[20px];
 }
 
-.hlc-select > .hlc-select-selector > .hlc-select-selection-search {
+.hlc-select.hlc-select-allow-clear > .hlc-select-clear {
+  @apply cursor-pointer select-none absolute right-[13px] top-[50%] z-[1] -mt-2.5 flex items-center justify-center w-5 h-5 rounded-md text-base-subtle bg-white opacity-0 transition-opacity ease-in-out;
+}
+
+.hlc-select.hlc-select-allow-clear > .hlc-select-clear > .icon {
+  @apply text-[20px];
+}
+
+.hlc-select.hlc-select-allow-clear:hover > .hlc-select-clear {
+  @apply opacity-100 bg-surface-base-primary_hover;
+}
+
+.hlc-select.hlc-select-focused.hlc-select-allow-clear > .hlc-select-clear {
+  @apply bg-surface-base-primary;
+}
+
+.hlc-select.hlc-select-single > .hlc-select-selector > .hlc-select-selection-search {
   @apply absolute top-0 inset-[13px] h-full;
 }
 
-.hlc-select > .hlc-select-selector > .hlc-select-selection-search > input {
+.hlc-select > .hlc-select-selector .hlc-select-selection-search > input {
   @apply cursor-auto caret-base-primary m-0 p-0 outline-none border-none appearance-none w-full h-full;
   background: transparent;
 }
@@ -49,7 +65,7 @@
   > .hlc-select-selector
   > .hlc-select-selection-item
   > .hlc-select-selection-item-content {
-  @apply flex-auto overflow-hidden whitespace-nowrap text-ellipsis font-primary text-base;
+  @apply overflow-hidden whitespace-nowrap text-ellipsis font-primary text-base;
 }
 
 .hlc-select
@@ -60,16 +76,50 @@
   @apply font-normal text-base-secondary;
 }
 
+.hlc-select-multiple > .hlc-select-selector {
+  @apply relative flex flex-wrap items-center;
+}
+
+.hlc-select-multiple > .hlc-select-selector > .hlc-select-selection-overflow {
+  @apply relative flex flex-[auto] flex-nowrap max-w-full;
+}
+
+.hlc-select-multiple
+  > .hlc-select-selector
+  > .hlc-select-selection-overflow
+  .hlc-select-selection-overflow-item {
+  @apply flex-none self-center max-w-full;
+}
+
+.hlc-select-multiple
+  > .hlc-select-selector
+  > .hlc-select-selection-overflow
+  .hlc-select-selection-overflow-item
+  .hlc-select-selection-item {
+  @apply me-1;
+}
+
+.hlc-select-multiple.hlc-select-show-arrow > .hlc-select-selector {
+  @apply pe-[41px];
+}
+
+.hlc-select-multiple > .hlc-select-selector > .hlc-select-selection-placeholder {
+  @apply absolute top-1/2 right-[13px] left-[13px];
+  transform: translateY(-50%);
+}
+
 .hlc-select.hlc-select-focused > .hlc-select-selector {
   @apply bg-surface-base-primary border-brand-red-primary_active;
   box-shadow:
     0px 1px 2px 0px var(--elevation-shadow_low),
     0px 0px 0px 1px var(--color-primary-500);
 }
-.hlc-select.hlc-select-focused > .hlc-select-selector > .hlc-select-selection-item {
+.hlc-select.hlc-select-show-search.hlc-select-focused
+  > .hlc-select-selector
+  > .hlc-select-selection-item {
   @apply text-base-subtle;
 }
-.hlc-select.hlc-select-focused
+.hlc-select.hlc-select-show-search.hlc-select-focused
   > .hlc-select-selector
   > .hlc-select-selection-item
   > .hlc-select-selection-item-content
@@ -77,64 +127,125 @@
   @apply text-base-subtle;
 }
 
-.hlc-select-show-arrow > .hlc-select-selector > .hlc-select-selection-search {
+.hlc-select.hlc-select-single.hlc-select-show-arrow
+  > .hlc-select-selector
+  > .hlc-select-selection-search {
   @apply right-[33px];
 }
 
 .hlc-select-dropdown {
   @apply mt-1.5 border border-base-secondary bg-surface-base-primary rounded-md shadow-md overflow-y-auto overflow-x-hidden max-h-80 transition-all;
 }
+.hlc-select-dropdown.hlc-select-dropdown-show-search {
+  @apply overflow-y-hidden;
+}
+.hlc-select-dropdown.hlc-select-dropdown-show-search > .hlc-select-menu {
+  @apply overflow-y-auto overflow-x-hidden max-h-[calc(320px-44px)];
+}
+
+.hlc-select-dropdown.hlc-select-dropdown-show-search > .hlc-select-dropdown-search-box {
+  @apply flex items-center gap-x-md border-b-2 border-brand-red-primary_active py-2.5 px-lg;
+}
+
+.hlc-select-dropdown.hlc-select-dropdown-show-search
+  > .hlc-select-dropdown-search-box
+  > .hlc-select-dropdown-search-icon {
+  @apply text-[20px] text-base-subtle w-5 h-5 flex items-center justify-center;
+}
+
+.hlc-select-dropdown.hlc-select-dropdown-show-search
+  > .hlc-select-dropdown-search-box
+  > .hlc-select-dropdown-search-input {
+  @apply outline-none w-full h-5;
+}
+.hlc-select-dropdown.hlc-select-dropdown-show-search
+  > .hlc-select-dropdown-search-box
+  > input::placeholder {
+  @apply caret-base-primary font-primary text-sm text-base-placeholder pl-[1.5px];
+}
 
 .hlc-select-menu {
   @apply py-xs;
 }
 
-.hlc-select-menu-item {
+.hlc-select-menu > .hlc-select-menu-item {
   @apply flex items-center gap-x-md text-base-primary bg-surface-base-primary rounded-sm px-md py-2.5 mx-sm my-[1px] transition-colors duration-300 ease-in-out;
 }
 
-.hlc-select-menu-item:hover {
+.hlc-select-menu
+  > .hlc-select-menu-item.hlc-select-menu-item-highlighted:not(.hlc-select-menu-item-disabled) {
   @apply bg-surface-base-primary_hover;
 }
 
-.hlc-select-menu-item.hlc-select-menu-item-selected {
+.hlc-select-menu > .hlc-select-menu-item.hlc-select-menu-item-selected {
   @apply bg-surface-base-secondary;
 }
-.hlc-select-menu-item.hlc-select-menu-item-selected:hover {
+
+.hlc-select-menu
+  > .hlc-select-menu-item.hlc-select-menu-item-selected.hlc-select-menu-item-highlighted:not(
+    .hlc-select-menu-item-disabled
+  ) {
   @apply bg-surface-base-secondary_hover;
 }
 
-.hlc-select-menu-item.hlc-select-menu-item-disabled {
+.hlc-select-menu > .hlc-select-menu-item.hlc-select-menu-item-disabled {
   @apply cursor-not-allowed bg-surface-base-primary;
 }
-.hlc-select-menu-item.hlc-select-menu-item-selected.hlc-select-menu-item-disabled {
+
+.hlc-select-menu
+  > .hlc-select-menu-item.hlc-select-menu-item-selected.hlc-select-menu-item-disabled {
   @apply bg-surface-base-secondary;
 }
-.hlc-select-menu-item.hlc-select-menu-item-selected.hlc-select-menu-item-disabled
+
+.hlc-select-menu
+  > .hlc-select-menu-item.hlc-select-menu-item-selected.hlc-select-menu-item-disabled
   > .hlc-select-menu-item-state {
   @apply text-base-primary_disabled;
 }
-.hlc-select-menu-item.hlc-select-menu-item-disabled > .hlc-select-menu-item-content,
-.hlc-select-menu-item.hlc-select-menu-item-disabled
-  > .hlc-select-menu-item-content
-  > .hlc-select-menu-item-content-sub {
+
+.hlc-select-menu
+  > .hlc-select-menu-item.hlc-select-menu-item-disabled
+  .hlc-select-menu-item-content,
+.hlc-select-menu
+  > .hlc-select-menu-item.hlc-select-menu-item-disabled
+  .hlc-select-menu-item-content
+  .hlc-select-menu-item-content-sub {
   @apply cursor-not-allowed text-base-tertiary_disabled;
 }
 
-.hlc-select-menu-item > .hlc-select-menu-item-content {
+.hlc-select-menu > .hlc-select-menu-item .hlc-select-menu-item-content {
   @apply cursor-pointer flex-auto overflow-hidden whitespace-nowrap text-ellipsis font-primary text-base font-medium text-base-primary rounded-sm;
 }
 
-.hlc-select-menu-item > .hlc-select-menu-item-content > .hlc-select-menu-item-content-sub {
+.hlc-select-menu
+  > .hlc-select-menu-item
+  .hlc-select-menu-item-content
+  .hlc-select-menu-item-content-sub {
   @apply font-normal text-base-secondary;
 }
 
-.hlc-select-menu-item > .hlc-select-menu-item-state {
+.hlc-select-menu > .hlc-select-menu-item > .hlc-checkbox-wrapper {
+  @apply items-center;
+}
+
+.hlc-select-menu > .hlc-select-menu-item > .hlc-checkbox-wrapper > .hlc-select-menu-item-content {
+  @apply rounded-none;
+}
+
+.hlc-select-menu > .hlc-select-menu-item > .hlc-select-menu-item-state {
   @apply select-none text-brand-red-primary flex items-center w-5 h-5 justify-center;
 }
 
-.hlc-select-menu-item > .hlc-select-menu-item-state > .icon {
+.hlc-select-menu > .hlc-select-menu-item > .hlc-select-menu-item-state > .icon {
   @apply text-[20px];
+}
+
+.hlc-select-menu > .hlc-select-menu-empty-state {
+  @apply px-md py-2.5 mx-sm my-[1px];
+}
+
+.hlc-select-menu > .hlc-select-menu-empty-state > p {
+  @apply font-primary text-base text-base-primary;
 }
 
 .hlc-select-wrapper-disabled > .hlc-select-label {
@@ -145,11 +256,13 @@
   @apply text-base-tertiary_disabled;
 }
 
-.hlc-select-disabled > .hlc-select-selector {
+.hlc-select-disabled > .hlc-select-selector,
+.hlc-select-readOnly > .hlc-select-selector {
   @apply cursor-not-allowed bg-surface-base-primary_disabled border-base-primary_disabled;
 }
 
-.hlc-select-disabled > .hlc-select-selector:hover {
+.hlc-select-disabled > .hlc-select-selector:hover,
+.hlc-select-readOnly > .hlc-select-selector:hover {
   @apply bg-surface-base-primary_disabled border-base-primary_disabled;
 }
 
@@ -160,7 +273,7 @@
   @apply text-base-primary_disabled;
 }
 
-.hlc-select-disabled > .hlc-select-selector > .hlc-select-selection-search > input {
+.hlc-select-disabled > .hlc-select-selector .hlc-select-selection-search > input {
   @apply cursor-not-allowed;
 }
 

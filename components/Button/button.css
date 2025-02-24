@@ -5,6 +5,7 @@
 .hlc-btn-disabled {
   @apply cursor-not-allowed;
 }
+
 /* Button Size */
 .hlc-btn-size-sm {
   @apply px-[13px] py-[7px] text-sm rounded-sm;
@@ -21,9 +22,10 @@
 .hlc-btn-size-2xl {
   @apply px-[23px] py-[13px] text-lg rounded-md;
 }
+
 /* Icon Only */
 .hlc-btn-icon-only {
-  @apply px-0 inline-flex items-center justify-center;
+  @apply !px-0 inline-flex items-center justify-center;
 }
 .hlc-btn-size-sm.hlc-btn-icon-only {
   @apply min-w-9;
@@ -40,6 +42,7 @@
 .hlc-btn-size-2xl.hlc-btn-icon-only {
   @apply min-w-14;
 }
+
 /* Button Icon */
 .hlc-btn-icon:not(.hlc-btn-icon-only) {
   @apply inline-flex items-center gap-x-md;
@@ -54,12 +57,24 @@
   @apply text-[1.5rem];
 }
 
+.hlc-btn:has(.hlc-btn-icon-loading) {
+  @apply cursor-wait;
+}
+
+.hlc-btn-icon > .hlc-btn-icon-loading {
+  @apply text-[1.25rem] w-5 h-5;
+}
+
+.hlc-btn-icon > .hlc-btn-icon-loading > .icon {
+  @apply animate-spin;
+}
+
 .hlc-btn-primary {
   @apply relative bg-fill-brand-red-primary border text-white shadow-xs transition-all duration-200 ease-out;
   background-clip: padding-box;
   border-color: transparent;
 }
-.hlc-btn-primary::before {
+.hlc-btn-primary:not(.hlc-btn-disabled)::before {
   @apply absolute z-[-1] -m-[1px] inset-0;
   content: '';
   background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600))
@@ -69,50 +84,51 @@
 .hlc-btn-primary:hover {
   @apply bg-fill-brand-red-primary_hover;
 }
-.hlc-btn-primary:hover::before {
+.hlc-btn-primary:not(.hlc-btn-disabled):hover::before {
   background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-700))
     border-box;
 }
 .hlc-btn-primary:active {
   @apply bg-fill-brand-red-primary_active;
 }
-.hlc-btn-primary:active::before {
+.hlc-btn-primary:not(.hlc-btn-disabled):active::before {
   background: linear-gradient(to bottom, var(--color-primary-600), var(--color-primary-800))
     border-box;
 }
 .hlc-btn-primary:focus-visible {
   @apply outline outline-2 outline-offset-2 outline-primary-400 bg-fill-brand-red-primary;
 }
-.hlc-btn-primary:focus-visible::before {
+.hlc-btn-primary:not(.hlc-btn-disabled):focus-visible::before {
   background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600))
     border-box;
 }
 .hlc-btn-primary.hlc-btn-disabled {
   @apply bg-surface-base-primary_disabled text-base-primary_disabled border-base-primary_disabled;
 }
+
 /* Button Primary + danger */
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled) {
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled) {
   @apply bg-fill-error-primary;
 }
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled)::before {
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled)::before {
   background: linear-gradient(to bottom, var(--color-error-400), var(--color-error-600)) border-box;
 }
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled):hover {
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):hover {
   @apply bg-fill-error-primary_hover;
 }
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled):hover::before {
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):hover::before {
   background: linear-gradient(to bottom, var(--color-error-500), var(--color-error-700)) border-box;
 }
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled):active {
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):active {
   @apply bg-fill-error-primary_active;
 }
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled):active::before {
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):active::before {
   background: linear-gradient(to bottom, var(--color-error-600), var(--color-error-800)) border-box;
 }
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled):focus-visible {
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):focus-visible {
   @apply outline outline-2 outline-offset-2 outline-error-400 bg-fill-error-primary;
 }
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-primary.hlc-btn-disabled):focus-visible::before {
+.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):focus-visible::before {
   background: linear-gradient(to bottom, var(--color-error-400), var(--color-error-600)) border-box;
 }
 
@@ -131,6 +147,7 @@
 .hlc-btn-secondary.hlc-btn-disabled {
   @apply bg-surface-base-primary text-base-primary_disabled border-base-primary_disabled;
 }
+
 /* Button Secondary + danger */
 .hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-secondary.hlc-btn-disabled) {
   @apply text-error-primary border-error-primary;
@@ -173,6 +190,7 @@
 .hlc-btn-text.hlc-btn-disabled {
   @apply bg-surface-base-primary text-base-secondary_disabled;
 }
+
 /* Button Text + danger */
 .hlc-btn-text.hlc-btn-danger:not(.hlc-btn-text.hlc-btn-disabled) {
   @apply text-error-primary;
@@ -234,6 +252,7 @@
 .hlc-btn-link.hlc-btn-disabled {
   @apply text-base-tertiary_disabled;
 }
+
 /* Button Link + danger */
 .hlc-btn-link.hlc-btn-danger:not(.hlc-btn-link.hlc-btn-disabled) {
   @apply text-error-primary;
