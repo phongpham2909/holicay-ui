@@ -2,7 +2,7 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { Button, ButtonProps } from '@/components';
+import { Button, ButtonProps as IButtonProps } from '@/components';
 import { ButtonColor, ButtonSize, ButtonType } from '@/components/Button/constants';
 
 const meta = {
@@ -148,7 +148,7 @@ export const Variants = {
                   <p className="text-sm font-normal capitalize text-base-primary">{variant}</p>
                 </div>
                 {OPTIONS.map((opt) => {
-                  let props: ButtonProps = {
+                  let props: IButtonProps = {
                     size: 'md',
                     color: 'primary',
                     type: variant as ButtonType,
@@ -161,7 +161,7 @@ export const Variants = {
                     };
                   }
                   if (['disabled', 'loading'].includes(opt)) {
-                    props[opt as keyof ButtonProps] = true;
+                    props[opt as keyof IButtonProps] = true;
                   }
 
                   if (opt.startsWith('size')) {
@@ -169,7 +169,7 @@ export const Variants = {
                   }
 
                   if (['prefixIcon', 'suffixIcon'].includes(opt)) {
-                    props[opt as keyof ButtonProps] = <i className="icon icon-rocket-01" />;
+                    props[opt as keyof IButtonProps] = <i className="icon icon-rocket-01" />;
                   }
 
                   if (['only Icon'].includes(opt)) {
@@ -205,13 +205,13 @@ export const Variants = {
                   </p>
                 </div>
                 {OPTIONS.map((opt) => {
-                  const props: ButtonProps = {
+                  const props: IButtonProps = {
                     danger: true,
                     size: 'md',
                     type: variant as ButtonType,
                   };
                   if (['disabled', 'loading'].includes(opt)) {
-                    props[opt as keyof ButtonProps] = true;
+                    props[opt as keyof IButtonProps] = true;
                   }
 
                   if (opt.startsWith('size')) {
@@ -219,7 +219,7 @@ export const Variants = {
                   }
 
                   if (['prefixIcon', 'suffixIcon'].includes(opt)) {
-                    props[opt as keyof ButtonProps] = <i className="icon icon-rocket-01" />;
+                    props[opt as keyof IButtonProps] = <i className="icon icon-rocket-01" />;
                   }
 
                   if (['only Icon'].includes(opt)) {
@@ -249,7 +249,7 @@ export const Variants = {
   },
 };
 
-export const ButtonControls = {
+export const ButtonProps = {
   tags: ['!dev'],
   argTypes: {
     // 👇 All Button stories expect a label arg
@@ -258,19 +258,31 @@ export const ButtonControls = {
       description: 'Overwritten description',
     },
     type: {
-      control: 'inline-radio',
+      control: 'select',
       options: ['primary', 'secondary', 'text', 'link'],
       description: 'Can be set to primary secondary link text',
+      table: {
+        type: { summary: "'primary' | 'secondary' | 'text' | 'link'" },
+        defaultValue: { summary: 'primary' },
+      },
     },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg', 'xl', '2xl'],
-      description: 'Set the size of button',
+      description: 'Determines the size of the button component.',
+      table: {
+        type: { summary: "'sm' | 'md' | 'lg' | 'xl' | '2xl'" },
+        defaultValue: { summary: 'md' },
+      },
     },
     color: {
       control: 'inline-radio',
       options: ['primary', 'gray'],
       description: 'Set the color of button',
+      table: {
+        type: { summary: "'primary' | 'gray'" },
+        defaultValue: { summary: 'primary' },
+      },
     },
     icon: {
       control: 'object',

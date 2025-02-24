@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import '../public/css/icons.css';
-@import '../public/css/fonts.css';
+@import 'public/css/icons.css';
+@import 'public/css/fonts.css';
 
 @layer base {
   .display-custom {
