@@ -69,7 +69,7 @@
 
 /* Avatar - Size Small */
 .hlc-avatar-sm {
-  @apply size-9;
+  @apply size-8;
 }
 
 .hlc-avatar-sm.hlc-avatar-icon {
@@ -82,7 +82,7 @@
 
 /* Avatar - Size Extra Small */
 .hlc-avatar-xs {
-  @apply size-8;
+  @apply size-6;
 }
 
 .hlc-avatar-xs.hlc-avatar-icon {
