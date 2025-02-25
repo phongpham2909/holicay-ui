@@ -6,7 +6,7 @@ import './avatar-badge.css';
 
 export type AvatarBadgeType = 'avatar' | 'profile-photo';
 
-export type AvatarBadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type AvatarBadgeSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 export interface AvatarBadgeProps {
   prefixCls?: string;

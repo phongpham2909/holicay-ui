@@ -1,0 +1,31 @@
+.icon.hlc-icon-sm {
+  @apply text-[14px];
+}
+.icon.hlc-icon-md {
+  @apply text-[16px];
+}
+.icon.hlc-icon-lg {
+  @apply text-[18px];
+}
+.icon.hlc-icon-xl {
+  @apply text-[20px];
+}
+.icon.hlc-icon-2xl {
+  @apply text-[24px];
+}
+
+.iconify.hlc-icon-sm {
+  @apply w-3.5 h-3.5;
+}
+.iconify.hlc-icon-md {
+  @apply w-4 h-4;
+}
+.iconify.hlc-icon-lg {
+  @apply w-[18px] h-[18px];
+}
+.iconify.hlc-icon-xl {
+  @apply w-5 h-5;
+}
+.iconify.hlc-icon-2xl {
+  @apply w-6 h-6;
+}

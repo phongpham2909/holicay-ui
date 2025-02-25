@@ -6,8 +6,14 @@
   @apply text-base-secondary_hover border-base-primary_hover bg-surface-base-primary_hover;
 }
 
-.hlc-tag:active {
+.hlc-tag:active,
+.hlc-tag.hlc-tag-selected {
   @apply text-brand-green-primary_active border-base-primary_active bg-surface-base-primary_active;
+}
+
+.hlc-tag.hlc-tag-solid:active,
+.hlc-tag.hlc-tag-solid.hlc-tag-selected {
+  @apply text-white border-brand-green-solid_hover bg-fill-brand-green-primary;
 }
 
 .hlc-tag-sm {
@@ -23,7 +29,7 @@
 .hlc-tag > .hlc-tag-prefix-icon,
 .hlc-tag > .hlc-tag-suffix-icon,
 .hlc-tag > .hlc-tag-close-icon {
-  @apply inline-flex mx-[3px] ms-[3px] transition-all duration-200 ease-out;
+  @apply inline-flex transition-all duration-200 ease-out;
 }
 
 .hlc-tag > .hlc-tag-prefix-icon,
@@ -34,18 +40,84 @@
   @apply me-sm;
 }
 
-.hlc-tag > .hlc-tag-close-icon {
-  @apply cursor-pointer m-[3px];
+.hlc-tag > .hlc-tag-suffix-icon,
+.hlc-tag.hlc-tag-md > .hlc-tag-suffix-icon {
+  @apply ms-xs;
+}
+.hlc-tag.hlc-tag-lg > .hlc-tag-suffix-icon {
+  @apply ms-sm;
 }
 
-.hlc-tag.hlc-tag-sm:has(.hlc-tag-close-icon) {
+.hlc-tag > .hlc-tag-prefix-icon > .hlc-dot,
+.hlc-tag.hlc-tag-md > .hlc-tag-prefix-icon > .hlc-dot,
+.hlc-tag.hlc-tag-lg > .hlc-tag-prefix-icon > .hlc-dot {
+  @apply m-xxs;
+}
+
+.hlc-tag > .hlc-tag-count {
+  @apply font-medium rounded-xxs ms-[3px] bg-fill-base-primary_subtle;
+}
+
+.hlc-tag.hlc-tag-sm > .hlc-tag-count {
+  @apply px-xs text-xs min-w-4;
+}
+
+.hlc-tag.hlc-tag-md > .hlc-tag-count {
+  @apply px-[5px] py-[1px] text-xs min-w-[18px];
+}
+
+.hlc-tag.hlc-tag-lg > .hlc-tag-count {
+  @apply px-sm text-sm min-w-5;
+}
+
+.hlc-tag > .hlc-tag-close-icon {
+  @apply cursor-pointer m-[3px] ms-[3px];
+}
+
+.hlc-tag.hlc-tag-sm:has(.hlc-tag-count) {
+  @apply !pr-xs;
+}
+
+.hlc-tag.hlc-tag-md:has(.hlc-tag-count) {
+  @apply !pr-[3px];
+}
+
+.hlc-tag.hlc-tag-lg:has(.hlc-tag-count) {
+  @apply !pr-sm;
+}
+
+.hlc-tag.hlc-tag-sm:has(.hlc-tag-close-icon):not(.hlc-tag-prefix-icon) {
   @apply pl-sm pr-xs;
 }
 
-.hlc-tag.hlc-tag-md:has(.hlc-tag-close-icon) {
+.hlc-tag.hlc-tag-md:has(.hlc-tag-close-icon):not(.hlc-tag-prefix-icon) {
   @apply pl-[9px] pr-xs;
 }
 
-.hlc-tag.hlc-tag-lg:has(.hlc-tag-close-icon) {
+.hlc-tag.hlc-tag-lg:has(.hlc-tag-close-icon):not(.hlc-tag-prefix-icon) {
   @apply pl-md pr-sm;
+}
+
+.hlc-tag.hlc-tag-sm:has(.hlc-tag-prefix-icon):not(.hlc-tag-close-icon) {
+  @apply px-xs;
+}
+
+.hlc-tag.hlc-tag-md:has(.hlc-tag-prefix-icon):not(.hlc-tag-close-icon) {
+  @apply px-[5px];
+}
+
+.hlc-tag.hlc-tag-lg:has(.hlc-tag-prefix-icon):not(.hlc-tag-close-icon) {
+  @apply px-md;
+}
+
+.hlc-tag.hlc-tag-sm:has(.hlc-tag-prefix-icon):has(.hlc-tag-close-icon) {
+  @apply px-xs;
+}
+
+.hlc-tag.hlc-tag-md:has(.hlc-tag-prefix-icon):has(.hlc-tag-close-icon) {
+  @apply pl-[5px] pr-xs;
+}
+
+.hlc-tag.hlc-tag-lg:has(.hlc-tag-prefix-icon):has(.hlc-tag-close-icon) {
+  @apply pl-md pr-xs;
 }

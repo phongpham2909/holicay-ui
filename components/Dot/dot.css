@@ -1,0 +1,41 @@
+.hlc-dot {
+  @apply inline-flex rounded-full;
+}
+
+.hlc-dot.hlc-dot-size-sm {
+  @apply size-1;
+}
+.hlc-dot.hlc-dot-size-md {
+  @apply size-1.5;
+}
+.hlc-dot.hlc-dot-size-lg {
+  @apply size-2;
+}
+.hlc-dot.hlc-dot-size-xl {
+  @apply size-2.5;
+}
+.hlc-dot.hlc-dot-size-2xl {
+  @apply size-3;
+}
+
+.hlc-dot.hlc-dot-color-gray {
+  @apply bg-base-subtle;
+}
+.hlc-dot.hlc-dot-color-primary {
+  @apply bg-brand-red-primary;
+}
+.hlc-dot.hlc-dot-color-error {
+  @apply bg-error-primary;
+}
+.hlc-dot.hlc-dot-color-warning {
+  @apply bg-warning-primary;
+}
+.hlc-dot.hlc-dot-color-success {
+  @apply bg-success-primary;
+}
+.hlc-dot.hlc-dot-color-additional {
+  @apply bg-additional-primary;
+}
+.hlc-dot.hlc-dot-color-info {
+  @apply bg-info-primary;
+}

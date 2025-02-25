@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { PREFIX_CLASS } from '@/variables/app';
+import { TAG_SIZES, TAG_TYPES, TagSize, TagType } from './constants';
 
 import './tag.css';
 
@@ -8,7 +9,10 @@ type PropsWithOptionalChildren<P = unknown> = P & { children?: React.ReactNode }
 
 export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
   label?: string;
-  size?: 'sm' | 'md' | 'lg';
+  type?: TagType;
+  size?: TagSize;
+  count?: number;
+  selected?: boolean;
   bordered?: boolean;
   closable?: boolean;
   icon?: React.ReactNode;
@@ -21,9 +25,12 @@ export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 export const Tag = ({
   label,
-  size = 'md',
+  type = TAG_TYPES[0],
+  size = TAG_SIZES[1],
+  selected = false,
   bordered = true,
   closable = false,
+  count,
   icon,
   closeIcon,
   prefixIcon,
@@ -37,9 +44,13 @@ export const Tag = ({
   const withPrefixIcon = (icon || prefixIcon) && (
     <span className={`${prefixCls}-tag-prefix-icon`}>{icon || prefixIcon}</span>
   );
+
+  const withCount = !!count && <span className={`${prefixCls}-tag-count`}>{count}</span>;
+
   const withSuffixIcon = !!suffixIcon && (
     <span className={`${prefixCls}-tag-suffix-icon`}>{suffixIcon}</span>
   );
+
   const withCloseIcon = (closable || !!closeIcon) && (
     <span className={`${prefixCls}-tag-close-icon`} onClick={onClose}>
       {closeIcon || <i className="icon icon-x-close" />}
@@ -49,7 +60,8 @@ export const Tag = ({
   return (
     <span
       {...rest}
-      className={clsx(`${prefixCls}-tag`, `${prefixCls}-tag-${size}`, {
+      className={clsx(`${prefixCls}-tag`, `${prefixCls}-tag-${size}`, `${prefixCls}-tag-${type}`, {
+        [`${prefixCls}-tag-selected`]: selected,
         [`${prefixCls}-tag-borderless`]: !bordered,
         [className as string]: !!className,
       })}
@@ -57,6 +69,8 @@ export const Tag = ({
       {withPrefixIcon}
 
       {children || label}
+
+      {withCount}
 
       {withSuffixIcon || withCloseIcon}
     </span>

@@ -71,16 +71,15 @@ const InternalAvatar = React.forwardRef<HTMLSpanElement, AvatarProps>((props, re
   const hasImageElement = React.isValidElement(src);
 
   const avatarWrapperClasses = clsx(`${prefixCls}-avatar-wrapper`, rootClassName);
-  const avatarClasses = clsx(`${prefixCls}-avatar`, className, {
-    [`${prefixCls}-avatar-2xl`]: customSize === '2xl',
-    [`${prefixCls}-avatar-xl`]: customSize === 'xl',
-    [`${prefixCls}-avatar-lg`]: customSize === 'lg',
-    [`${prefixCls}-avatar-md`]: customSize === 'md',
-    [`${prefixCls}-avatar-sm`]: customSize === 'sm',
-    [`${prefixCls}-avatar-xs`]: customSize === 'xs',
-    [`${prefixCls}-avatar-image`]: hasImageElement || (src && isImgExist),
-    [`${prefixCls}-avatar-icon`]: !!icon,
-  });
+  const avatarClasses = clsx(
+    `${prefixCls}-avatar`,
+    `${prefixCls}-avatar-${customSize}`,
+    className,
+    {
+      [`${prefixCls}-avatar-image`]: hasImageElement || (src && isImgExist),
+      [`${prefixCls}-avatar-icon`]: !!icon,
+    }
+  );
 
   let childrenToRender: React.ReactNode;
   if (typeof src === 'string' && isImgExist) {
@@ -100,10 +99,18 @@ const InternalAvatar = React.forwardRef<HTMLSpanElement, AvatarProps>((props, re
   } else {
     childrenToRender = children;
   }
+
+  if (typeof badge !== 'undefined') {
+    return (
+      <span className={avatarWrapperClasses} ref={ref} {...others}>
+        <span className={avatarClasses}>{childrenToRender}</span>
+        {typeof badge !== 'undefined' && <AvatarBadge {...avatarBadgeProps} />}
+      </span>
+    );
+  }
   return (
-    <span className={avatarWrapperClasses} ref={ref} {...others}>
-      <span className={avatarClasses}>{childrenToRender}</span>
-      {typeof badge !== 'undefined' && <AvatarBadge {...avatarBadgeProps} />}
+    <span className={avatarClasses} ref={ref} {...others}>
+      {childrenToRender}
     </span>
   );
 });
