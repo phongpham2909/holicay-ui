@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { Tag } from '@/components';
+import { Tag, Avatar } from '@/components';
+import { images } from '@/variables/images';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -35,5 +36,6 @@ export const Primary: Story = {
     size: 'md',
     label: 'Holicay',
     closable: true,
+    prefixIcon: <Avatar size="xs" src={images.HLC_AVATAR_0} alt="" className="size-4" />,
   },
 };
