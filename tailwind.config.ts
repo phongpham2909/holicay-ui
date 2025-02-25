@@ -107,7 +107,7 @@ export default {
         900: 'var(--color-additional-900)',
       },
       white: 'var(--color-base-white)',
-      black: 'var(--color-base-black)',
+      black: 'rgb(var(--color-base-black))',
       'base-placeholder': 'var(--color-gray-400)',
 
       'base-primary': 'var(--color-gray-900)',

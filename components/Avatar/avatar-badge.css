@@ -1,0 +1,105 @@
+.hlc-avatar-badge-wrapper {
+  @apply absolute bottom-0 right-0 inline-flex;
+}
+
+/* Avatar Badge with Border */
+.hlc-avatar-badge-wrapper.hlc-avatar-badge-border {
+  @apply outline outline-[1.5px] rounded-full outline-white;
+}
+
+.hlc-avatar-badge-wrapper.hlc-avatar-badge-border.hlc-avatar-badge-border-with-image {
+  @apply outline-[1.67px];
+}
+
+/* Avatar Badge with Online */
+.hlc-avatar-badge-online .hlc-avatar-badge {
+  @apply inline-block rounded-full bg-fill-success-primary;
+}
+
+.hlc-avatar-badge-2xl.hlc-avatar-badge-online {
+  @apply -bottom-0.5 -right-0.5;
+}
+
+.hlc-avatar-badge-2xl.hlc-avatar-badge-online .hlc-avatar-badge {
+  @apply size-4;
+}
+
+.hlc-avatar-badge-xl.hlc-avatar-badge-online .hlc-avatar-badge {
+  @apply size-3.5;
+}
+
+.hlc-avatar-badge-lg.hlc-avatar-badge-online .hlc-avatar-badge {
+  @apply size-3;
+}
+
+.hlc-avatar-badge-md.hlc-avatar-badge-online .hlc-avatar-badge {
+  @apply size-2.5;
+}
+
+.hlc-avatar-badge-sm.hlc-avatar-badge-online .hlc-avatar-badge {
+  @apply size-2;
+}
+
+.hlc-avatar-badge-xs.hlc-avatar-badge-online .hlc-avatar-badge {
+  @apply size-1.5;
+}
+
+/* Avatar Badge with Image */
+.hlc-avatar-badge-with-image {
+  @apply -bottom-0.5 -right-0.5;
+}
+
+.hlc-avatar-badge-with-image .hlc-avatar-badge {
+  @apply inline-block rounded-full overflow-hidden;
+}
+
+.hlc-avatar-badge-with-image .hlc-avatar-badge > img {
+  @apply block size-full object-cover;
+}
+
+.hlc-avatar-badge-2xl.hlc-avatar-badge-with-image .hlc-avatar-badge {
+  @apply size-5;
+}
+
+.hlc-avatar-badge-xl.hlc-avatar-badge-with-image .hlc-avatar-badge {
+  @apply size-[18px];
+}
+
+.hlc-avatar-badge-lg.hlc-avatar-badge-with-image .hlc-avatar-badge {
+  @apply size-4;
+}
+
+.hlc-avatar-badge-md.hlc-avatar-badge-with-image .hlc-avatar-badge {
+  @apply size-3.5;
+}
+
+.hlc-avatar-badge-sm.hlc-avatar-badge-with-image .hlc-avatar-badge {
+  @apply size-3;
+}
+
+.hlc-avatar-badge-xs.hlc-avatar-badge-with-image .hlc-avatar-badge {
+  @apply size-2.5;
+}
+
+/* Avatar Badge with Profile */
+.hlc-avatar-badge-lg.hlc-avatar-badge-profile-photo {
+  @apply bottom-1 right-1;
+}
+.hlc-avatar-badge-lg.hlc-avatar-badge-profile-photo.hlc-avatar-badge-with-image .hlc-avatar-badge {
+  @apply size-8;
+}
+
+.hlc-avatar-badge-md.hlc-avatar-badge-profile-photo {
+  @apply bottom-0.5 right-0.5;
+}
+.hlc-avatar-badge-md.hlc-avatar-badge-profile-photo.hlc-avatar-badge-with-image .hlc-avatar-badge {
+  @apply size-6;
+}
+
+.hlc-avatar-badge-sm.hlc-avatar-badge-profile-photo {
+  @apply bottom-[0.5px] right-[0.5px];
+}
+
+.hlc-avatar-badge-sm.hlc-avatar-badge-profile-photo.hlc-avatar-badge-with-image .hlc-avatar-badge {
+  @apply size-5;
+}

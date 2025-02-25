@@ -1,0 +1,47 @@
+.hlc-avatar-label-group {
+  @apply flex items-center gap-x-2;
+}
+
+.hlc-avatar-label {
+  @apply text-gray-700;
+}
+
+.hlc-avatar-helper-text {
+  @apply text-gray-600;
+}
+
+/* Avatar Label Group - Extra Large */
+.hlc-avatar-label-group-xl .hlc-avatar-label {
+  @apply text-lg font-semibold;
+}
+
+.hlc-avatar-label-group-xl .hlc-avatar-helper-text {
+  @apply text-base font-normal;
+}
+
+/* Avatar Label Group - Large */
+.hlc-avatar-label-group-lg .hlc-avatar-label {
+  @apply text-base font-semibold;
+}
+
+.hlc-avatar-label-group-lg .hlc-avatar-helper-text {
+  @apply text-base font-normal;
+}
+
+/* Avatar Label Group - Medium */
+.hlc-avatar-label-group-md .hlc-avatar-label {
+  @apply text-sm font-semibold;
+}
+
+.hlc-avatar-label-group-md .hlc-avatar-helper-text {
+  @apply text-sm font-normal;
+}
+
+/* Avatar Label Group - Small */
+.hlc-avatar-label-group-sm .hlc-avatar-label {
+  @apply text-sm font-semibold;
+}
+
+.hlc-avatar-label-group-sm .hlc-avatar-helper-text {
+  @apply text-xs font-normal;
+}

@@ -1,0 +1,47 @@
+.hlc-avatar-group-wrapper {
+  @apply flex items-center gap-x-4;
+}
+
+.hlc-avatar-group-wrapper .hlc-avatar-wrapper {
+  @apply outline outline-[1.5px] outline-white rounded-full;
+}
+
+.hlc-avatar-group-wrapper .hlc-avatar-wrapper .hlc-avatar {
+  @apply border-0;
+}
+
+/* Avatar Group Button*/
+.hlc-avatar-group-button {
+  @apply border border-dashed border-gray-300 rounded-full flex items-center justify-center text-base-subtle text-base;
+}
+
+/* Avatar Group - Size Medium */
+.hlc-avatar-group-wrapper-md {
+  @apply gap-x-5;
+}
+
+.hlc-avatar-group-wrapper-md .hlc-avatar-group > *:not(:first-child) {
+  @apply -ms-3;
+}
+
+.hlc-avatar-group-wrapper-md .hlc-avatar-group-button {
+  @apply size-10 text-[20px];
+}
+
+/* Avatar Group - Size Small */
+.hlc-avatar-group-wrapper-sm .hlc-avatar-group > *:not(:first-child) {
+  @apply -ms-2;
+}
+
+.hlc-avatar-group-wrapper-sm .hlc-avatar-group-button {
+  @apply size-8;
+}
+
+/* Avatar Group - Size Extra Small */
+.hlc-avatar-group-wrapper-xs .hlc-avatar-group > *:not(:first-child) {
+  @apply -ms-1;
+}
+
+.hlc-avatar-group-wrapper-xs .hlc-avatar-group-button {
+  @apply size-6;
+}
