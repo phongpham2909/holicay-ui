@@ -1,0 +1,45 @@
+.hlc-btn-group {
+  @apply inline-flex font-primary font-semibold rounded-md shadow-xs;
+}
+
+.hlc-btn-group > button {
+  @apply inline-flex text-sm text-base-tertiary border border-base-primary bg-surface-base-primary transition-all;
+}
+
+.hlc-btn-group > button:not(:first-child) {
+  @apply border-l-0;
+}
+
+.hlc-btn-group > button:first-child {
+  @apply rounded-s-md;
+}
+
+.hlc-btn-group > button:last-child {
+  @apply rounded-e-md;
+}
+
+.hlc-btn-group > button:hover {
+  @apply bg-surface-base-primary_hover;
+}
+
+.hlc-btn-group > button:active,
+.hlc-btn-group > .hlc-btn-group-item-selected,
+.hlc-btn-group > .hlc-btn-group-item-selected:hover {
+  @apply bg-surface-base-primary_active;
+}
+
+.hlc-btn-group > .hlc-btn-group-item-disabled {
+  @apply cursor-not-allowed !bg-surface-base-primary_disabled;
+}
+
+.hlc-btn-group-sm > button {
+  @apply px-md py-sm gap-x-sm;
+}
+
+.hlc-btn-group-md > button {
+  @apply px-xl py-md gap-x-md;
+}
+
+.hlc-btn-group-lg > button {
+  @apply px-xl py-2.5 gap-x-md;
+}
