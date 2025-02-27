@@ -1,0 +1,195 @@
+.hlc-badge {
+  @apply cursor-default inline-flex items-center font-primary text-base-secondary border border-base-primary bg-surface-base-primary align-bottom transition-all duration-200 ease-out;
+}
+
+.hlc-badge.hlc-badge-selected {
+  @apply text-brand-green-primary_active border-base-primary_active bg-surface-base-primary_active;
+}
+
+.hlc-badge.hlc-badge-solid.hlc-badge-selected {
+  @apply text-white border-brand-green-solid_hover bg-fill-brand-green-primary;
+}
+
+.hlc-badge-sm {
+  @apply text-xs font-medium px-sm h-3xl;
+}
+.hlc-badge-md {
+  @apply text-sm font-medium px-md h-3xl;
+}
+.hlc-badge-lg {
+  @apply text-sm font-medium px-lg h-4xl;
+}
+
+.hlc-badge-rounded {
+  @apply rounded-xl;
+}
+
+.hlc-badge-square {
+  @apply rounded-sm;
+}
+
+.hlc-badge > .hlc-badge-prefix-icon,
+.hlc-badge > .hlc-badge-suffix-icon,
+.hlc-badge > .hlc-badge-close-icon {
+  @apply inline-flex transition-all duration-200 ease-out;
+}
+
+.hlc-badge > .hlc-badge-prefix-icon,
+.hlc-badge.hlc-badge-md > .hlc-badge-prefix-icon {
+  @apply me-xs;
+}
+.hlc-badge.hlc-badge-lg > .hlc-badge-prefix-icon {
+  @apply me-sm;
+}
+
+.hlc-badge > .hlc-badge-suffix-icon,
+.hlc-badge.hlc-badge-md > .hlc-badge-suffix-icon {
+  @apply ms-xs;
+}
+.hlc-badge.hlc-badge-lg > .hlc-badge-suffix-icon {
+  @apply ms-sm;
+}
+
+.hlc-badge > .hlc-badge-prefix-icon > .hlc-dot,
+.hlc-badge.hlc-badge-md > .hlc-badge-prefix-icon > .hlc-dot,
+.hlc-badge.hlc-badge-lg > .hlc-badge-prefix-icon > .hlc-dot {
+  @apply m-xxs;
+}
+
+.hlc-badge > .hlc-badge-count {
+  @apply font-medium rounded-xxs ms-[3px] bg-fill-base-primary_subtle;
+}
+
+.hlc-badge.hlc-badge-sm > .hlc-badge-count {
+  @apply px-xs text-xs min-w-4;
+}
+
+.hlc-badge.hlc-badge-md > .hlc-badge-count {
+  @apply px-[5px] py-[1px] text-xs min-w-[18px];
+}
+
+.hlc-badge.hlc-badge-lg > .hlc-badge-count {
+  @apply px-sm text-sm min-w-5;
+}
+
+.hlc-badge > .hlc-badge-close-icon {
+  @apply cursor-pointer m-[3px] ms-[3px];
+}
+
+.hlc-badge.hlc-badge-sm:has(.hlc-badge-count) {
+  @apply !pr-xs;
+}
+
+.hlc-badge.hlc-badge-md:has(.hlc-badge-count) {
+  @apply !pr-[3px];
+}
+
+.hlc-badge.hlc-badge-lg:has(.hlc-badge-count) {
+  @apply !pr-sm;
+}
+
+.hlc-badge.hlc-badge-sm:has(.hlc-badge-close-icon):not(.hlc-badge-prefix-icon) {
+  @apply pl-sm pr-xs;
+}
+
+.hlc-badge.hlc-badge-md:has(.hlc-badge-close-icon):not(.hlc-badge-prefix-icon) {
+  @apply pl-[9px] pr-xs;
+}
+
+.hlc-badge.hlc-badge-lg:has(.hlc-badge-close-icon):not(.hlc-badge-prefix-icon) {
+  @apply pl-md pr-sm;
+}
+
+.hlc-badge.hlc-badge-sm:has(.hlc-badge-prefix-icon):not(.hlc-badge-close-icon) {
+  @apply px-xs;
+}
+
+.hlc-badge.hlc-badge-md:has(.hlc-badge-prefix-icon):not(.hlc-badge-close-icon) {
+  @apply px-[5px];
+}
+
+.hlc-badge.hlc-badge-lg:has(.hlc-badge-prefix-icon):not(.hlc-badge-close-icon) {
+  @apply px-md;
+}
+
+.hlc-badge.hlc-badge-sm:has(.hlc-badge-prefix-icon):has(.hlc-badge-close-icon) {
+  @apply px-xs;
+}
+
+.hlc-badge.hlc-badge-md:has(.hlc-badge-prefix-icon):has(.hlc-badge-close-icon) {
+  @apply pl-[5px] pr-xs;
+}
+
+.hlc-badge.hlc-badge-lg:has(.hlc-badge-prefix-icon):has(.hlc-badge-close-icon) {
+  @apply pl-md pr-xs;
+}
+
+.hlc-badge.hlc-badge-primary:not(.hlc-badge-solid) {
+  @apply text-brand-red-primary border-brand-red-secondary;
+}
+.hlc-badge.hlc-badge-gray:not(.hlc-badge-solid) {
+  @apply text-base-secondary border-base-secondary;
+}
+.hlc-badge.hlc-badge-error:not(.hlc-badge-solid) {
+  @apply text-error-primary border-error-secondary;
+}
+.hlc-badge.hlc-badge-warning:not(.hlc-badge-solid) {
+  @apply text-warning-primary border-warning-secondary;
+}
+.hlc-badge.hlc-badge-success:not(.hlc-badge-solid) {
+  @apply text-success-primary border-success-secondary;
+}
+.hlc-badge.hlc-badge-additional:not(.hlc-badge-solid) {
+  @apply text-additional-primary border-additional-secondary;
+}
+.hlc-badge.hlc-badge-info:not(.hlc-badge-solid) {
+  @apply text-info-primary border-info-secondary;
+}
+
+.hlc-badge.hlc-badge-pill.hlc-badge-primary {
+  @apply bg-fill-brand-red-tertiary;
+}
+.hlc-badge.hlc-badge-pill.hlc-badge-gray {
+  @apply bg-fill-base-tertiary;
+}
+.hlc-badge.hlc-badge-pill.hlc-badge-error {
+  @apply bg-fill-error-tertiary;
+}
+.hlc-badge.hlc-badge-pill.hlc-badge-warning {
+  @apply bg-fill-warning-tertiary;
+}
+.hlc-badge.hlc-badge-pill.hlc-badge-success {
+  @apply bg-fill-success-tertiary;
+}
+.hlc-badge.hlc-badge-pill.hlc-badge-additional {
+  @apply bg-surface-additional-tertiary;
+}
+.hlc-badge.hlc-badge-pill.hlc-badge-info {
+  @apply bg-surface-info-tertiary;
+}
+
+.hlc-badge.hlc-badge-solid {
+  @apply text-white border-none;
+}
+
+.hlc-badge.hlc-badge-solid.hlc-badge-primary {
+  @apply bg-fill-brand-red-primary;
+}
+.hlc-badge.hlc-badge-solid.hlc-badge-gray {
+  @apply bg-fill-brand-green-primary;
+}
+.hlc-badge.hlc-badge-solid.hlc-badge-error {
+  @apply bg-fill-error-primary;
+}
+.hlc-badge.hlc-badge-solid.hlc-badge-warning {
+  @apply bg-fill-warning-primary;
+}
+.hlc-badge.hlc-badge-solid.hlc-badge-success {
+  @apply bg-fill-success-primary;
+}
+.hlc-badge.hlc-badge-solid.hlc-badge-additional {
+  @apply bg-fill-additional-primary;
+}
+.hlc-badge.hlc-badge-solid.hlc-badge-info {
+  @apply bg-fill-info-primary;
+}
