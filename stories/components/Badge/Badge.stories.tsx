@@ -53,7 +53,7 @@ export const BadgeRoundedPill: Story = {
     return (
       <div className="flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="gray" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="gray" />
           <Badge {...props} color="gray" prefixIcon={<Dot color="gray" size="md" />} />
           <Badge
             {...props}
@@ -64,7 +64,7 @@ export const BadgeRoundedPill: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="primary" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="primary" />
           <Badge {...props} color="primary" prefixIcon={<Dot color="primary" size="md" />} />
           <Badge
             {...props}
@@ -75,7 +75,7 @@ export const BadgeRoundedPill: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="error" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="error" />
           <Badge {...props} color="error" prefixIcon={<Dot color="error" size="md" />} />
           <Badge
             {...props}
@@ -86,7 +86,7 @@ export const BadgeRoundedPill: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="warning" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="warning" />
           <Badge {...props} color="warning" prefixIcon={<Dot color="warning" size="md" />} />
           <Badge
             {...props}
@@ -97,7 +97,7 @@ export const BadgeRoundedPill: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="success" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="success" />
           <Badge {...props} color="success" prefixIcon={<Dot color="success" size="md" />} />
           <Badge
             {...props}
@@ -108,7 +108,7 @@ export const BadgeRoundedPill: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="additional" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="additional" />
           <Badge {...props} color="additional" prefixIcon={<Dot color="additional" size="md" />} />
           <Badge
             {...props}
@@ -119,7 +119,7 @@ export const BadgeRoundedPill: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="info" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="info" />
           <Badge {...props} color="info" prefixIcon={<Dot color="info" size="md" />} />
           <Badge
             {...props}
@@ -145,7 +145,7 @@ export const BadgeRoundedOutline: Story = {
     return (
       <div className="flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="gray" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="gray" />
           <Badge {...props} color="gray" prefixIcon={<Dot color="gray" size="md" />} />
           <Badge
             {...props}
@@ -156,7 +156,7 @@ export const BadgeRoundedOutline: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="primary" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="primary" />
           <Badge {...props} color="primary" prefixIcon={<Dot color="primary" size="md" />} />
           <Badge
             {...props}
@@ -167,7 +167,7 @@ export const BadgeRoundedOutline: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="error" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="error" />
           <Badge {...props} color="error" prefixIcon={<Dot color="error" size="md" />} />
           <Badge
             {...props}
@@ -178,7 +178,7 @@ export const BadgeRoundedOutline: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="warning" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="warning" />
           <Badge {...props} color="warning" prefixIcon={<Dot color="warning" size="md" />} />
           <Badge
             {...props}
@@ -189,7 +189,7 @@ export const BadgeRoundedOutline: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="success" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="success" />
           <Badge {...props} color="success" prefixIcon={<Dot color="success" size="md" />} />
           <Badge
             {...props}
@@ -200,7 +200,7 @@ export const BadgeRoundedOutline: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="additional" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="additional" />
           <Badge {...props} color="additional" prefixIcon={<Dot color="additional" size="md" />} />
           <Badge
             {...props}
@@ -211,7 +211,7 @@ export const BadgeRoundedOutline: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="info" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="info" />
           <Badge {...props} color="info" prefixIcon={<Dot color="info" size="md" />} />
           <Badge
             {...props}
@@ -237,7 +237,7 @@ export const BadgeRoundedSolid: Story = {
     return (
       <div className="flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="gray" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="gray" />
           <Badge {...props} color="gray" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -248,7 +248,7 @@ export const BadgeRoundedSolid: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="primary" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="primary" />
           <Badge {...props} color="primary" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -259,7 +259,7 @@ export const BadgeRoundedSolid: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="error" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="error" />
           <Badge {...props} color="error" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -270,7 +270,7 @@ export const BadgeRoundedSolid: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="warning" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="warning" />
           <Badge {...props} color="warning" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -281,7 +281,7 @@ export const BadgeRoundedSolid: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="success" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="success" />
           <Badge {...props} color="success" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -292,7 +292,7 @@ export const BadgeRoundedSolid: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="additional" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="additional" />
           <Badge {...props} color="additional" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -303,7 +303,7 @@ export const BadgeRoundedSolid: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="info" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="info" />
           <Badge {...props} color="info" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -329,7 +329,7 @@ export const BadgeSquarePill: Story = {
     return (
       <div className="flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="gray" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="gray" />
           <Badge {...props} color="gray" prefixIcon={<Dot color="gray" size="md" />} />
           <Badge
             {...props}
@@ -340,7 +340,7 @@ export const BadgeSquarePill: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="primary" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="primary" />
           <Badge {...props} color="primary" prefixIcon={<Dot color="primary" size="md" />} />
           <Badge
             {...props}
@@ -351,7 +351,7 @@ export const BadgeSquarePill: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="error" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="error" />
           <Badge {...props} color="error" prefixIcon={<Dot color="error" size="md" />} />
           <Badge
             {...props}
@@ -362,7 +362,7 @@ export const BadgeSquarePill: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="warning" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="warning" />
           <Badge {...props} color="warning" prefixIcon={<Dot color="warning" size="md" />} />
           <Badge
             {...props}
@@ -373,7 +373,7 @@ export const BadgeSquarePill: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="success" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="success" />
           <Badge {...props} color="success" prefixIcon={<Dot color="success" size="md" />} />
           <Badge
             {...props}
@@ -384,7 +384,7 @@ export const BadgeSquarePill: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="additional" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="additional" />
           <Badge {...props} color="additional" prefixIcon={<Dot color="additional" size="md" />} />
           <Badge
             {...props}
@@ -395,7 +395,7 @@ export const BadgeSquarePill: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="info" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="info" />
           <Badge {...props} color="info" prefixIcon={<Dot color="info" size="md" />} />
           <Badge
             {...props}
@@ -421,7 +421,7 @@ export const BadgeSquareOutline: Story = {
     return (
       <div className="flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="gray" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="gray" />
           <Badge {...props} color="gray" prefixIcon={<Dot color="gray" size="md" />} />
           <Badge
             {...props}
@@ -432,7 +432,7 @@ export const BadgeSquareOutline: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="primary" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="primary" />
           <Badge {...props} color="primary" prefixIcon={<Dot color="primary" size="md" />} />
           <Badge
             {...props}
@@ -443,7 +443,7 @@ export const BadgeSquareOutline: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="error" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="error" />
           <Badge {...props} color="error" prefixIcon={<Dot color="error" size="md" />} />
           <Badge
             {...props}
@@ -454,7 +454,7 @@ export const BadgeSquareOutline: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="warning" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="warning" />
           <Badge {...props} color="warning" prefixIcon={<Dot color="warning" size="md" />} />
           <Badge
             {...props}
@@ -465,7 +465,7 @@ export const BadgeSquareOutline: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="success" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="success" />
           <Badge {...props} color="success" prefixIcon={<Dot color="success" size="md" />} />
           <Badge
             {...props}
@@ -476,7 +476,7 @@ export const BadgeSquareOutline: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="additional" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="additional" />
           <Badge {...props} color="additional" prefixIcon={<Dot color="additional" size="md" />} />
           <Badge
             {...props}
@@ -487,7 +487,7 @@ export const BadgeSquareOutline: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="info" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="info" />
           <Badge {...props} color="info" prefixIcon={<Dot color="info" size="md" />} />
           <Badge
             {...props}
@@ -513,7 +513,7 @@ export const BadgeSquareSolid: Story = {
     return (
       <div className="flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="gray" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="gray" />
           <Badge {...props} color="gray" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -524,7 +524,7 @@ export const BadgeSquareSolid: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="primary" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="primary" />
           <Badge {...props} color="primary" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -535,7 +535,7 @@ export const BadgeSquareSolid: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="error" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="error" />
           <Badge {...props} color="error" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -546,7 +546,7 @@ export const BadgeSquareSolid: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="warning" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="warning" />
           <Badge {...props} color="warning" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -557,7 +557,7 @@ export const BadgeSquareSolid: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="success" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="success" />
           <Badge {...props} color="success" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -568,7 +568,7 @@ export const BadgeSquareSolid: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="additional" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="additional" />
           <Badge {...props} color="additional" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
@@ -579,7 +579,7 @@ export const BadgeSquareSolid: Story = {
         </div>
 
         <div className="flex items-center gap-x-4">
-          <Badge {...props} color="info" prefixIcon={<Icon name="icon-VN" size="md" />} />
+          <Badge {...props} color="info" />
           <Badge {...props} color="info" prefixIcon={<Dot color="white" size="md" />} />
           <Badge
             {...props}
