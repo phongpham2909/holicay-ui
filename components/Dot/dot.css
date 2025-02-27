@@ -18,6 +18,9 @@
   @apply size-3;
 }
 
+.hlc-dot.hlc-dot-color-white {
+  @apply bg-white;
+}
 .hlc-dot.hlc-dot-color-gray {
   @apply bg-base-subtle;
 }
