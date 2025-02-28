@@ -6,6 +6,8 @@ import { Icon } from '../Icon';
 
 import './button-group.css';
 
+type PropsWithOptionalChildren<P = unknown> = P & { children?: React.ReactNode };
+
 export type ButtonGroupOption = {
   label: string;
   value: string;
@@ -32,8 +34,9 @@ export const ButtonGroup = ({
   onChange,
   className,
   prefixCls = PREFIX_CLASS,
+  children,
   ...rest
-}: ButtonGroupProps) => {
+}: PropsWithOptionalChildren<ButtonGroupProps>) => {
   const [selected, setSelected] = useState<string[]>(value || []);
 
   const handleClick = (option: string) => {
@@ -57,28 +60,29 @@ export const ButtonGroup = ({
       role="group"
       className={clsx(`${prefixCls}-btn-group`, `${prefixCls}-btn-group-${size}`, className)}
     >
-      {options.map((option, oIndex) => (
-        <button
-          type="button"
-          key={option.value || oIndex}
-          onClick={() => !option.disabled && handleClick(option.value)}
-          className={clsx(`${prefixCls}-btn-group-item`, {
-            [`${prefixCls}-btn-group-item-disabled`]: option.disabled,
-            [`${prefixCls}-btn-group-item-selected`]: selected.includes(option.value),
-          })}
-        >
-          {option.prefix ||
-            (typeof option.icon === 'string' ? (
-              <Icon name={option.icon} size={size === 'sm' ? 'md' : 'xl'} />
-            ) : (
-              option.icon
-            ))}
+      {children ||
+        options.map((option, oIndex) => (
+          <button
+            type="button"
+            key={option.value || oIndex}
+            onClick={() => !option.disabled && handleClick(option.value)}
+            className={clsx(`${prefixCls}-btn-group-item`, {
+              [`${prefixCls}-btn-group-item-disabled`]: option.disabled,
+              [`${prefixCls}-btn-group-item-selected`]: selected.includes(option.value),
+            })}
+          >
+            {option.prefix ||
+              (typeof option.icon === 'string' ? (
+                <Icon name={option.icon} size={size === 'sm' ? 'md' : 'xl'} />
+              ) : (
+                option.icon
+              ))}
 
-          {option.label}
+            {option.label}
 
-          {option.suffix}
-        </button>
-      ))}
+            {option.suffix}
+          </button>
+        ))}
     </div>
   );
 };
