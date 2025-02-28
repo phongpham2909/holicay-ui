@@ -1,5 +1,5 @@
 .hlc-btn {
-  @apply cursor-pointer inline-block text-center select-none not-italic heading-semibold;
+  @apply cursor-pointer inline-block text-center select-none not-italic heading-semibold transition-all ease-in-out;
 }
 
 .hlc-btn-disabled {
@@ -27,19 +27,19 @@
 .hlc-btn-icon-only {
   @apply !px-0 inline-flex items-center justify-center;
 }
-.hlc-btn-size-sm.hlc-btn-icon-only {
+.hlc-btn-size-sm.hlc-btn-icon-only:not(.hlc-btn-link) {
   @apply min-w-9;
 }
-.hlc-btn-size-md.hlc-btn-icon-only {
+.hlc-btn-size-md.hlc-btn-icon-only:not(.hlc-btn-link) {
   @apply min-w-10;
 }
-.hlc-btn-size-lg.hlc-btn-icon-only {
+.hlc-btn-size-lg.hlc-btn-icon-only:not(.hlc-btn-link) {
   @apply min-w-[44px];
 }
-.hlc-btn-size-xl.hlc-btn-icon-only {
+.hlc-btn-size-xl.hlc-btn-icon-only:not(.hlc-btn-link) {
   @apply min-w-12;
 }
-.hlc-btn-size-2xl.hlc-btn-icon-only {
+.hlc-btn-size-2xl.hlc-btn-icon-only:not(.hlc-btn-link) {
   @apply min-w-14;
 }
 
@@ -281,4 +281,8 @@
 }
 .hlc-btn-link.hlc-btn-color-gray.hlc-btn-disabled {
   @apply text-base-tertiary_disabled;
+}
+
+.hlc-btn-link.hlc-btn-size-sm {
+  @apply rounded-xxs;
 }

@@ -1,4 +1,4 @@
-import Avatar from '@/components/Avatar/InternalAvatar';
+import { Avatar } from '@/components';
 import { images } from '@/variables/images';
 import type { Meta, StoryObj } from '@storybook/react';
 

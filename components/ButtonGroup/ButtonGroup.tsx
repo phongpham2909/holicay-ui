@@ -11,7 +11,7 @@ type PropsWithOptionalChildren<P = unknown> = P & { children?: React.ReactNode }
 export type ButtonGroupOption = {
   label: string;
   value: string;
-  icon?: string | React.ReactNode;
+  icon?: React.ReactNode;
   disabled?: boolean;
   suffix?: React.ReactNode;
   prefix?: React.ReactNode;

@@ -1,4 +1,4 @@
-import Avatar from '@/components/Avatar/Avatar';
+import { Avatar } from '@/components';
 import { images } from '@/variables/images';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';

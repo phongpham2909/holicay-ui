@@ -1,0 +1,39 @@
+.hlc-dropdown {
+  @apply mt-2 border border-base-secondary bg-surface-base-primary rounded-md shadow-md overflow-y-auto overflow-x-hidden max-h-80 transition-all ease-in-out;
+}
+
+.hlc-dropdown-menu > .hlc-dropdown-menu-header {
+  @apply py-md px-xl border-b border-base-secondary;
+}
+
+.hlc-dropdown-menu .hlc-dropdown-menu-items {
+  @apply py-xs;
+}
+
+.hlc-dropdown-menu .hlc-dropdown-menu-item {
+  @apply cursor-pointer py-[1px] px-sm;
+}
+
+.hlc-dropdown-menu .hlc-dropdown-menu-item-button {
+  @apply px-xl;
+}
+
+.hlc-dropdown-menu .hlc-dropdown-menu-item > .hlc-dropdown-menu-item-content {
+  @apply inline-flex items-center gap-x-sm py-md px-2.5 w-full font-primary font-medium text-sm text-base-secondary rounded-sm;
+}
+
+.hlc-dropdown-menu .hlc-dropdown-menu-item:hover > .hlc-dropdown-menu-item-content {
+  @apply bg-surface-base-primary_hover;
+}
+
+.hlc-dropdown-menu .hlc-dropdown-menu-item-disabled > .hlc-dropdown-menu-item-content {
+  @apply cursor-not-allowed text-base-secondary_disabled;
+}
+
+.hlc-dropdown-menu .hlc-dropdown-menu-item-divider {
+  @apply h-[1px] my-xs bg-surface-base-secondary_disabled overflow-hidden;
+}
+
+.hlc-dropdown-trigger.hlc-dropdown-open {
+  @apply outline outline-2 outline-offset-2 outline-primary-400;
+}
