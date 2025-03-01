@@ -1,4 +1,4 @@
-import { Meta, Canvas, Controls } from '@storybook/blocks';
+import { Meta, Canvas, Controls, Story } from '@storybook/blocks';
 import { Button } from '@/components';
 
 import * as ButtonStories from './Button.stories';
@@ -23,11 +23,13 @@ their style, specific labels and icons, they help understand the most important 
 import { Button } from '@holicay-ui/design-system';
 ```
 
-<Canvas of={ButtonStories.Base} layout="centered"/>
+<Canvas  of={ButtonStories.Primary} layout="centered">
+
+</Canvas>
 
 ## Props
 
-<Controls of={ButtonStories.ButtonProps} />
+<Controls />
 
 ## Variants
 

@@ -2,7 +2,7 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { Button, ButtonProps as IButtonProps } from '@/components';
+import { Button, ButtonProps, Dot, Icon } from '@/components';
 import { ButtonColor, ButtonSize, ButtonType } from '@/components/Button/constants';
 
 const meta = {
@@ -11,6 +11,65 @@ const meta = {
   parameters: {
     layout: 'centered',
     chromatic: { disableSnapshot: false },
+  },
+  argTypes: {
+    // 👇 All Button stories expect a label arg
+    label: {
+      control: 'text',
+      description: 'Overwritten description',
+    },
+    type: {
+      control: 'select',
+      options: ['primary', 'secondary', 'text', 'link'],
+      description: 'Can be set to primary secondary link text',
+      table: {
+        type: { summary: "'primary' | 'secondary' | 'text' | 'link'" },
+        defaultValue: { summary: 'primary' },
+      },
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg', 'xl', '2xl'],
+      description: 'Determines the size of the button component.',
+      table: {
+        type: { summary: "'sm' | 'md' | 'lg' | 'xl' | '2xl'" },
+        defaultValue: { summary: 'md' },
+      },
+    },
+    color: {
+      control: 'inline-radio',
+      options: ['primary', 'gray'],
+      description: 'Set the color of button',
+      table: {
+        type: { summary: "'primary' | 'gray'" },
+        defaultValue: { summary: 'primary' },
+      },
+    },
+    icon: {
+      control: 'object',
+      description: 'Set the icon component of button',
+    },
+    prefixIcon: {
+      control: 'object',
+      description: 'Set the left icon component of button',
+    },
+    suffixIcon: {
+      control: 'object',
+      description: 'Set the right icon component of button',
+    },
+    danger: {
+      control: 'boolean',
+      description: 'Set the danger status of button',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disabled state of button',
+    },
+    className: {
+      control: 'text',
+      description:
+        'CSS Class Name which will be appended to the most outer element of a component. Use this prop carefully, overwriting CSS rules might break the component.',
+    },
   },
   args: {
     size: 'md',
@@ -23,10 +82,18 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Base: Story = {
+export const Primary: Story = {
   args: {
     size: 'md',
-    color: 'primary',
+    type: 'primary',
+    label: 'Button CTA',
+  },
+};
+
+export const Secondary: Story = {
+  args: {
+    size: 'md',
+    type: 'secondary',
     label: 'Button CTA',
   },
 };
@@ -92,7 +159,7 @@ export const Link: Story = {
   },
 };
 
-export const Danger: Story = {
+export const Destructive: Story = {
   args: {
     size: 'md',
     color: 'primary',
@@ -123,6 +190,7 @@ const OPTIONS = [
   'size 2xl',
   'prefixIcon',
   'suffixIcon',
+  'withDot',
   'only Icon',
 ];
 
@@ -132,7 +200,7 @@ export const Variants = {
   render: () => {
     return (
       <div className="p-6">
-        <div className="grid grid-cols-[repeat(12,1fr)] gap-y-6 gap-x-4">
+        <div className="grid grid-cols-[repeat(13,1fr)] gap-y-6 gap-x-4">
           <div className="col-span-1 min-w-32">
             <p className="text-sm font-medium uppercase text-base-primary">Variant</p>
           </div>
@@ -148,7 +216,7 @@ export const Variants = {
                   <p className="text-sm font-normal capitalize text-base-primary">{variant}</p>
                 </div>
                 {OPTIONS.map((opt) => {
-                  let props: IButtonProps = {
+                  let props: ButtonProps = {
                     size: 'md',
                     color: 'primary',
                     type: variant as ButtonType,
@@ -160,8 +228,8 @@ export const Variants = {
                       color: variant.split(' ')[1] as ButtonColor,
                     };
                   }
-                  if (['disabled', 'loading'].includes(opt)) {
-                    props[opt as keyof IButtonProps] = true;
+                  if (['withDot', 'disabled', 'loading'].includes(opt)) {
+                    props[opt as keyof ButtonProps] = true;
                   }
 
                   if (opt.startsWith('size')) {
@@ -169,14 +237,14 @@ export const Variants = {
                   }
 
                   if (['prefixIcon', 'suffixIcon'].includes(opt)) {
-                    props[opt as keyof IButtonProps] = <i className="icon icon-rocket-01" />;
+                    props[opt as keyof ButtonProps] = <i className="icon icon-rocket-01" />;
                   }
 
                   if (['only Icon'].includes(opt)) {
                     return (
                       <div className="col-span-1" key={`${variant}-${opt}`}>
                         <div className="flex items-center justify-center min-h-14">
-                          <Button {...props} icon={<i className="icon icon-rocket-01" />} />
+                          <Button {...props} icon={<Icon name="icon-rocket-01" size="xl" />} />
                         </div>
                       </div>
                     );
@@ -205,13 +273,13 @@ export const Variants = {
                   </p>
                 </div>
                 {OPTIONS.map((opt) => {
-                  const props: IButtonProps = {
+                  const props: ButtonProps = {
                     danger: true,
                     size: 'md',
                     type: variant as ButtonType,
                   };
-                  if (['disabled', 'loading'].includes(opt)) {
-                    props[opt as keyof IButtonProps] = true;
+                  if (['withDot', 'disabled', 'loading'].includes(opt)) {
+                    props[opt as keyof ButtonProps] = true;
                   }
 
                   if (opt.startsWith('size')) {
@@ -219,14 +287,14 @@ export const Variants = {
                   }
 
                   if (['prefixIcon', 'suffixIcon'].includes(opt)) {
-                    props[opt as keyof IButtonProps] = <i className="icon icon-rocket-01" />;
+                    props[opt as keyof ButtonProps] = <Icon name="icon-rocket-01" size="xl" />;
                   }
 
                   if (['only Icon'].includes(opt)) {
                     return (
                       <div className="col-span-1" key={`${variant}-${opt}`}>
                         <div className="flex items-center justify-center min-h-14">
-                          <Button {...props} icon={<i className="icon icon-rocket-01" />} />
+                          <Button {...props} icon={<Icon name="icon-rocket-01" size="xl" />} />
                         </div>
                       </div>
                     );
@@ -246,68 +314,5 @@ export const Variants = {
         </div>
       </div>
     );
-  },
-};
-
-export const ButtonProps = {
-  tags: ['!dev'],
-  argTypes: {
-    // 👇 All Button stories expect a label arg
-    label: {
-      control: 'text',
-      description: 'Overwritten description',
-    },
-    type: {
-      control: 'select',
-      options: ['primary', 'secondary', 'text', 'link'],
-      description: 'Can be set to primary secondary link text',
-      table: {
-        type: { summary: "'primary' | 'secondary' | 'text' | 'link'" },
-        defaultValue: { summary: 'primary' },
-      },
-    },
-    size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg', 'xl', '2xl'],
-      description: 'Determines the size of the button component.',
-      table: {
-        type: { summary: "'sm' | 'md' | 'lg' | 'xl' | '2xl'" },
-        defaultValue: { summary: 'md' },
-      },
-    },
-    color: {
-      control: 'inline-radio',
-      options: ['primary', 'gray'],
-      description: 'Set the color of button',
-      table: {
-        type: { summary: "'primary' | 'gray'" },
-        defaultValue: { summary: 'primary' },
-      },
-    },
-    icon: {
-      control: 'object',
-      description: 'Set the icon component of button',
-    },
-    prefixIcon: {
-      control: 'object',
-      description: 'Set the left icon component of button',
-    },
-    suffixIcon: {
-      control: 'object',
-      description: 'Set the right icon component of button',
-    },
-    danger: {
-      control: 'boolean',
-      description: 'Set the danger status of button',
-    },
-    disabled: {
-      control: 'boolean',
-      description: 'Disabled state of button',
-    },
-    className: {
-      control: 'text',
-      description:
-        'CSS Class Name which will be appended to the most outer element of a component. Use this prop carefully, overwriting CSS rules might break the component.',
-    },
   },
 };

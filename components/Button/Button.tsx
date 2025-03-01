@@ -5,6 +5,7 @@ import { PREFIX_CLASS } from '@/variables/app';
 import { ButtonSize, ButtonType, ButtonColor, PRIMARY, BUTTON_SIZES } from './constants';
 
 import './button.css';
+import { Dot } from '../Dot';
 
 export interface ButtonProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'type' | 'color'> {
@@ -16,6 +17,7 @@ export interface ButtonProps
   loading?: boolean;
   disabled?: boolean;
   fullWidth?: boolean;
+  withDot?: boolean;
   prefixCls?: string;
   icon?: React.ReactNode;
   prefixIcon?: React.ReactNode;
@@ -43,6 +45,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       danger = false,
       disabled = false,
       fullWidth = false,
+      withDot = false,
       className,
       onClick,
       children,
@@ -73,7 +76,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           {
             'w-full': fullWidth,
             [`${prefixCls}-btn-icon-only`]: !children && !label,
-            [`${prefixCls}-btn-icon ${prefixCls}-btn-icon-left`]: !!icon || !!prefixIcon || loading,
+            [`${prefixCls}-btn-icon ${prefixCls}-btn-icon-left`]:
+              withDot || !!icon || !!prefixIcon || loading,
             [`${prefixCls}-btn-icon ${prefixCls}-btn-icon-right`]: !!suffixIcon,
             [`${prefixCls}-btn-danger`]: danger,
             [`${prefixCls}-btn-disabled`]: isDisabled,
@@ -84,6 +88,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading ? (
           <span className={`${prefixCls}-btn-icon-loading`}>{loadingIcon}</span>
+        ) : withDot ? (
+          <Dot size="lg" />
         ) : (
           icon || prefixIcon
         )}

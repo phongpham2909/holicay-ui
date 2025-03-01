@@ -18,7 +18,7 @@
   @apply size-3;
 }
 
-.hlc-dot.hlc-dot-color-white {
+.hlc-dot.hlc-dot-color-default {
   @apply bg-white;
 }
 .hlc-dot.hlc-dot-color-gray {

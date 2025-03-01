@@ -6,6 +6,14 @@
   @apply cursor-not-allowed;
 }
 
+.hlc-btn.hlc-btn-disabled > .hlc-dot {
+  @apply !bg-base-primary_disabled;
+}
+
+.hlc-btn:has(.hlc-btn-icon-loading) {
+  @apply cursor-wait;
+}
+
 /* Button Size */
 .hlc-btn-size-sm {
   @apply px-[13px] py-[7px] text-sm rounded-sm;
@@ -56,17 +64,26 @@
 .hlc-btn-icon.hlc-btn-size-2xl > .icon {
   @apply text-[1.5rem];
 }
-
-.hlc-btn:has(.hlc-btn-icon-loading) {
-  @apply cursor-wait;
-}
-
 .hlc-btn-icon > .hlc-btn-icon-loading {
   @apply text-[1.25rem] w-5 h-5;
 }
-
 .hlc-btn-icon > .hlc-btn-icon-loading > .icon {
   @apply animate-spin;
+}
+
+.hlc-btn-primary.hlc-btn-icon-left:hover > .hlc-dot,
+.hlc-btn-primary.hlc-btn-icon-left:active > .hlc-dot {
+  @apply bg-[#FFFFFFE5];
+}
+
+.hlc-btn.hlc-btn-icon-left:not(.hlc-btn-primary) > .hlc-dot {
+  @apply bg-fill-success-primary;
+}
+.hlc-btn.hlc-btn-icon-left:not(.hlc-btn-primary):hover > .hlc-dot {
+  @apply bg-fill-success-primary_hover;
+}
+.hlc-btn.hlc-btn-icon-left:not(.hlc-btn-primary):active > .hlc-dot {
+  @apply bg-fill-success-primary_active;
 }
 
 .hlc-btn-primary {
@@ -131,6 +148,7 @@
 .hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):focus-visible::before {
   background: linear-gradient(to bottom, var(--color-error-400), var(--color-error-600)) border-box;
 }
+
 /* Button Secondary */
 .hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray) {
   @apply relative bg-fill-brand-green-primary text-white border shadow-xs;
@@ -143,13 +161,13 @@
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) -240%, rgba(13, 45, 63, 1) 70%) border-box;
   border-radius: inherit;
 }
-.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray):hover {
+.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray, .hlc-btn-disabled):hover {
   @apply bg-fill-brand-green-primary_hover;
 }
 .hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray):hover::before {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) -240%, rgba(9, 34, 53, 1) 70%) border-box;
 }
-.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray):active {
+.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray, .hlc-btn-disabled):active {
   @apply bg-fill-brand-green-primary_active;
 }
 .hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray):active::before {
@@ -161,24 +179,27 @@
 .hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray):focus-visible::before {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) -240%, rgba(13, 45, 63, 1) 70%) border-box;
 }
-.hlc-btn-secondary.hlc-btn-disabled {
-  @apply bg-surface-base-primary text-base-primary_disabled border-base-primary_disabled;
+.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray).hlc-btn-disabled {
+  @apply bg-surface-base-primary_disabled text-base-primary_disabled border-base-primary_disabled;
 }
 /* Button Secondary + danger */
 .hlc-btn-secondary.hlc-btn-danger {
   @apply bg-surface-base-primary text-error-primary border border-error-primary shadow-xs;
 }
-.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-secondary.hlc-btn-disabled) {
+.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-disabled) {
   @apply text-error-primary border-error-primary;
 }
-.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-secondary.hlc-btn-disabled):hover {
+.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-disabled):hover {
   @apply bg-surface-error-primary_hover text-error_hover border-error_hover;
 }
-.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-secondary.hlc-btn-disabled):active {
+.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-disabled):active {
   @apply bg-surface-error-primary_active text-error_active border-error_hover;
 }
-.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-secondary.hlc-btn-disabled):focus-visible {
+.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-disabled):focus-visible {
   @apply outline outline-2 outline-offset-2 outline-error-400;
+}
+.hlc-btn-secondary.hlc-btn-danger.hlc-btn-disabled {
+  @apply bg-surface-base-primary text-base-tertiary_disabled border-base-primary_disabled;
 }
 /* Button Secondary + color gray */
 .hlc-btn-secondary.hlc-btn-color-gray {
@@ -196,7 +217,7 @@
 .hlc-btn-secondary.hlc-btn-color-gray.hlc-btn-disabled {
   @apply bg-surface-base-primary text-base-secondary_disabled border-base-primary_disabled;
 }
-
+/* Button text */
 .hlc-btn-text {
   @apply bg-surface-base-primary text-brand-red-primary;
 }
