@@ -6,7 +6,7 @@
   @apply cursor-not-allowed;
 }
 
-.hlc-btn.hlc-btn-disabled > .hlc-dot {
+.hlc-btn-disabled > .hlc-dot {
   @apply !bg-base-primary_disabled;
 }
 
@@ -34,21 +34,21 @@
 /* Icon Only */
 .hlc-btn-icon-only {
   @apply !px-0 inline-flex items-center justify-center;
-}
-.hlc-btn-size-sm.hlc-btn-icon-only:not(.hlc-btn-link) {
-  @apply min-w-9;
-}
-.hlc-btn-size-md.hlc-btn-icon-only:not(.hlc-btn-link) {
-  @apply min-w-10;
-}
-.hlc-btn-size-lg.hlc-btn-icon-only:not(.hlc-btn-link) {
-  @apply min-w-[44px];
-}
-.hlc-btn-size-xl.hlc-btn-icon-only:not(.hlc-btn-link) {
-  @apply min-w-12;
-}
-.hlc-btn-size-2xl.hlc-btn-icon-only:not(.hlc-btn-link) {
-  @apply min-w-14;
+  &.hlc-btn-size-sm:not(.hlc-btn-link) {
+    @apply min-w-9;
+  }
+  &.hlc-btn-size-md:not(.hlc-btn-link) {
+    @apply min-w-10;
+  }
+  &.hlc-btn-size-lg:not(.hlc-btn-link) {
+    @apply min-w-[44px];
+  }
+  &.hlc-btn-size-xl:not(.hlc-btn-link) {
+    @apply min-w-12;
+  }
+  &.hlc-btn-size-2xl:not(.hlc-btn-link) {
+    @apply min-w-14;
+  }
 }
 
 /* Button Icon */
@@ -76,256 +76,261 @@
   @apply bg-[#FFFFFFE5];
 }
 
-.hlc-btn.hlc-btn-icon-left:not(.hlc-btn-primary) > .hlc-dot {
-  @apply bg-fill-success-primary;
-}
-.hlc-btn.hlc-btn-icon-left:not(.hlc-btn-primary):hover > .hlc-dot {
-  @apply bg-fill-success-primary_hover;
-}
-.hlc-btn.hlc-btn-icon-left:not(.hlc-btn-primary):active > .hlc-dot {
-  @apply bg-fill-success-primary_active;
+.hlc-btn.hlc-btn-icon-left {
+  &:not(.hlc-btn-primary) > .hlc-dot {
+    @apply bg-fill-success-primary;
+  }
+  &:not(.hlc-btn-primary):hover > .hlc-dot {
+    @apply bg-fill-success-primary_hover;
+  }
+  &:not(.hlc-btn-primary):active > .hlc-dot {
+    @apply bg-fill-success-primary_active;
+  }
 }
 
+/* Button Primary */
 .hlc-btn-primary {
   @apply relative bg-fill-brand-red-primary border text-white shadow-xs;
   background-clip: padding-box;
   border-color: transparent;
+  &:hover {
+    @apply bg-fill-brand-red-primary_hover;
+  }
+  &:active {
+    @apply bg-fill-brand-red-primary_active;
+  }
+  &:focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-primary-400;
+  }
+  &:not(.hlc-btn-disabled) {
+    &::before {
+      @apply absolute z-[-1] -m-[1px] inset-0;
+      content: '';
+      border-radius: inherit;
+      background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600));
+    }
+    &:hover::before {
+      background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-700));
+    }
+    &:active::before {
+      background: linear-gradient(to bottom, var(--color-primary-600), var(--color-primary-800));
+    }
+    &:focus-visible::before {
+      background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600));
+    }
+  }
+  &.hlc-btn-disabled {
+    @apply bg-surface-base-primary_disabled text-base-primary_disabled border-base-primary_disabled;
+  }
 }
-.hlc-btn-primary:not(.hlc-btn-disabled)::before {
-  @apply absolute z-[-1] -m-[1px] inset-0;
-  content: '';
-  background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600))
-    border-box;
-  border-radius: inherit;
-}
-.hlc-btn-primary:hover {
-  @apply bg-fill-brand-red-primary_hover;
-}
-.hlc-btn-primary:not(.hlc-btn-disabled):hover::before {
-  background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-700))
-    border-box;
-}
-.hlc-btn-primary:active {
-  @apply bg-fill-brand-red-primary_active;
-}
-.hlc-btn-primary:not(.hlc-btn-disabled):active::before {
-  background: linear-gradient(to bottom, var(--color-primary-600), var(--color-primary-800))
-    border-box;
-}
-.hlc-btn-primary:focus-visible {
-  @apply outline outline-2 outline-offset-2 outline-primary-400;
-}
-.hlc-btn-primary:not(.hlc-btn-disabled):focus-visible::before {
-  background: linear-gradient(to bottom, var(--color-primary-400), var(--color-primary-600))
-    border-box;
-}
-.hlc-btn-primary.hlc-btn-disabled {
-  @apply bg-surface-base-primary_disabled text-base-primary_disabled border-base-primary_disabled;
-}
-
 /* Button Primary + danger */
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled) {
-  @apply bg-fill-error-primary;
-}
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled)::before {
-  background: linear-gradient(to bottom, var(--color-error-400), var(--color-error-600)) border-box;
-}
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):hover {
-  @apply bg-fill-error-primary_hover;
-}
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):hover::before {
-  background: linear-gradient(to bottom, var(--color-error-500), var(--color-error-700)) border-box;
-}
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):active {
-  @apply bg-fill-error-primary_active;
-}
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):active::before {
-  background: linear-gradient(to bottom, var(--color-error-600), var(--color-error-800)) border-box;
-}
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):focus-visible {
-  @apply outline outline-2 outline-offset-2 outline-error-400;
-}
-.hlc-btn-primary.hlc-btn-danger:not(.hlc-btn-disabled):focus-visible::before {
-  background: linear-gradient(to bottom, var(--color-error-400), var(--color-error-600)) border-box;
+.hlc-btn-primary.hlc-btn-danger {
+  &:not(.hlc-btn-disabled) {
+    @apply bg-fill-error-primary;
+    &:hover {
+      @apply bg-fill-error-primary_hover;
+    }
+    &:active {
+      @apply bg-fill-error-primary_active;
+    }
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-error-400;
+    }
+    &::before {
+      background: linear-gradient(to bottom, var(--color-error-400), var(--color-error-600));
+    }
+    &:hover::before {
+      background: linear-gradient(to bottom, var(--color-error-500), var(--color-error-700));
+    }
+    &:active::before {
+      background: linear-gradient(to bottom, var(--color-error-600), var(--color-error-800));
+    }
+    &:focus-visible::before {
+      background: linear-gradient(to bottom, var(--color-error-400), var(--color-error-600));
+    }
+  }
 }
 
 /* Button Secondary */
-.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray) {
-  @apply relative bg-fill-brand-green-primary text-white border shadow-xs;
-  background-clip: padding-box;
-  border-color: transparent;
-}
-.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray):not(.hlc-btn-disabled)::before {
-  @apply absolute z-[-1] -m-[1px] inset-0;
-  content: '';
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) -240%, rgba(13, 45, 63, 1) 70%) border-box;
-  border-radius: inherit;
-}
-.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray, .hlc-btn-disabled):hover {
-  @apply bg-fill-brand-green-primary_hover;
-}
-.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray):hover::before {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) -240%, rgba(9, 34, 53, 1) 70%) border-box;
-}
-.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray, .hlc-btn-disabled):active {
-  @apply bg-fill-brand-green-primary_active;
-}
-.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray):active::before {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) -240%, rgba(6, 24, 42, 1) 70%) border-box;
-}
-.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray):focus-visible {
-  @apply outline outline-2 outline-offset-2 outline-secondary-400;
-}
-.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray):focus-visible::before {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) -240%, rgba(13, 45, 63, 1) 70%) border-box;
-}
-.hlc-btn-secondary:not(.hlc-btn-danger, .hlc-btn-color-gray).hlc-btn-disabled {
-  @apply bg-surface-base-primary_disabled text-base-primary_disabled border-base-primary_disabled;
-}
-/* Button Secondary + danger */
-.hlc-btn-secondary.hlc-btn-danger {
-  @apply bg-surface-base-primary text-error-primary border border-error-primary shadow-xs;
-}
-.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-disabled) {
-  @apply text-error-primary border-error-primary;
-}
-.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-disabled):hover {
-  @apply bg-surface-error-primary_hover text-error_hover border-error_hover;
-}
-.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-disabled):active {
-  @apply bg-surface-error-primary_active text-error_active border-error_hover;
-}
-.hlc-btn-secondary.hlc-btn-danger:not(.hlc-btn-disabled):focus-visible {
-  @apply outline outline-2 outline-offset-2 outline-error-400;
-}
-.hlc-btn-secondary.hlc-btn-danger.hlc-btn-disabled {
-  @apply bg-surface-base-primary text-base-tertiary_disabled border-base-primary_disabled;
+.hlc-btn-secondary.hlc-btn-color-primary {
+  &:not(.hlc-btn-danger, .hlc-btn-disabled) {
+    @apply relative bg-fill-brand-green-primary text-white border shadow-xs;
+    background-clip: padding-box;
+    border-color: transparent;
+    &:hover {
+      @apply bg-fill-brand-green-primary_hover;
+    }
+    &:active {
+      @apply bg-fill-brand-green-primary_active;
+    }
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-secondary-400;
+    }
+    &::before {
+      @apply absolute z-[-1] -m-[1px] inset-0;
+      content: '';
+      border-radius: inherit;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) -240%, rgba(13, 45, 63, 1) 70%);
+    }
+    &:hover::before {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) -240%, rgba(9, 34, 53, 1) 70%);
+    }
+    &:active::before {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) -240%, rgba(6, 24, 42, 1) 70%);
+    }
+    &:focus-visible::before {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0) -240%, rgba(13, 45, 63, 1) 70%);
+    }
+  }
+  &:not(.hlc-btn-danger).hlc-btn-disabled {
+    @apply bg-surface-base-primary_disabled text-base-primary_disabled border border-base-primary_disabled shadow-xs;
+  }
 }
 /* Button Secondary + color gray */
 .hlc-btn-secondary.hlc-btn-color-gray {
   @apply bg-surface-base-primary text-base-secondary border border-base-primary shadow-xs;
+  &:hover {
+    @apply bg-surface-base-primary_hover text-base-secondary_hover border-base-primary_hover;
+  }
+  &:active {
+    @apply bg-surface-base-primary_active text-base-secondary_active border-base-primary_active;
+  }
+  &:focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-primary-400;
+  }
+  &.hlc-btn-disabled {
+    @apply bg-surface-base-primary text-base-secondary_disabled border-base-primary_disabled;
+  }
 }
-.hlc-btn-secondary.hlc-btn-color-gray:hover {
-  @apply bg-surface-base-primary_hover text-base-secondary_hover border-base-primary_hover;
+/* Button Secondary + danger */
+.hlc-btn-secondary.hlc-btn-danger {
+  &:not(.hlc-btn-disabled) {
+    @apply bg-surface-base-primary text-error-primary border border-error-primary shadow-xs;
+    &:hover {
+      @apply bg-surface-error-primary_hover text-error_hover border-error_hover;
+    }
+    &:active {
+      @apply bg-surface-error-primary_active text-error_active border-error_hover;
+    }
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-error-400;
+    }
+  }
+  &.hlc-btn-disabled {
+    @apply bg-surface-base-primary text-base-tertiary_disabled border border-base-primary_disabled shadow-xs;
+  }
 }
-.hlc-btn-secondary.hlc-btn-color-gray:active {
-  @apply bg-surface-base-primary_active text-base-secondary_active border-base-primary_active;
-}
-.hlc-btn-secondary.hlc-btn-color-gray:focus-visible {
-  @apply outline outline-2 outline-offset-2 outline-primary-400;
-}
-.hlc-btn-secondary.hlc-btn-color-gray.hlc-btn-disabled {
-  @apply bg-surface-base-primary text-base-secondary_disabled border-base-primary_disabled;
-}
-/* Button text */
-.hlc-btn-text {
+
+/* Button text + color primary */
+.hlc-btn-text.hlc-btn-color-primary {
   @apply bg-surface-base-primary text-brand-red-primary;
+  &.hlc-btn-size-sm {
+    @apply px-3.5 py-md;
+  }
+  &.hlc-btn-size-md {
+    @apply px-xl py-2.5;
+  }
+  &.hlc-btn-size-lg {
+    @apply px-xl py-2.5;
+  }
+  &.hlc-btn-size-xl {
+    @apply px-2xl py-lg;
+  }
+  &.hlc-btn-size-2xl {
+    @apply px-3xl py-3.5;
+  }
+  &:hover {
+    @apply bg-surface-brand-red-primary_hover text-brand-red-primary_hover;
+  }
+  &:active {
+    @apply bg-surface-brand-red-primary_active text-brand-red-primary_active;
+  }
+  &:focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-primary-400;
+  }
+  &.hlc-btn-disabled {
+    @apply bg-surface-base-primary text-base-secondary_disabled;
+  }
 }
-.hlc-btn-text:hover {
-  @apply bg-surface-brand-red-primary_hover text-brand-red-primary_hover;
-}
-.hlc-btn-text:active {
-  @apply bg-surface-brand-red-primary_active text-brand-red-primary_active;
-}
-.hlc-btn-text:focus-visible {
-  @apply outline outline-2 outline-offset-2 outline-primary-400;
-}
-.hlc-btn-text.hlc-btn-disabled {
-  @apply bg-surface-base-primary text-base-secondary_disabled;
-}
-
-/* Button Text + danger */
-.hlc-btn-text.hlc-btn-danger:not(.hlc-btn-text.hlc-btn-disabled) {
-  @apply text-error-primary;
-}
-.hlc-btn-text.hlc-btn-danger:not(.hlc-btn-text.hlc-btn-disabled):hover {
-  @apply bg-surface-error-primary_hover text-error_hover;
-}
-.hlc-btn-text.hlc-btn-danger:not(.hlc-btn-text.hlc-btn-disabled):active {
-  @apply bg-surface-error-primary_active text-error_active;
-}
-.hlc-btn-text.hlc-btn-danger:not(.hlc-btn-text.hlc-btn-disabled):focus-visible {
-  @apply outline outline-2 outline-offset-2 outline-error-400;
-}
-
+/* Button Text + color gray */
 .hlc-btn-text.hlc-btn-color-gray {
   @apply bg-surface-base-primary text-base-tertiary;
+  &:hover {
+    @apply bg-surface-base-primary_hover text-base-tertiary_hover;
+  }
+  &:active {
+    @apply bg-surface-base-primary_active text-base-tertiary_active;
+  }
+  &:focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-primary-400;
+  }
+  &.hlc-btn-disabled {
+    @apply bg-surface-base-primary text-base-tertiary_disabled;
+  }
 }
-.hlc-btn-text.hlc-btn-color-gray:hover {
-  @apply bg-surface-base-primary_hover text-base-tertiary_hover;
-}
-.hlc-btn-text.hlc-btn-color-gray:active {
-  @apply bg-surface-base-primary_active text-base-tertiary_active;
-}
-.hlc-btn-text.hlc-btn-color-gray:focus-visible {
-  @apply outline outline-2 outline-offset-2 outline-primary-400;
-}
-.hlc-btn-text.hlc-btn-color-gray.hlc-btn-disabled {
-  @apply bg-surface-base-primary text-base-tertiary_disabled;
+/* Button Text + danger */
+.hlc-btn-text.hlc-btn-danger {
+  &:not(.hlc-btn-disabled) {
+    @apply text-error-primary;
+    &:hover {
+      @apply bg-surface-error-primary_hover text-error_hover;
+    }
+    &:active {
+      @apply bg-surface-error-primary_active text-error_active;
+    }
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-error-400;
+    }
+  }
 }
 
-.hlc-btn-text.hlc-btn-size-sm {
-  @apply px-3.5 py-md;
-}
-.hlc-btn-text.hlc-btn-size-md {
-  @apply px-xl py-2.5;
-}
-.hlc-btn-text.hlc-btn-size-lg {
-  @apply px-xl py-2.5;
-}
-.hlc-btn-text.hlc-btn-size-xl {
-  @apply px-2xl py-lg;
-}
-.hlc-btn-text.hlc-btn-size-2xl {
-  @apply px-3xl py-3.5;
-}
-
-.hlc-btn-link {
+/* Button Link + color primary */
+.hlc-btn-link.hlc-btn-color-primary {
   @apply bg-surface-base-primary text-brand-red-primary p-0;
+  &.hlc-btn-size-sm {
+    @apply rounded-xxs;
+  }
+  &:hover {
+    @apply text-brand-red-primary_hover;
+  }
+  &:active {
+    @apply text-brand-red-primary_active;
+  }
+  &:focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-primary-400;
+  }
+  &.hlc-btn-disabled {
+    @apply text-base-tertiary_disabled;
+  }
 }
-.hlc-btn-link:hover {
-  @apply text-brand-red-primary_hover;
-}
-.hlc-btn-link:active {
-  @apply text-brand-red-primary_active;
-}
-.hlc-btn-link:focus-visible {
-  @apply outline outline-2 outline-offset-2 outline-primary-400;
-}
-.hlc-btn-link.hlc-btn-disabled {
-  @apply text-base-tertiary_disabled;
-}
-
-/* Button Link + danger */
-.hlc-btn-link.hlc-btn-danger:not(.hlc-btn-link.hlc-btn-disabled) {
-  @apply text-error-primary;
-}
-.hlc-btn-link.hlc-btn-danger:not(.hlc-btn-link.hlc-btn-disabled):hover {
-  @apply text-error_hover;
-}
-.hlc-btn-link.hlc-btn-danger:not(.hlc-btn-link.hlc-btn-disabled):active {
-  @apply text-error_active;
-}
-.hlc-btn-link.hlc-btn-danger:not(.hlc-btn-link.hlc-btn-disabled):focus-visible {
-  @apply outline outline-2 outline-offset-2 outline-error-400;
-}
-
+/* Button Link + color gray */
 .hlc-btn-link.hlc-btn-color-gray {
   @apply bg-surface-base-primary text-base-tertiary;
+  &:hover {
+    @apply text-base-tertiary_hover;
+  }
+  &:active {
+    @apply text-base-tertiary_active;
+  }
+  &:focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-primary-400;
+  }
+  &.hlc-btn-disabled {
+    @apply text-base-tertiary_disabled;
+  }
 }
-.hlc-btn-link.hlc-btn-color-gray:hover {
-  @apply text-base-tertiary_hover;
-}
-.hlc-btn-link.hlc-btn-color-gray:active {
-  @apply text-base-tertiary_active;
-}
-.hlc-btn-link.hlc-btn-color-gray:focus-visible {
-  @apply outline outline-2 outline-offset-2 outline-primary-400;
-}
-.hlc-btn-link.hlc-btn-color-gray.hlc-btn-disabled {
-  @apply text-base-tertiary_disabled;
-}
-
-.hlc-btn-link.hlc-btn-size-sm {
-  @apply rounded-xxs;
+/* Button Link + danger */
+.hlc-btn-link.hlc-btn-danger {
+  &:not(.hlc-btn-disabled) {
+    @apply text-error-primary;
+    &:hover {
+      @apply text-error_hover;
+    }
+    &:active {
+      @apply text-error_active;
+    }
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-error-400;
+    }
+  }
 }

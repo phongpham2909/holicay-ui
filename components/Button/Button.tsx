@@ -2,10 +2,10 @@ import React from 'react';
 import clsx from 'clsx';
 import { forwardRef } from '@/utilities';
 import { PREFIX_CLASS } from '@/variables/app';
+import { Dot } from '../Dot';
 import { ButtonSize, ButtonType, ButtonColor, PRIMARY, BUTTON_SIZES } from './constants';
 
 import './button.css';
-import { Dot } from '../Dot';
 
 export interface ButtonProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'type' | 'color'> {

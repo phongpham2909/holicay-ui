@@ -1,0 +1,152 @@
+.hlc-btn-social {
+  @apply font-semibold font-primary rounded-md shadow-xs transition-colors duration-200 ease-out;
+  &.hlc-btn-social-sm {
+    @apply px-[15px] py-[5px] text-sm;
+  }
+  &.hlc-btn-social-md {
+    @apply px-[15px] py-[9px] text-base;
+  }
+  &.hlc-btn-social-lg {
+    @apply px-[15px] py-[9px] text-base;
+  }
+
+  &.hlc-btn-social-icon:not(.hlc-btn-social-icon-only) {
+    @apply inline-flex items-center gap-x-lg;
+  }
+
+  &.hlc-btn-social-icon-only {
+    @apply inline-flex items-center justify-center px-0;
+  }
+
+  &.hlc-btn-social-icon-only.hlc-btn-social-sm {
+    @apply min-w-8;
+  }
+
+  &.hlc-btn-social-icon-only.hlc-btn-social-md {
+    @apply min-w-[44px];
+  }
+
+  &.hlc-btn-social-icon-only.hlc-btn-social-lg {
+    @apply min-w-[44px];
+  }
+
+  &.hlc-btn-social-icon.hlc-btn-social-sm > .hlc-social-icon > svg {
+    @apply w-5 h-5;
+  }
+  &.hlc-btn-social-icon.hlc-btn-social-md > .hlc-social-icon > svg {
+    @apply w-6 h-6;
+  }
+  &.hlc-btn-social-icon.hlc-btn-social-lg > .hlc-social-icon > svg {
+    @apply w-6 h-6;
+  }
+
+  &.hlc-btn-social-google {
+    @apply border border-base-primary text-base-tertiary bg-surface-base-primary;
+    &:hover {
+      @apply border-base-primary_hover bg-surface-base-primary_hover;
+    }
+    &:active {
+      @apply border-base-primary bg-surface-base-primary;
+    }
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-primary-400;
+    }
+  }
+  &.hlc-btn-social-default.hlc-btn-social-google > .hlc-social-icon {
+    @apply text-base-primary_disabled;
+  }
+
+  &.hlc-btn-social-solid.hlc-btn-social-facebook {
+    @apply border border-[#1877F2] text-white bg-[#1877F2];
+    &:hover {
+      @apply border-[#0C63D4] bg-[#0C63D4];
+    }
+    &:active {
+      @apply border-[#1877F2] bg-[#1877F2];
+    }
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-secondary-400;
+    }
+  }
+  &.hlc-btn-social-outlined.hlc-btn-social-facebook,
+  &.hlc-btn-social-default.hlc-btn-social-facebook {
+    @apply border border-base-primary text-base-tertiary bg-surface-base-primary;
+    &:hover {
+      @apply border-base-primary_hover bg-surface-base-primary_hover;
+    }
+    &:active {
+      @apply border-base-primary bg-surface-base-primary;
+    }
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-primary-400;
+    }
+  }
+  &.hlc-btn-social-outlined.hlc-btn-social-facebook > .hlc-social-icon {
+    @apply text-[#1877F2];
+  }
+  &.hlc-btn-social-default.hlc-btn-social-facebook > .hlc-social-icon {
+    @apply text-base-primary_disabled;
+  }
+
+  &.hlc-btn-social-solid.hlc-btn-social-apple {
+    @apply border border-black text-white bg-black;
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-primary-400;
+    }
+  }
+  &.hlc-btn-social-outlined.hlc-btn-social-apple,
+  &.hlc-btn-social-default.hlc-btn-social-apple {
+    @apply border border-base-primary text-base-tertiary bg-surface-base-primary;
+    &:hover {
+      @apply border-base-primary_hover bg-surface-base-primary_hover;
+    }
+    &:active {
+      @apply border-base-primary bg-surface-base-primary;
+    }
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-primary-400;
+    }
+  }
+  &.hlc-btn-social-outlined.hlc-btn-social-apple > .hlc-social-icon {
+    @apply text-black;
+  }
+  &.hlc-btn-social-default.hlc-btn-social-apple > .hlc-social-icon {
+    @apply text-base-primary_disabled;
+  }
+
+  &.hlc-btn-social-solid.hlc-btn-social-twitter {
+    @apply border border-[#1DA1F2] text-white bg-[#1DA1F2];
+    &:hover {
+      @apply border-[#0C8BD9] bg-[#0C8BD9];
+    }
+    &:active {
+      @apply border-[#1DA1F2] bg-[#1DA1F2];
+    }
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-secondary-400;
+    }
+  }
+  &.hlc-btn-social-outlined.hlc-btn-social-twitter,
+  &.hlc-btn-social-default.hlc-btn-social-twitter {
+    @apply border border-base-primary text-base-tertiary bg-surface-base-primary;
+    &:hover {
+      @apply border-base-primary_hover bg-surface-base-primary_hover;
+    }
+    &:active {
+      @apply border-base-primary bg-surface-base-primary;
+    }
+    &:focus-visible {
+      @apply outline outline-2 outline-offset-2 outline-primary-400;
+    }
+  }
+  &.hlc-btn-social-outlined.hlc-btn-social-twitter > .hlc-social-icon {
+    @apply text-black;
+  }
+  &.hlc-btn-social-default.hlc-btn-social-twitter > .hlc-social-icon {
+    @apply text-base-primary_disabled;
+  }
+}
+
+.hlc-btn-social:has(.hlc-icon-loading) {
+  @apply cursor-wait;
+}

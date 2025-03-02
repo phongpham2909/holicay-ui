@@ -2,7 +2,7 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { Button, ButtonProps, Dot, Icon } from '@/components';
+import { Button, ButtonProps, ButtonSocial, Icon } from '@/components';
 import { ButtonColor, ButtonSize, ButtonType } from '@/components/Button/constants';
 
 const meta = {
@@ -74,6 +74,7 @@ const meta = {
   args: {
     size: 'md',
     type: 'primary',
+    color: 'primary',
     htmlType: 'button',
     onClick: fn(),
   },
@@ -166,6 +167,87 @@ export const Destructive: Story = {
     label: 'Button CTA',
     danger: true,
     disabled: false,
+  },
+};
+
+type ButtonSocialStory = StoryObj<typeof ButtonSocial>;
+
+export const Social: ButtonSocialStory = {
+  args: {
+    size: 'md',
+  },
+  render: ({ ...props }) => {
+    return (
+      <div className="p-6">
+        <div className="flex flex-row flex-wrap gap-6">
+          <div className="flex flex-col gap-y-lg">
+            <ButtonSocial {...props} type="google" variant="solid">
+              Sign in with Google
+            </ButtonSocial>
+            <ButtonSocial {...props} type="facebook" variant="solid">
+              Sign in with Facebook
+            </ButtonSocial>
+            <ButtonSocial {...props} type="apple" variant="solid">
+              Sign in with Apple
+            </ButtonSocial>
+            <ButtonSocial {...props} type="twitter" variant="solid">
+              Sign in with Twitter
+            </ButtonSocial>
+          </div>
+
+          <div className="flex flex-col gap-y-lg ">
+            <ButtonSocial {...props} type="google" variant="solid" />
+            <ButtonSocial {...props} type="facebook" variant="solid" />
+            <ButtonSocial {...props} type="apple" variant="solid" />
+            <ButtonSocial {...props} type="twitter" variant="solid" />
+          </div>
+
+          <div className="flex flex-col gap-y-lg">
+            <ButtonSocial {...props} type="google" variant="outlined">
+              Sign in with Google
+            </ButtonSocial>
+            <ButtonSocial {...props} type="facebook" variant="outlined">
+              Sign in with Facebook
+            </ButtonSocial>
+            <ButtonSocial {...props} type="apple" variant="outlined">
+              Sign in with Apple
+            </ButtonSocial>
+            <ButtonSocial {...props} type="twitter" variant="outlined">
+              Sign in with Twitter
+            </ButtonSocial>
+          </div>
+
+          <div className="flex flex-col gap-y-lg ">
+            <ButtonSocial {...props} type="google" variant="outlined" />
+            <ButtonSocial {...props} type="facebook" variant="outlined" />
+            <ButtonSocial {...props} type="apple" variant="outlined" />
+            <ButtonSocial {...props} type="twitter" variant="outlined" />
+          </div>
+
+          <div className="flex flex-col gap-y-lg">
+            <ButtonSocial {...props} type="google">
+              Sign in with Google
+            </ButtonSocial>
+            <ButtonSocial {...props} type="facebook">
+              Sign in with Facebook
+            </ButtonSocial>
+            <ButtonSocial {...props} type="apple">
+              Sign in with Apple
+            </ButtonSocial>
+            <ButtonSocial {...props} type="twitter">
+              Sign in with Twitter
+            </ButtonSocial>
+          </div>
+
+          <div className="flex flex-col gap-y-lg ">
+            <ButtonSocial {...props} type="google" />
+            <ButtonSocial {...props} type="facebook" />
+            <ButtonSocial {...props} type="apple" />
+            <ButtonSocial {...props} type="twitter" />
+          </div>
+        </div>
+      </div>
+    );
   },
 };
 
