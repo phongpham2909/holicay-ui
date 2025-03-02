@@ -52,8 +52,6 @@ export const AvatarBadge = ({
 
   const hasImageElement = React.isValidElement(src);
 
-  console.log(src);
-
   const avatarBadgeClasses = clsx(`${prefixCls}-avatar-badge-wrapper`, rootClassName, {
     [`${prefixCls}-avatar-badge-2xl`]: size === '2xl',
     [`${prefixCls}-avatar-badge-xl`]: size === 'xl',
