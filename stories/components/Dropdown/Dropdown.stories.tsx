@@ -2,7 +2,15 @@ import React from 'react';
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { Avatar, Button, Dropdown, DropdownMenuItem, DropdownProps, Icon } from '@/components';
+import {
+  Avatar,
+  Button,
+  ButtonSocial,
+  Dropdown,
+  DropdownMenuItem,
+  DropdownProps,
+  Icon,
+} from '@/components';
 import { images } from '@/variables/images';
 
 const items: DropdownMenuItem[] = [
@@ -51,9 +59,9 @@ const itemsPlaceholder: DropdownMenuItem[] = [
     key: '1',
     type: 'button',
     label: (
-      <Button fullWidth size="sm" type="secondary" color="gray">
+      <ButtonSocial fullWidth size="sm" type="google" variant="solid">
         Sign in with Google
-      </Button>
+      </ButtonSocial>
     ),
   },
   {
@@ -63,7 +71,7 @@ const itemsPlaceholder: DropdownMenuItem[] = [
     key: '2',
     type: 'button',
     label: (
-      <Button fullWidth type="primary">
+      <Button fullWidth size="sm" type="primary">
         Log In
       </Button>
     ),
@@ -72,7 +80,7 @@ const itemsPlaceholder: DropdownMenuItem[] = [
     key: '3',
     type: 'button',
     label: (
-      <Button fullWidth type="secondary" color="gray">
+      <Button fullWidth size="sm" type="secondary" color="gray">
         Register
       </Button>
     ),
@@ -107,7 +115,6 @@ export const Default: Story = {
       <div className="flex items-center gap-x-3xl">
         <Dropdown {...args}>
           <Button
-            size="md"
             type="secondary"
             color="gray"
             suffixIcon={<Icon name="icon-chevron-down" size="xl" />}
@@ -117,12 +124,7 @@ export const Default: Story = {
         </Dropdown>
 
         <Dropdown {...args}>
-          <Button
-            size="sm"
-            type="link"
-            color="gray"
-            icon={<Icon name="icon-dots-vertical" size="xl" />}
-          />
+          <Button type="link" color="gray" icon={<Icon name="icon-dots-vertical" size="xl" />} />
         </Dropdown>
 
         <Dropdown {...args}>
