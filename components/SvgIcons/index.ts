@@ -1,0 +1,11 @@
+export { default as Apple } from './Apple';
+export { default as Facebook } from './Facebook';
+export { default as GitHub } from './GitHub';
+export { default as Google } from './Google';
+export { default as Instagram } from './Instagram';
+export { default as Layers } from './Layers';
+export { default as LinkedIn } from './LinkedIn';
+export { default as Pinterest } from './Pinterest';
+export { default as Snapchat } from './Snapchat';
+export { default as XTwitter } from './XTwitter';
+export { default as YouTube } from './YouTube';

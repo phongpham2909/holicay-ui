@@ -1,0 +1,14 @@
+export { default as AngelList } from './AngelList';
+export { default as Apple } from './Apple';
+export { default as Discord } from './Discord';
+export { default as Dribbble } from './Dribbble';
+export { default as Facebook } from './Facebook';
+export { default as Figma } from './Figma';
+export { default as GitHub } from './GitHub';
+export { default as Google } from './Google';
+export { default as Layers } from './Layers';
+export { default as LinkedIn } from './LinkedIn';
+export { default as Tiktok } from './Tiktok';
+export { default as Twitter } from './Twitter';
+export { default as Whatsapp } from './Whatsapp';
+export { default as YouTube } from './YouTube';
