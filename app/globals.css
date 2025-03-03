@@ -1,3 +1,119 @@
+/* In your CSS */
+:root {
+  --font-primary: Inter, sans-serif;
+  --font-display: ClashGrotesk, serif;
+  --font-weight-custom: 520;
+
+  /* Rgb */
+  --color-rgb-base-black: 0 0 0;
+
+  /* Brand color - Your brand color defines the interface's feel and elicits emotion, used consistently across interactive elements. */
+  /* Primary */
+  --color-primary-50: #fef3f2;
+  --color-primary-100: #fee4e2;
+  --color-primary-200: #ffcec9;
+  --color-primary-300: #fdaca4;
+  --color-primary-400: #fa7b6f;
+  --color-primary-500: #f25142;
+  --color-primary-600: #df3323;
+  --color-primary-700: #bc2719;
+  --color-primary-800: #9b2419;
+  --color-primary-900: #81241b;
+  /* Secondary */
+  --color-secondary-50: #edfcfc;
+  --color-secondary-100: #d1f5f5;
+  --color-secondary-200: #a6e6ec;
+  --color-secondary-300: #6fbac8;
+  --color-secondary-400: #408092;
+  --color-secondary-500: #133a4a;
+  --color-secondary-600: #0d2d3f;
+  --color-secondary-700: #092235;
+  --color-secondary-800: #06182a;
+  --color-secondary-900: #031123;
+  /* Neutral color - Neutral color is foundational in UI design, used for text, form fields, backgrounds, and dividers. */
+  /* Base */
+  --color-base-black: 0 0 0;
+  --color-base-white: #ffffff;
+  --color-base-transparent: #ffffff00;
+  /* Gray */
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #e9eaeb;
+  --color-gray-300: #d5d7da;
+  --color-gray-400: #a4a7ae;
+  --color-gray-500: #717680;
+  --color-gray-600: #535862;
+  --color-gray-700: #414651;
+  --color-gray-800: #252b37;
+  --color-gray-900: #101828;
+  /* Semantic color - Highlight semantic states to provide visual feedback and warnings during interface use. */
+  /* Error */
+  --color-error-50: #fff1f2;
+  --color-error-100: #ffdfe1;
+  --color-error-200: #ffc5c8;
+  --color-error-300: #ff9da2;
+  --color-error-400: #ff646c;
+  --color-error-500: #ff2d38;
+  --color-error-600: #ed1520;
+  --color-error-700: #c80d17;
+  --color-error-800: #a50f17;
+  --color-error-900: #88141a;
+  /* Warning */
+  --color-warning-50: #fffdea;
+  --color-warning-100: #fff6c5;
+  --color-warning-200: #ffee85;
+  --color-warning-300: #ffdf46;
+  --color-warning-400: #ffcd1b;
+  --color-warning-500: #ffab00;
+  --color-warning-600: #e28200;
+  --color-warning-700: #bb5a02;
+  --color-warning-800: #984508;
+  --color-warning-900: #7c390b;
+  /* Success */
+  --color-success-50: #ecfdf2;
+  --color-success-100: #d1fadf;
+  --color-success-200: #a8f2c4;
+  --color-success-300: #6fe6a4;
+  --color-success-400: #35d280;
+  --color-success-500: #11b364;
+  --color-success-600: #069553;
+  --color-success-700: #057745;
+  --color-success-800: #075e38;
+  --color-success-900: #074d30;
+  /* Information */
+  --color-info-50: #eef7ff;
+  --color-info-100: #d9ecff;
+  --color-info-200: #bcdeff;
+  --color-info-300: #8ecaff;
+  --color-info-400: #59abff;
+  --color-info-500: #2883ff;
+  --color-info-600: #1b68f5;
+  --color-info-700: #1453e1;
+  --color-info-800: #1743b6;
+  --color-info-900: #193c8f;
+  /* Additional */
+  --color-additional-50: #f4f2ff;
+  --color-additional-100: #eae8ff;
+  --color-additional-200: #d7d4ff;
+  --color-additional-300: #bbb1ff;
+  --color-additional-400: #9985ff;
+  --color-additional-500: #744dff;
+  --color-additional-600: #6830f7;
+  --color-additional-700: #5a1ee3;
+  --color-additional-800: #4b18bf;
+  --color-additional-900: #3e169c;
+  /* Others */
+  --background: #ffffff;
+  --foreground: #171717;
+  --surface-overlay-w: #ffffff80;
+  --surface-overlay-w_hover: #ffffffa6;
+  --surface-overlay-w_active: #ffffffb2;
+  --surface-overlay-w_disabled: #ffffff4d;
+
+  --elevation-shadow_low: rgba(16, 24, 40, 0.06);
+  --elevation-shadow_high: rgba(16, 24, 40, 0.18);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +123,7 @@
   @import 'public/assets/css/fonts.css';
 }
 
-@layer base {
+@layer components {
   .display-custom {
     @apply font-display font-weight-custom;
   }
@@ -181,119 +297,4 @@
       max-height: var(--scrollbar-width-legacy);
     }
   }
-}
-
-:root {
-  --font-primary: Inter, sans-serif;
-  --font-display: ClashGrotesk, serif;
-  --font-weight-custom: 520;
-
-  /* Rgb */
-  --color-rgb-base-black: 0 0 0;
-
-  /* Brand color - Your brand color defines the interface's feel and elicits emotion, used consistently across interactive elements. */
-  /* Primary */
-  --color-primary-50: #fef3f2;
-  --color-primary-100: #fee4e2;
-  --color-primary-200: #ffcec9;
-  --color-primary-300: #fdaca4;
-  --color-primary-400: #fa7b6f;
-  --color-primary-500: #f25142;
-  --color-primary-600: #df3323;
-  --color-primary-700: #bc2719;
-  --color-primary-800: #9b2419;
-  --color-primary-900: #81241b;
-  /* Secondary */
-  --color-secondary-50: #edfcfc;
-  --color-secondary-100: #d1f5f5;
-  --color-secondary-200: #a6e6ec;
-  --color-secondary-300: #6fbac8;
-  --color-secondary-400: #408092;
-  --color-secondary-500: #133a4a;
-  --color-secondary-600: #0d2d3f;
-  --color-secondary-700: #092235;
-  --color-secondary-800: #06182a;
-  --color-secondary-900: #031123;
-  /* Neutral color - Neutral color is foundational in UI design, used for text, form fields, backgrounds, and dividers. */
-  /* Base */
-  --color-base-black: 0 0 0;
-  --color-base-white: #ffffff;
-  --color-base-transparent: #ffffff00;
-  /* Gray */
-  --color-gray-50: #fafafa;
-  --color-gray-100: #f5f5f5;
-  --color-gray-200: #e9eaeb;
-  --color-gray-300: #d5d7da;
-  --color-gray-400: #a4a7ae;
-  --color-gray-500: #717680;
-  --color-gray-600: #535862;
-  --color-gray-700: #414651;
-  --color-gray-800: #252b37;
-  --color-gray-900: #101828;
-  /* Semantic color - Highlight semantic states to provide visual feedback and warnings during interface use. */
-  /* Error */
-  --color-error-50: #fff1f2;
-  --color-error-100: #ffdfe1;
-  --color-error-200: #ffc5c8;
-  --color-error-300: #ff9da2;
-  --color-error-400: #ff646c;
-  --color-error-500: #ff2d38;
-  --color-error-600: #ed1520;
-  --color-error-700: #c80d17;
-  --color-error-800: #a50f17;
-  --color-error-900: #88141a;
-  /* Warning */
-  --color-warning-50: #fffdea;
-  --color-warning-100: #fff6c5;
-  --color-warning-200: #ffee85;
-  --color-warning-300: #ffdf46;
-  --color-warning-400: #ffcd1b;
-  --color-warning-500: #ffab00;
-  --color-warning-600: #e28200;
-  --color-warning-700: #bb5a02;
-  --color-warning-800: #984508;
-  --color-warning-900: #7c390b;
-  /* Success */
-  --color-success-50: #ecfdf2;
-  --color-success-100: #d1fadf;
-  --color-success-200: #a8f2c4;
-  --color-success-300: #6fe6a4;
-  --color-success-400: #35d280;
-  --color-success-500: #11b364;
-  --color-success-600: #069553;
-  --color-success-700: #057745;
-  --color-success-800: #075e38;
-  --color-success-900: #074d30;
-  /* Information */
-  --color-info-50: #eef7ff;
-  --color-info-100: #d9ecff;
-  --color-info-200: #bcdeff;
-  --color-info-300: #8ecaff;
-  --color-info-400: #59abff;
-  --color-info-500: #2883ff;
-  --color-info-600: #1b68f5;
-  --color-info-700: #1453e1;
-  --color-info-800: #1743b6;
-  --color-info-900: #193c8f;
-  /* Additional */
-  --color-additional-50: #f4f2ff;
-  --color-additional-100: #eae8ff;
-  --color-additional-200: #d7d4ff;
-  --color-additional-300: #bbb1ff;
-  --color-additional-400: #9985ff;
-  --color-additional-500: #744dff;
-  --color-additional-600: #6830f7;
-  --color-additional-700: #5a1ee3;
-  --color-additional-800: #4b18bf;
-  --color-additional-900: #3e169c;
-  /* Others */
-  --background: #ffffff;
-  --foreground: #171717;
-  --surface-overlay-w: #ffffff80;
-  --surface-overlay-w_hover: #ffffffa6;
-  --surface-overlay-w_active: #ffffffb2;
-  --surface-overlay-w_disabled: #ffffff4d;
-
-  --elevation-shadow_low: rgba(16, 24, 40, 0.06);
-  --elevation-shadow_high: rgba(16, 24, 40, 0.18);
 }
