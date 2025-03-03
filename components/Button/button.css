@@ -90,9 +90,7 @@
 
 /* Button Primary */
 .hlc-btn-primary {
-  @apply relative bg-fill-brand-red-primary border text-white shadow-xs;
-  background-clip: padding-box;
-  border-color: transparent;
+  @apply relative bg-fill-brand-red-primary border border-transparent bg-clip-padding text-white shadow-xs;
   &:hover {
     @apply bg-fill-brand-red-primary_hover;
   }
@@ -154,9 +152,7 @@
 /* Button Secondary */
 .hlc-btn-secondary.hlc-btn-color-primary {
   &:not(.hlc-btn-danger, .hlc-btn-disabled) {
-    @apply relative bg-fill-brand-green-primary text-white border shadow-xs;
-    background-clip: padding-box;
-    border-color: transparent;
+    @apply relative bg-fill-brand-green-primary text-white border border-transparent bg-clip-padding shadow-xs;
     &:hover {
       @apply bg-fill-brand-green-primary_hover;
     }

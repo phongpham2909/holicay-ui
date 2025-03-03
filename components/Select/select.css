@@ -49,8 +49,7 @@
 }
 
 .hlc-select > .hlc-select-selector .hlc-select-selection-search > input {
-  @apply cursor-auto caret-base-primary m-0 p-0 outline-none border-none appearance-none w-full h-full;
-  background: transparent;
+  @apply cursor-auto caret-base-primary m-0 p-0 outline-none border-none appearance-none w-full h-full bg-transparent;
 }
 
 .hlc-select > .hlc-select-selector > .hlc-select-selection-placeholder {

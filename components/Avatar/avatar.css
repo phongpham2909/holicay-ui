@@ -7,7 +7,7 @@
 }
 
 .hlc-avatar-image {
-  @apply bg-[transparent] border-none;
+  @apply bg-transparent border-none;
 }
 
 /* Avatar - With Image */
