@@ -1,4 +1,4 @@
-import { Meta, Canvas, ArgTypes, Controls } from '@storybook/blocks';
+import { Meta, Canvas, ArgTypes, ArgsTable, Controls } from '@storybook/blocks';
 import * as SelectStories from './Select.stories';
 
 <Meta of={SelectStories} />
@@ -27,12 +27,12 @@ import { Select } from '@holicay/design-system';
 
 ### Select
 
-<Controls of={SelectStories.SelectProps} />
+<ArgTypes of={SelectStories.SelectProps} />
 
 ### SingleSelect
 
-<Controls of={SelectStories.SingleSelectProps} />
+<ArgTypes of={SelectStories.SingleSelectProps} />
 
 ### MultiSelect
 
-<Controls of={SelectStories.MultipleSelectProps} />
+<ArgTypes of={SelectStories.MultipleSelectProps} />

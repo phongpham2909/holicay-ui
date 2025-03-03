@@ -202,6 +202,7 @@ export const SelectProps = {
 type SingleSelectStory = StoryObj<typeof SingleSelect>;
 
 export const Base: SingleSelectStory = {
+  tags: ['!dev'],
   name: 'Single Select',
   args: {
     options,
@@ -210,19 +211,49 @@ export const Base: SingleSelectStory = {
   },
 };
 
-export const SingleSelectSearchInDropdown: SingleSelectStory = {
-  name: 'Single Select - Search In Dropdown',
+export const SingleSelectBase: SingleSelectStory = {
+  name: 'Single Select',
   args: {
     options,
-    disabled: false,
-    readOnly: false,
-    dropdownShowSearch: true,
-    placeholder: 'Select item',
+    showSearch: true,
+    placeholder: 'Search to Select',
+  },
+  render: ({ ...props }) => {
+    const [value, setValue] = React.useState<SingleSelectValue>('option1');
+
+    return (
+      <div className="space-y-4">
+        <SingleSelect
+          {...props}
+          options={options}
+          value={value}
+          onChange={(val) => setValue(val as SingleSelectValue)}
+        />
+        <SingleSelect
+          {...props}
+          options={withIconOptions}
+          value={value}
+          onChange={(val) => setValue(val as SingleSelectValue)}
+        />
+        <SingleSelect
+          {...props}
+          options={withAvatarOptions}
+          value={value}
+          onChange={(val) => setValue(val as SingleSelectValue)}
+        />
+        <SingleSelect
+          {...props}
+          options={withDotOptions}
+          value={value}
+          onChange={(val) => setValue(val as SingleSelectValue)}
+        />
+      </div>
+    );
   },
 };
 
-export const SingleSelectSearchInDropdownWithPrefixIcon: SingleSelectStory = {
-  name: 'Single Select - Search In Dropdown - With PrefixIcon',
+export const SingleSelectSearchInDropdown: SingleSelectStory = {
+  name: 'Single Select - Search In Dropdown',
   args: {
     disabled: false,
     readOnly: false,
@@ -230,10 +261,16 @@ export const SingleSelectSearchInDropdownWithPrefixIcon: SingleSelectStory = {
     placeholder: 'Select item',
   },
   render: ({ ...props }) => {
-    const [value, setValue] = React.useState<SingleSelectValue>('option1');
+    const [value, setValue] = React.useState<SingleSelectValue>('option2');
 
     return (
       <div className="space-y-4">
+        <SingleSelect
+          {...props}
+          options={options}
+          value={value}
+          onChange={(val) => setValue(val as SingleSelectValue)}
+        />
         <SingleSelect
           {...props}
           options={withIconOptions}
@@ -297,10 +334,11 @@ export const MultipleSelect: MultipleSelectStory = {
     placeholder: 'Search to Select items',
   },
   render: ({ ...props }) => {
-    const [values, setValues] = React.useState<MultiSelectValue>([]);
+    const [values, setValues] = React.useState<MultiSelectValue>(['option3', 'option4']);
 
     return (
       <div className="space-y-4">
+        <MultiSelect {...props} options={options} value={values} onChange={setValues} />
         <MultiSelect {...props} options={withIconOptions} value={values} onChange={setValues} />
         <MultiSelect {...props} options={withAvatarOptions} value={values} onChange={setValues} />
         <MultiSelect {...props} options={withDotOptions} value={values} onChange={setValues} />
@@ -320,9 +358,16 @@ export const MultipleSelectSearchInDropdown: MultipleSelectStory = {
     placeholder: 'Select items',
   },
   render: ({ ...props }) => {
-    const [values, setValues] = React.useState<MultiSelectValue>([]);
+    const [values, setValues] = React.useState<MultiSelectValue>(['option5', 'option6']);
 
-    return <MultiSelect {...props} value={values} onChange={setValues} />;
+    return (
+      <div className="space-y-4">
+        <MultiSelect {...props} options={options} value={values} onChange={setValues} />
+        <MultiSelect {...props} options={withIconOptions} value={values} onChange={setValues} />
+        <MultiSelect {...props} options={withAvatarOptions} value={values} onChange={setValues} />
+        <MultiSelect {...props} options={withDotOptions} value={values} onChange={setValues} />
+      </div>
+    );
   },
 };
 
