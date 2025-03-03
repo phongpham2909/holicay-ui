@@ -1,5 +1,5 @@
 .hlc-badge {
-  @apply cursor-default inline-flex items-center font-primary text-base-secondary border border-base-primary bg-surface-base-primary align-bottom transition-all duration-200 ease-out;
+  @apply cursor-default inline-flex items-center font-primary text-base-secondary border-[1.5px] border-base-primary bg-surface-base-primary align-bottom transition-all duration-200 ease-out;
 }
 
 .hlc-badge.hlc-badge-selected {
@@ -11,13 +11,13 @@
 }
 
 .hlc-badge-sm {
-  @apply text-xs font-medium px-sm h-3xl;
+  @apply text-xs font-medium px-[5px] h-[18px];
 }
 .hlc-badge-md {
-  @apply text-sm font-medium px-md h-3xl;
+  @apply text-sm font-medium px-[7px] h-[22px];
 }
 .hlc-badge-lg {
-  @apply text-sm font-medium px-lg h-4xl;
+  @apply text-sm font-medium px-[9px] h-[24px];
 }
 
 .hlc-badge-rounded {
@@ -34,12 +34,23 @@
   @apply inline-flex transition-all duration-200 ease-out;
 }
 
-.hlc-badge > .hlc-badge-prefix-icon,
+.hlc-badge.hlc-badge-sm > .hlc-badge-prefix-icon {
+  @apply me-xs;
+  & > .hlc-avatar {
+    @apply w-3 h-3;
+  }
+}
 .hlc-badge.hlc-badge-md > .hlc-badge-prefix-icon {
   @apply me-xs;
+  & > .hlc-avatar {
+    @apply w-4 h-4;
+  }
 }
 .hlc-badge.hlc-badge-lg > .hlc-badge-prefix-icon {
   @apply me-sm;
+  & > .hlc-avatar {
+    @apply w-4 h-4;
+  }
 }
 
 .hlc-badge > .hlc-badge-suffix-icon,
@@ -101,15 +112,15 @@
 }
 
 .hlc-badge.hlc-badge-sm:has(.hlc-badge-prefix-icon):not(.hlc-badge-close-icon) {
-  @apply px-xs;
+  @apply pl-[3px] pr-[7px];
 }
 
 .hlc-badge.hlc-badge-md:has(.hlc-badge-prefix-icon):not(.hlc-badge-close-icon) {
-  @apply px-[5px];
+  @apply pl-xxs pr-[7px];
 }
 
 .hlc-badge.hlc-badge-lg:has(.hlc-badge-prefix-icon):not(.hlc-badge-close-icon) {
-  @apply px-md;
+  @apply pl-[3px] pr-[9px];
 }
 
 .hlc-badge.hlc-badge-sm:has(.hlc-badge-prefix-icon):has(.hlc-badge-close-icon) {

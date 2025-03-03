@@ -14,9 +14,9 @@ export type Option = {
   value: string;
   subLabel?: string;
   avatar?: string;
-  icon?: string;
-  dot?: string | boolean;
   disabled?: boolean;
+  icon?: React.ReactNode;
+  dot?: React.ReactNode;
   suffix?: React.ReactNode;
   prefix?: React.ReactNode;
 };

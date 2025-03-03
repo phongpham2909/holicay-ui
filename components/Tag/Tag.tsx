@@ -4,6 +4,7 @@ import { PREFIX_CLASS } from '@/variables/app';
 import { TAG_SIZES, TAG_TYPES, TagSize, TagType } from './constants';
 
 import './tag.css';
+import { Icon } from '../Icon';
 
 type PropsWithOptionalChildren<P = unknown> = P & { children?: React.ReactNode };
 
@@ -53,7 +54,9 @@ export const Tag = ({
 
   const withCloseIcon = (closable || !!closeIcon) && (
     <span className={`${prefixCls}-tag-close-icon`} onClick={onClose}>
-      {closeIcon || <i className="icon icon-x-close" />}
+      {closeIcon || (
+        <Icon name="icon-x-close" size={size === 'sm' ? 'xxs' : size === 'md' ? 'xs' : 'sm'} />
+      )}
     </span>
   );
 

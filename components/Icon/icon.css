@@ -1,3 +1,9 @@
+.icon.hlc-icon-xxs {
+  @apply text-[10px];
+}
+.icon.hlc-icon-xs {
+  @apply text-[12px];
+}
 .icon.hlc-icon-sm {
   @apply text-[14px];
 }

@@ -134,7 +134,7 @@
 }
 
 .hlc-select-dropdown {
-  @apply mt-1.5 border border-base-secondary bg-surface-base-primary rounded-md shadow-md overflow-y-auto overflow-x-hidden max-h-80 transition-all;
+  @apply mt-1.5 border border-base-secondary bg-surface-base-primary rounded-md shadow-md overflow-y-auto overflow-x-hidden max-h-80 transition-all duration-200 ease-out;
 }
 .hlc-select-dropdown.hlc-select-dropdown-show-search {
   @apply overflow-y-hidden;

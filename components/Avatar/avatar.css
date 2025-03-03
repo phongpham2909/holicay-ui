@@ -105,3 +105,16 @@
 .hlc-avatar-xxs:not(.hlc-avatar-icon) {
   @apply text-xs font-medium;
 }
+
+/* Avatar - Size Extra Extra Extra Small */
+.hlc-avatar-2xs {
+  @apply size-3;
+}
+
+.hlc-avatar-2xs.hlc-avatar-icon {
+  @apply text-[12px];
+}
+
+.hlc-avatar-2xs:not(.hlc-avatar-icon) {
+  @apply text-xs font-medium;
+}

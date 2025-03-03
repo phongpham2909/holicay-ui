@@ -18,7 +18,7 @@ export interface IconProps {
 
 export const Icon = ({
   name = DEFAULT_NAME,
-  size = ICON_SIZES[1],
+  size = ICON_SIZES[3],
   prefixCls = PREFIX_CLASS,
   className,
   ...rest

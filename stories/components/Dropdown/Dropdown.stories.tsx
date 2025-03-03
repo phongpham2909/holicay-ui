@@ -87,6 +87,40 @@ const itemsPlaceholder: DropdownMenuItem[] = [
   },
 ];
 
+const checkboxItems: DropdownMenuItem[] = [
+  {
+    key: 'Planning',
+    label: 'Planning',
+    type: 'checkbox',
+  },
+  {
+    key: 'Published',
+    label: 'Published',
+    type: 'checkbox',
+    disabled: true,
+  },
+  {
+    key: 'Saved',
+    label: 'Saved',
+    type: 'checkbox',
+  },
+];
+
+const radioItems: DropdownMenuItem[] = [
+  {
+    key: 'Board View',
+    label: 'Board View',
+  },
+  {
+    key: 'Calendar',
+    label: 'Calendar',
+  },
+  {
+    key: 'Map',
+    label: 'Map',
+  },
+];
+
 const meta = {
   title: 'Components/Dropdown',
   component: Dropdown,
@@ -145,40 +179,45 @@ export const Default: Story = {
 export const Checkbox: Story = {
   args: {
     menu: {
-      items: items,
+      items: checkboxItems,
+      className: 'w-[240px]',
     },
   },
   render: (args) => {
     return (
-      <div className="flex items-center gap-x-3xl">
-        <Dropdown {...args}>
-          <Button
-            size="md"
-            type="secondary"
-            color="gray"
-            suffixIcon={<Icon name="icon-chevron-down" size="xl" />}
-          >
-            Account
-          </Button>
-        </Dropdown>
+      <Dropdown {...args}>
+        <Button
+          size="md"
+          type="secondary"
+          color="gray"
+          suffixIcon={<Icon name="icon-chevron-down" size="xl" />}
+        >
+          Status
+        </Button>
+      </Dropdown>
+    );
+  },
+};
 
-        <Dropdown {...args}>
-          <Button
-            size="sm"
-            type="link"
-            color="gray"
-            icon={<Icon name="icon-dots-vertical" size="xl" />}
-          />
-        </Dropdown>
-
-        <Dropdown {...args}>
-          <Avatar src={images.HLC_AVATAR_0} />
-        </Dropdown>
-
-        <Dropdown {...args}>
-          <Avatar icon={<Icon name="icon-user-01" size="2xl" />} />
-        </Dropdown>
-      </div>
+export const Radio: Story = {
+  args: {
+    menu: {
+      items: radioItems,
+      className: 'w-[240px]',
+    },
+  },
+  render: (args) => {
+    return (
+      <Dropdown {...args}>
+        <Button
+          size="md"
+          type="secondary"
+          color="gray"
+          suffixIcon={<Icon name="icon-chevron-down" size="xl" />}
+        >
+          Views
+        </Button>
+      </Dropdown>
     );
   },
 };

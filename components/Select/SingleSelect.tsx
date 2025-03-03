@@ -2,10 +2,15 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import { isEmpty } from 'lodash';
+import { motion, AnimatePresence } from 'framer-motion';
 import { PREFIX_CLASS } from '@/variables/app';
 
 import { Option, RawValue } from './Select';
 import { SelectSize, SelectStatus, SIZE_MD } from './constants';
+import { Avatar } from '../Avatar';
+import { Dot } from '../Dot';
+import { DotColor } from '../Dot/constants';
+import { Icon } from '../Icon';
 
 export type SingleSelectValue = RawValue | null;
 
@@ -218,6 +223,28 @@ export const SingleSelect = ({
     resetStates();
   };
 
+  const renderPrefixIcon = (item?: Option) => {
+    if (!item) return;
+
+    if (!!item.avatar) {
+      if (typeof item.avatar === 'string') return <Avatar size="xs" src={item.avatar} />;
+      return item.avatar;
+    }
+
+    if (!!item.dot) {
+      if (typeof item.dot === 'string') return <Dot color={item.dot as DotColor} />;
+      return item.dot;
+    }
+
+    if (!!item.icon) {
+      if (typeof item.icon === 'string')
+        return <Icon name={item.icon} size="xl" className="text-base-subtle" />;
+      return item.icon;
+    }
+
+    return null;
+  };
+
   const itemSelected = useMemo(() => {
     return options.find((o) => o.value === selectedValue);
   }, [options, selectedValue]);
@@ -252,16 +279,25 @@ export const SingleSelect = ({
         invisible: !!valueSearch && !dropdownShowSearch,
       })}
     >
-      {itemSelected?.subLabel ? (
-        <span className={clsx(`${prefixCls}-select-selection-item-content`, 'flex gap-x-md')}>
-          <span>{itemSelected?.label}</span>
+      <span
+        className={clsx(`${prefixCls}-select-selection-item-content`, {
+          'flex items-center gap-x-md':
+            !!itemSelected.icon ||
+            !!itemSelected.avatar ||
+            !!itemSelected.dot ||
+            !!itemSelected?.subLabel,
+        })}
+      >
+        {renderPrefixIcon(itemSelected)}
+
+        <span>{itemSelected?.label}</span>
+
+        {itemSelected?.subLabel && (
           <span className={`${prefixCls}-select-selection-item-content-sub`}>
             {itemSelected?.subLabel}
           </span>
-        </span>
-      ) : (
-        itemSelected?.label
-      )}
+        )}
+      </span>
     </span>
   );
 
@@ -351,78 +387,91 @@ export const SingleSelect = ({
         {renderHint}
       </div>
 
-      {isOpen &&
-        createPortal(
-          <div
-            ref={dropdownRef}
-            style={dropdownStyle}
-            className={clsx(`${prefixCls}-select-dropdown`, 'scroller', {
-              [`${prefixCls}-select-dropdown-show-search`]: showSearchInDropdown,
-              [dropdownClassName as string]: !!dropdownClassName,
-            })}
-          >
-            {showSearchInDropdown && (
-              <div className={clsx(`${prefixCls}-select-dropdown-search-box`)}>
-                <span className={`${prefixCls}-select-dropdown-search-icon`}>
-                  <i className="icon icon-search-md" />
-                </span>
-                <input
-                  type="text"
-                  autoComplete="off"
-                  placeholder={dropdownSearchPlaceholder}
-                  value={valueSearch}
-                  onChange={(e) => handleSearch(e.target.value)}
-                  className={`${prefixCls}-select-dropdown-search-input`}
-                />
-              </div>
-            )}
-            <ul className={clsx(`${prefixCls}-select-menu`, 'scroller')}>
-              {optionsFromProp.map((option, optionIndex) => (
-                <li
-                  key={option.value}
-                  title={option.label}
-                  ref={(el) => {
-                    optionRefs.current[optionIndex] = el;
-                  }}
-                  className={clsx(`${prefixCls}-select-menu-item`, {
-                    [`${prefixCls}-select-menu-item-selected`]: selectedValue === option.value,
-                    [`${prefixCls}-select-menu-item-disabled`]: option?.disabled,
-                    [`${prefixCls}-select-menu-item-highlighted`]: highlightedIndex === optionIndex,
-                  })}
-                  onMouseEnter={() => setHighlightedIndex(optionIndex)}
-                  onMouseLeave={() => setHighlightedIndex(-1)}
-                  onClick={() => !option?.disabled && handleSelect(option.value)}
-                >
-                  {!!option?.subLabel ? (
-                    <div className={clsx(`${prefixCls}-select-menu-item-content`, 'flex gap-x-md')}>
-                      <span>{option.label}</span>
-                      <span className={`${prefixCls}-select-menu-item-content-sub`}>
-                        {option?.subLabel}
-                      </span>
-                    </div>
-                  ) : (
-                    <div className={`${prefixCls}-select-menu-item-content`}>{option.label}</div>
-                  )}
-                  {selectedValue === option.value && (
-                    <span className={`${prefixCls}-select-menu-item-state`}>
-                      <i className="icon icon-check" />
-                    </span>
-                  )}
-                </li>
-              ))}
-
-              {isEmpty(optionsFromProp) && (
-                <li
-                  key={`${prefixCls}-select-menu-empty-state`}
-                  className={clsx(`${prefixCls}-select-menu-empty-state`)}
-                >
-                  <p>No results</p>
-                </li>
+      {createPortal(
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              ref={dropdownRef}
+              style={dropdownStyle}
+              className={clsx(`${prefixCls}-select-dropdown`, 'scroller', dropdownClassName, {
+                [`${prefixCls}-select-dropdown-show-search`]: showSearchInDropdown,
+              })}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+              exit={{ opacity: 0, y: -8 }}
+            >
+              {showSearchInDropdown && (
+                <div className={clsx(`${prefixCls}-select-dropdown-search-box`)}>
+                  <span className={`${prefixCls}-select-dropdown-search-icon`}>
+                    <i className="icon icon-search-md" />
+                  </span>
+                  <input
+                    type="text"
+                    autoComplete="off"
+                    placeholder={dropdownSearchPlaceholder}
+                    value={valueSearch}
+                    onChange={(e) => handleSearch(e.target.value)}
+                    className={`${prefixCls}-select-dropdown-search-input`}
+                  />
+                </div>
               )}
-            </ul>
-          </div>,
-          document.body
-        )}
+              <ul className={clsx(`${prefixCls}-select-menu`, 'scroller')}>
+                {optionsFromProp.map((option, optionIndex) => (
+                  <li
+                    key={option.value}
+                    title={option.label}
+                    ref={(el) => {
+                      optionRefs.current[optionIndex] = el;
+                    }}
+                    className={clsx(`${prefixCls}-select-menu-item`, {
+                      [`${prefixCls}-select-menu-item-selected`]: selectedValue === option.value,
+                      [`${prefixCls}-select-menu-item-disabled`]: option?.disabled,
+                      [`${prefixCls}-select-menu-item-highlighted`]:
+                        highlightedIndex === optionIndex,
+                    })}
+                    onMouseEnter={() => setHighlightedIndex(optionIndex)}
+                    onMouseLeave={() => setHighlightedIndex(-1)}
+                    onClick={() => !option?.disabled && handleSelect(option.value)}
+                  >
+                    <div
+                      className={clsx(`${prefixCls}-select-menu-item-content`, {
+                        'flex items-center gap-x-md':
+                          !!option.icon || !!option.avatar || !!option.dot || !!option?.subLabel,
+                      })}
+                    >
+                      {renderPrefixIcon(option)}
+
+                      <span>{option.label}</span>
+
+                      {!!option?.subLabel && (
+                        <span className={`${prefixCls}-select-menu-item-content-sub`}>
+                          {option?.subLabel}
+                        </span>
+                      )}
+                    </div>
+
+                    {selectedValue === option.value && (
+                      <span className={`${prefixCls}-select-menu-item-state`}>
+                        <i className="icon icon-check" />
+                      </span>
+                    )}
+                  </li>
+                ))}
+
+                {isEmpty(optionsFromProp) && (
+                  <li
+                    key={`${prefixCls}-select-menu-empty-state`}
+                    className={clsx(`${prefixCls}-select-menu-empty-state`)}
+                  >
+                    <p>No results</p>
+                  </li>
+                )}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 };

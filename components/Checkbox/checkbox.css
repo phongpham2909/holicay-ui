@@ -7,7 +7,7 @@
 }
 
 .hlc-checkbox {
-  @apply relative rounded-xs;
+  @apply relative rounded-xxs;
 }
 
 .hlc-checkbox-input {
@@ -15,7 +15,7 @@
 }
 
 .hlc-checkbox .hlc-checkbox-inner {
-  @apply block border border-base-primary border-separate rounded-xs bg-white transition-all duration-300;
+  @apply block border border-base-primary border-separate rounded-xxs bg-white transition-all duration-300;
 }
 
 .hlc-checkbox .hlc-checkbox-inner .hlc-checkbox-icon {

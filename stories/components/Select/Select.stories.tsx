@@ -1,7 +1,16 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { MultiSelect, SingleSelect, Select, MultiSelectValue, Option } from '@/components';
+import {
+  MultiSelect,
+  SingleSelect,
+  Select,
+  MultiSelectValue,
+  Option,
+  Dot,
+  SingleSelectValue,
+} from '@/components';
+import { images } from '@/variables/images';
 
 const options: Option[] = [
   { label: 'Holicay Team', subLabel: '@holicay', value: 'option1' },
@@ -14,6 +23,63 @@ const options: Option[] = [
   { label: 'Holicay Team 8', value: 'option8' },
   { label: 'Holicay', value: 'option9' },
   { label: 'Holicay', value: 'option10' },
+];
+
+const withAvatarOptions: Option[] = [
+  { label: 'Holicay Team', subLabel: '@holicay', avatar: images.HLC_AVATAR_0, value: 'option1' },
+  {
+    label: 'Holicay Team 2',
+    subLabel: '@holicay',
+    avatar: images.HLC_AVATAR_1,
+    value: 'option2',
+    disabled: true,
+  },
+  { label: 'Holicay Team 3', value: 'option3', avatar: images.HLC_AVATAR_1, disabled: false },
+  { label: 'Holicay Team 4', value: 'option4', avatar: images.HLC_AVATAR_2 },
+  { label: 'Holicay Team 5', value: 'option5', avatar: images.HLC_AVATAR_3 },
+  { label: 'Holicay Team 6', value: 'option6', avatar: images.HLC_AVATAR_4 },
+  { label: 'Holicay Team 7', value: 'option7', avatar: images.HLC_AVATAR_5 },
+  { label: 'Holicay Team 8', value: 'option8', avatar: images.HLC_AVATAR_6 },
+  { label: 'Holicay', value: 'option9', avatar: images.HLC_AVATAR_7 },
+  { label: 'Holicay', value: 'option10', avatar: images.HLC_AVATAR_8 },
+];
+
+const withDotOptions: Option[] = [
+  { label: 'Holicay Team', subLabel: '@holicay', dot: 'success', value: 'option1' },
+  {
+    label: 'Holicay Team 2',
+    subLabel: '@holicay',
+    dot: 'success',
+    value: 'option2',
+    disabled: true,
+  },
+  { label: 'Holicay Team 3', value: 'option3', dot: 'success', disabled: false },
+  { label: 'Holicay Team 4', value: 'option4', dot: 'success' },
+  { label: 'Holicay Team 5', value: 'option5', dot: 'success' },
+  { label: 'Holicay Team 6', value: 'option6', dot: 'success' },
+  { label: 'Holicay Team 7', value: 'option7', dot: 'success' },
+  { label: 'Holicay Team 8', value: 'option8', dot: 'success' },
+  { label: 'Holicay', value: 'option9', dot: 'success' },
+  { label: 'Holicay', value: 'option10', dot: 'success' },
+];
+
+const withIconOptions: Option[] = [
+  { label: 'Holicay Team', subLabel: '@holicay', icon: 'icon-user-01', value: 'option1' },
+  {
+    label: 'Holicay Team 2',
+    subLabel: '@holicay',
+    icon: 'icon-user-01',
+    value: 'option2',
+    disabled: true,
+  },
+  { label: 'Holicay Team 3', value: 'option3', icon: 'icon-user-01', disabled: false },
+  { label: 'Holicay Team 4', value: 'option4', icon: 'icon-user-01' },
+  { label: 'Holicay Team 5', value: 'option5', icon: 'icon-user-01' },
+  { label: 'Holicay Team 6', value: 'option6', icon: 'icon-user-01' },
+  { label: 'Holicay Team 7', value: 'option7', icon: 'icon-user-01' },
+  { label: 'Holicay Team 8', value: 'option8', icon: 'icon-user-01' },
+  { label: 'Holicay', value: 'option9', icon: 'icon-user-01' },
+  { label: 'Holicay', value: 'option10', icon: 'icon-user-01' },
 ];
 
 const meta: Meta<typeof Select> = {
@@ -155,6 +221,42 @@ export const SingleSelectSearchInDropdown: SingleSelectStory = {
   },
 };
 
+export const SingleSelectSearchInDropdownWithPrefixIcon: SingleSelectStory = {
+  name: 'Single Select - Search In Dropdown - With PrefixIcon',
+  args: {
+    disabled: false,
+    readOnly: false,
+    dropdownShowSearch: true,
+    placeholder: 'Select item',
+  },
+  render: ({ ...props }) => {
+    const [value, setValue] = React.useState<SingleSelectValue>('option1');
+
+    return (
+      <div className="space-y-4">
+        <SingleSelect
+          {...props}
+          options={withIconOptions}
+          value={value}
+          onChange={(val) => setValue(val as SingleSelectValue)}
+        />
+        <SingleSelect
+          {...props}
+          options={withAvatarOptions}
+          value={value}
+          onChange={(val) => setValue(val as SingleSelectValue)}
+        />
+        <SingleSelect
+          {...props}
+          options={withDotOptions}
+          value={value}
+          onChange={(val) => setValue(val as SingleSelectValue)}
+        />
+      </div>
+    );
+  },
+};
+
 export const SingleSelectProps = {
   tags: ['!dev'],
   argTypes: {
@@ -188,7 +290,6 @@ type MultipleSelectStory = StoryObj<typeof MultiSelect>;
 
 export const MultipleSelect: MultipleSelectStory = {
   args: {
-    options,
     disabled: false,
     readOnly: false,
     showSearch: true,
@@ -198,7 +299,13 @@ export const MultipleSelect: MultipleSelectStory = {
   render: ({ ...props }) => {
     const [values, setValues] = React.useState<MultiSelectValue>([]);
 
-    return <MultiSelect {...props} value={values} onChange={setValues} />;
+    return (
+      <div className="space-y-4">
+        <MultiSelect {...props} options={withIconOptions} value={values} onChange={setValues} />
+        <MultiSelect {...props} options={withAvatarOptions} value={values} onChange={setValues} />
+        <MultiSelect {...props} options={withDotOptions} value={values} onChange={setValues} />
+      </div>
+    );
   },
 };
 

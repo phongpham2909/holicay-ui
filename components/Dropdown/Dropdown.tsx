@@ -4,8 +4,10 @@ import clsx from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PREFIX_CLASS } from '@/variables/app';
 import { cloneElement } from '@/utilities';
+import { Checkbox } from '../Checkbox';
 
 import './dropdown.css';
+import { Icon } from '../Icon';
 
 type PropsWithChildren<P> = P & { children?: React.ReactNode };
 
@@ -13,7 +15,7 @@ export interface DropdownMenuItem {
   key?: string;
   label?: React.ReactNode;
   disabled?: boolean;
-  type?: 'header' | 'footer' | 'divider' | 'button';
+  type?: 'header' | 'footer' | 'divider' | 'button' | 'checkbox';
   icon?: React.ReactNode;
 }
 
@@ -26,6 +28,9 @@ export type MenuClickProps = {
 export interface DropdownMenu {
   items?: DropdownMenuItem[];
   onClick?: ({ key, item, domEvent }: MenuClickProps) => void;
+  activeKey?: string;
+  activeKeys?: string[];
+  onMultipleSelect?: (keys: string[]) => void;
   className?: string;
   itemsClassName?: string;
 }
@@ -41,6 +46,7 @@ export interface DropdownProps {
 
 export const Dropdown = ({
   menu = {
+    activeKeys: [],
     items: [],
   },
   disabled = false,
@@ -56,6 +62,8 @@ export const Dropdown = ({
   // * States
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [dropdownStyle, setDropdownStyle] = useState({});
+  const [selectedKey, setSelectedKey] = useState(menu.activeKey);
+  const [selectedKeys, setSelectedKeys] = useState(menu.activeKeys || []);
 
   const resetStates = () => {
     setIsOpen(false);
@@ -78,26 +86,26 @@ export const Dropdown = ({
         let top = rect.bottom + window.scrollY;
         let left = rect.left + window.scrollX;
 
-        const offsetWidth = dropdownRef.current ? dropdownRef.current.offsetWidth : 0;
-        const offsetHeight = dropdownRef.current ? dropdownRef.current.offsetHeight : 0;
+        const dropdownWidth = dropdownRef.current?.offsetWidth || rect.width;
+        const dropdownHeight = dropdownRef.current?.offsetHeight || 0;
 
         switch (placement) {
           case 'bottomLeft':
             left = rect.left + window.scrollX;
             break;
           case 'bottomRight':
-            left = rect.right + window.scrollX - offsetWidth;
+            left = rect.right + window.scrollX - dropdownWidth;
             break;
           case 'top':
-            top = rect.top + window.scrollY - offsetHeight;
+            top = rect.top + window.scrollY - dropdownHeight;
             break;
           case 'topLeft':
-            top = rect.top + window.scrollY - offsetHeight;
+            top = rect.top + window.scrollY - dropdownHeight;
             left = rect.left + window.scrollX;
             break;
           case 'topRight':
-            top = rect.top + window.scrollY - offsetHeight;
-            left = rect.right + window.scrollX - offsetWidth;
+            top = rect.top + window.scrollY - dropdownHeight;
+            left = rect.right + window.scrollX - dropdownWidth;
             break;
         }
 
@@ -127,8 +135,18 @@ export const Dropdown = ({
   };
 
   const handleMenuClick = ({ key, item, domEvent }: MenuClickProps) => {
+    setSelectedKey(key);
     menu?.onClick?.({ key, item, domEvent });
     resetStates();
+  };
+
+  const handleMultipleSelect = (val: string) => {
+    const newSelectedValues = selectedKeys.includes(val)
+      ? selectedKeys.filter((v) => v !== val)
+      : [...selectedKeys, val];
+
+    setSelectedKeys(newSelectedValues);
+    menu?.onMultipleSelect?.(newSelectedValues);
   };
 
   if (!children || !React.isValidElement(children)) return null;
@@ -169,10 +187,9 @@ export const Dropdown = ({
               ref={dropdownRef}
               style={dropdownStyle}
               className={clsx(`${prefixCls}-dropdown`, 'scroller', dropdownClassName)}
-              initial={{ opacity: 0, scale: 0.95, y: -8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: -8 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+              exit={{ opacity: 0, y: -8 }}
             >
               <div className={clsx(`${prefixCls}-dropdown-menu`, menu?.className)}>
                 {menuHeaderItems.map((item, headerItemIndex) => (
@@ -199,10 +216,13 @@ export const Dropdown = ({
                         return (
                           <li
                             key={item.key || itemIndex}
-                            className={clsx(`${prefixCls}-dropdown-menu-item`, {
-                              [`${prefixCls}-dropdown-menu-item-button`]: item.type === 'button',
-                              [`${prefixCls}-dropdown-menu-item-disabled`]: item.disabled,
-                            })}
+                            className={clsx(
+                              `${prefixCls}-dropdown-menu-item`,
+                              `${prefixCls}-dropdown-menu-item-${item.type}`,
+                              {
+                                [`${prefixCls}-dropdown-menu-item-disabled`]: item.disabled,
+                              }
+                            )}
                           >
                             {cloneElement(item.label, {
                               onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -218,27 +238,66 @@ export const Dropdown = ({
                           </li>
                         );
                       }
+                      if (item.type === 'checkbox') {
+                        return (
+                          <li
+                            key={item.key || itemIndex}
+                            className={clsx(
+                              `${prefixCls}-dropdown-menu-item`,
+                              `${prefixCls}-dropdown-menu-item-${item.type}`,
+                              {
+                                [`${prefixCls}-dropdown-menu-item-disabled`]: item.disabled,
+                              }
+                            )}
+                          >
+                            <div className={clsx(`${prefixCls}-dropdown-menu-item-content`)}>
+                              <Checkbox
+                                size="sm"
+                                value={item.key}
+                                checked={selectedKeys.includes(item.key || '')}
+                                disabled={item.disabled}
+                                onChange={(e) => handleMultipleSelect(e.target.value)}
+                                rootClassName="w-full !items-center"
+                              >
+                                <span className={`${prefixCls}-select-menu-item-content`}>
+                                  {item.label}
+                                </span>
+                              </Checkbox>
+                            </div>
+                          </li>
+                        );
+                      }
                       return (
                         <li
                           key={item.key || itemIndex}
                           className={clsx(`${prefixCls}-dropdown-menu-item`, {
+                            [`${prefixCls}-dropdown-menu-item-selected`]: selectedKey === item.key,
                             [`${prefixCls}-dropdown-menu-item-disabled`]: item.disabled,
                           })}
+                          onClick={(event) => {
+                            if (!item.disabled) {
+                              handleMenuClick({
+                                key: item.key,
+                                item: item,
+                                domEvent: event,
+                              });
+                            }
+                          }}
                         >
                           <div
-                            onClick={(event) => {
-                              if (!item.disabled) {
-                                handleMenuClick({
-                                  key: item.key,
-                                  item: item,
-                                  domEvent: event,
-                                });
-                              }
-                            }}
-                            className={clsx(`${prefixCls}-dropdown-menu-item-content`)}
+                            className={clsx(`${prefixCls}-dropdown-menu-item-content`, {
+                              'items-center justify-between': selectedKey === item.key,
+                            })}
                           >
-                            {item.icon}
-                            {item.label}
+                            <span>
+                              {item.icon}
+                              {item.label}
+                            </span>
+                            {selectedKey === item.key && (
+                              <span className={`${prefixCls}-dropdown-menu-item-state`}>
+                                <Icon name="icon-check" size="xl" />
+                              </span>
+                            )}
                           </div>
                         </li>
                       );
