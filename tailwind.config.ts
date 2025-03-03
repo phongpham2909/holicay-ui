@@ -106,6 +106,8 @@ export default {
         800: 'var(--color-additional-800)',
         900: 'var(--color-additional-900)',
       },
+      transparent: 'transparent',
+      current: 'currentColor',
       white: 'var(--color-base-white)',
       black: 'rgb(var(--color-base-black))',
       'base-placeholder': 'var(--color-gray-400)',
