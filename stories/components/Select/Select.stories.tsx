@@ -83,7 +83,7 @@ const withIconOptions: Option[] = [
 ];
 
 const meta: Meta<typeof Select> = {
-  title: 'Components/Select',
+  title: 'Testing/Select',
   component: Select,
   parameters: {
     layout: 'centered',

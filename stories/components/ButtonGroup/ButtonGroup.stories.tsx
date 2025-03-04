@@ -12,7 +12,7 @@ const options: ButtonGroupOption[] = [
 ];
 
 const meta = {
-  title: 'Components/ButtonGroup',
+  title: 'Testing/ButtonGroup',
   component: ButtonGroup,
   parameters: {
     layout: 'centered',
@@ -24,7 +24,6 @@ const meta = {
     },
     chromatic: { disableSnapshot: false },
   },
-  tags: ['autodocs'],
   args: {
     size: 'md',
     options: options,

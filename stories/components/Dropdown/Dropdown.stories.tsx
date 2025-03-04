@@ -1,16 +1,7 @@
 import React from 'react';
-import type { Meta, StoryFn, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  Avatar,
-  Button,
-  ButtonSocial,
-  Dropdown,
-  DropdownMenuItem,
-  DropdownProps,
-  Icon,
-} from '@/components';
+import { Avatar, Button, ButtonSocial, Dropdown, DropdownMenuItem, Icon } from '@/components';
 import { images } from '@/variables/images';
 
 const items: DropdownMenuItem[] = [
@@ -122,15 +113,57 @@ const radioItems: DropdownMenuItem[] = [
 ];
 
 const meta = {
-  title: 'Components/Dropdown',
+  title: 'Testing/Dropdown',
   component: Dropdown,
   parameters: {
     layout: 'centered',
     chromatic: { disableSnapshot: false },
   },
-  tags: ['autodocs'],
-  args: {
-    // onClick: fn(),
+  argTypes: {
+    menu: {
+      description: 'Configuration for dropdown menu items',
+      control: 'object',
+      table: {
+        type: { summary: 'DropdownMenu' },
+        defaultValue: { summary: '{}' },
+      },
+    },
+    disabled: {
+      description: 'Disables the dropdown trigger button',
+      control: 'boolean',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    placement: {
+      description: 'Dropdown position relative to trigger button',
+      control: 'select',
+      options: ['bottom', 'bottomLeft', 'bottomRight', 'top', 'topLeft', 'topRight'],
+      table: {
+        type: { summary: 'DropdownPlacement' },
+        defaultValue: { summary: 'bottomRight' },
+      },
+    },
+    className: {
+      description: 'Custom class for the dropdown trigger',
+      control: 'text',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    dropdownClassName: {
+      description: 'Custom class for the dropdown container',
+      control: 'text',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    prefixCls: {
+      table: {
+        disable: true,
+      },
+    },
   },
 } satisfies Meta<typeof Dropdown>;
 
@@ -138,7 +171,32 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Base: Story = {
+  name: 'Basic Menu',
+  args: {
+    menu: {
+      items: radioItems,
+      className: 'w-[240px]',
+    },
+  },
+  render: (args) => {
+    return (
+      <Dropdown {...args}>
+        <Button
+          size="md"
+          type="secondary"
+          color="gray"
+          suffixIcon={<Icon name="icon-chevron-down" size="xl" />}
+        >
+          Views
+        </Button>
+      </Dropdown>
+    );
+  },
+};
+
+export const Account: Story = {
+  name: 'Account Menu',
   args: {
     menu: {
       items: items,
@@ -177,6 +235,7 @@ export const Default: Story = {
 };
 
 export const Checkbox: Story = {
+  name: 'Checkbox Menu',
   args: {
     menu: {
       items: checkboxItems,
@@ -199,25 +258,71 @@ export const Checkbox: Story = {
   },
 };
 
-export const Radio: Story = {
-  args: {
-    menu: {
-      items: radioItems,
-      className: 'w-[240px]',
-    },
-  },
-  render: (args) => {
+export const Variants = {
+  tags: ['!dev'],
+  name: 'Variants',
+  render: () => {
     return (
-      <Dropdown {...args}>
-        <Button
-          size="md"
-          type="secondary"
-          color="gray"
-          suffixIcon={<Icon name="icon-chevron-down" size="xl" />}
-        >
-          Views
-        </Button>
-      </Dropdown>
+      <div className="p-6 min-h-56">
+        <div className="flex items-center gap-x-3xl">
+          <Dropdown menu={{ items }} placement="bottomLeft">
+            <Button
+              type="secondary"
+              color="gray"
+              suffixIcon={<Icon name="icon-chevron-down" size="xl" />}
+            >
+              Account
+            </Button>
+          </Dropdown>
+
+          <Dropdown menu={{ items }} placement="bottomLeft">
+            <Button type="link" color="gray" icon={<Icon name="icon-dots-vertical" size="xl" />} />
+          </Dropdown>
+
+          <Dropdown menu={{ items }} placement="bottomLeft">
+            <Avatar src={images.HLC_AVATAR_0} />
+          </Dropdown>
+
+          <Dropdown
+            menu={{ items: itemsPlaceholder, itemsClassName: 'flex flex-col gap-y-md !py-lg' }}
+            placement="bottomLeft"
+          >
+            <Avatar icon={<Icon name="icon-user-01" size="2xl" />} />
+          </Dropdown>
+          <Dropdown
+            menu={{
+              items: checkboxItems,
+              className: 'w-[240px]',
+            }}
+            placement="bottomLeft"
+          >
+            <Button
+              size="md"
+              type="secondary"
+              color="gray"
+              suffixIcon={<Icon name="icon-chevron-down" size="xl" />}
+            >
+              Status
+            </Button>
+          </Dropdown>
+          <Dropdown
+            menu={{
+              items: radioItems,
+              className: 'w-[240px]',
+            }}
+            placement="bottomLeft"
+          >
+            <Button
+              size="md"
+              type="secondary"
+              color="gray"
+              suffixIcon={<Icon name="icon-chevron-down" size="xl" />}
+            >
+              Views
+            </Button>
+          </Dropdown>
+        </div>
+      </div>
     );
   },
 };

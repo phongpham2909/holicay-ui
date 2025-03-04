@@ -1,0 +1,62 @@
+import { Meta, Canvas, Controls, Story } from '@storybook/blocks';
+import { Dropdown } from '@/components';
+
+import * as DropdownStories from './Dropdown.stories';
+
+<Meta of={DropdownStories} />
+
+# Dropdown
+
+- [Overview](#overview)
+- [Usage](#usage)
+- [Props](#props)
+- [Variants](#variants)
+
+## Overview
+
+When there are more than a few options to choose from, you can wrap them in a `Dropdown`. By hovering or clicking on the trigger, a dropdown menu will appear, which allows you to choose an option and execute the relevant action.
+
+## Usage
+
+```js
+import { Dropdown } from '@holicay/design-system';
+```
+
+<Canvas of={DropdownStories.Base} layout="centered" />
+
+## Props
+
+<Controls />
+
+## Variants
+
+The Variants story showcases different ways the `Dropdown` component can be used in a UI. These examples demonstrate how `Dropdown` integrates with various trigger elements, such as buttons and avatars, and how different menu styles can be applied.
+
+1. **Account Dropdown**
+    - Trigger: A secondary button labeled "Account" with a chevron-down icon.
+    - Menu Items: Uses the items array.
+    - Placement: bottomLeft – dropdown appears below and aligned to the left of the button.
+2. **Icon Button Dropdown**
+    - Trigger: A link-styled button with a vertical dots icon, typically used for more options.
+    - Menu Items: Uses the items array.
+    - Placement: bottomLeft.
+3. **Avatar Dropdown**
+    - Trigger: An avatar image.
+    - Menu Items: Uses the items array.
+    - Placement: bottomLeft.
+4. **Placeholder Avatar Dropdown**
+    - Trigger: An avatar with a user icon instead of an image.
+    - Menu Items: Uses itemsPlaceholder, a customized list with spacing applied (flex flex-col gap-y-md !py-lg).
+    - Placement: bottomLeft.
+5.  **Status Dropdown**
+    - Trigger: A button labeled "Status" with a chevron-down icon.
+    - Menu Items: Uses checkboxItems, allowing multiple selections.
+    - Customization: className: 'w-[240px]' sets the dropdown width.
+    - Placement: bottomLeft.
+6. **Views Dropdown**
+    - Trigger: A button labeled "Views" with a chevron-down icon.
+    - Menu Items: Uses radioItems, where only one item can be selected at a time.
+    - Customization: className: 'w-[240px]' sets the dropdown width.
+    - Placement: bottomLeft.
+
+<Canvas of={DropdownStories.Variants} layout="fullscreen" />
