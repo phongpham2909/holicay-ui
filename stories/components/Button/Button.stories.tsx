@@ -6,31 +6,33 @@ import { Button, ButtonProps, ButtonSocial, Icon } from '@/components';
 import { ButtonColor, ButtonSize, ButtonType } from '@/components/Button/constants';
 
 const meta = {
-  title: 'Components/Button',
+  title: 'Testing/Button',
   component: Button,
   parameters: {
     layout: 'centered',
     chromatic: { disableSnapshot: false },
   },
   argTypes: {
-    // 👇 All Button stories expect a label arg
     label: {
       control: 'text',
-      description: 'Overwritten description',
+      description: 'Text content inside the button.',
+      table: {
+        type: { summary: 'string' },
+      },
     },
     type: {
-      control: 'select',
+      control: 'radio',
       options: ['primary', 'secondary', 'text', 'link'],
-      description: 'Can be set to primary secondary link text',
+      description: 'Defines the button style.',
       table: {
         type: { summary: "'primary' | 'secondary' | 'text' | 'link'" },
         defaultValue: { summary: 'primary' },
       },
     },
     size: {
-      control: 'select',
+      control: 'radio',
       options: ['sm', 'md', 'lg', 'xl', '2xl'],
-      description: 'Determines the size of the button component.',
+      description: 'Controls the size of the button.',
       table: {
         type: { summary: "'sm' | 'md' | 'lg' | 'xl' | '2xl'" },
         defaultValue: { summary: 'md' },
@@ -39,36 +41,85 @@ const meta = {
     color: {
       control: 'inline-radio',
       options: ['primary', 'gray'],
-      description: 'Set the color of button',
+      description:
+        'Sets the button color scheme. This is only applicable if the type is not `primary`.',
       table: {
         type: { summary: "'primary' | 'gray'" },
         defaultValue: { summary: 'primary' },
       },
+      if: { arg: 'type', neq: 'primary' },
     },
     icon: {
       control: 'object',
-      description: 'Set the icon component of button',
+      description: 'Optional icon component inside the button.',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
     },
     prefixIcon: {
       control: 'object',
-      description: 'Set the left icon component of button',
+      description: 'Left-side icon inside the button.',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
     },
     suffixIcon: {
       control: 'object',
-      description: 'Set the right icon component of button',
+      description: 'Right-side icon inside the button.',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
+    },
+    loadingIcon: {
+      control: 'object',
+      description: 'Icon displayed when the button is loading.',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
     },
     danger: {
       control: 'boolean',
-      description: 'Set the danger status of button',
+      description: 'Applies a danger (destructive) style to the button.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     disabled: {
       control: 'boolean',
-      description: 'Disabled state of button',
+      description: 'Disables the button.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    loading: {
+      control: 'boolean',
+      description: 'Displays a loading state on the button.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    fullWidth: {
+      control: 'boolean',
+      description: 'Expands button width to 100% of its parent.',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
     className: {
       control: 'text',
-      description:
-        'CSS Class Name which will be appended to the most outer element of a component. Use this prop carefully, overwriting CSS rules might break the component.',
+      description: 'Additional CSS classes for custom styling.',
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    prefixCls: {
+      table: {
+        disable: true,
+      },
     },
   },
   args: {
@@ -76,14 +127,20 @@ const meta = {
     type: 'primary',
     color: 'primary',
     htmlType: 'button',
+    disabled: false,
+    danger: false,
+    loading: false,
+    fullWidth: false,
+    label: 'Button CTA',
     onClick: fn(),
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+type ButtonStory = StoryObj<typeof meta>;
+
+export const Primary: ButtonStory = {
   args: {
     size: 'md',
     type: 'primary',
@@ -91,7 +148,7 @@ export const Primary: Story = {
   },
 };
 
-export const Secondary: Story = {
+export const Secondary: ButtonStory = {
   args: {
     size: 'md',
     type: 'secondary',
@@ -99,7 +156,7 @@ export const Secondary: Story = {
   },
 };
 
-export const Disabled: Story = {
+export const Disabled: ButtonStory = {
   args: {
     size: 'md',
     color: 'primary',
@@ -108,7 +165,7 @@ export const Disabled: Story = {
   },
 };
 
-export const Loading: Story = {
+export const Loading: ButtonStory = {
   args: {
     size: 'md',
     color: 'primary',
@@ -117,7 +174,7 @@ export const Loading: Story = {
   },
 };
 
-export const LeadingIcon: Story = {
+export const LeadingIcon: ButtonStory = {
   args: {
     size: 'md',
     color: 'primary',
@@ -127,7 +184,7 @@ export const LeadingIcon: Story = {
   },
 };
 
-export const TrailingIcon: Story = {
+export const TrailingIcon: ButtonStory = {
   args: {
     size: 'md',
     color: 'primary',
@@ -136,7 +193,7 @@ export const TrailingIcon: Story = {
   },
 };
 
-export const OnlyIcon: Story = {
+export const OnlyIcon: ButtonStory = {
   args: {
     size: 'md',
     color: 'primary',
@@ -144,7 +201,7 @@ export const OnlyIcon: Story = {
   },
 };
 
-export const Text: Story = {
+export const Text: ButtonStory = {
   args: {
     type: 'text',
     color: 'primary',
@@ -152,7 +209,7 @@ export const Text: Story = {
   },
 };
 
-export const Link: Story = {
+export const Link: ButtonStory = {
   args: {
     type: 'link',
     color: 'primary',
@@ -160,94 +217,13 @@ export const Link: Story = {
   },
 };
 
-export const Destructive: Story = {
+export const Destructive: ButtonStory = {
   args: {
     size: 'md',
     color: 'primary',
     label: 'Button CTA',
     danger: true,
     disabled: false,
-  },
-};
-
-type ButtonSocialStory = StoryObj<typeof ButtonSocial>;
-
-export const Social: ButtonSocialStory = {
-  args: {
-    size: 'md',
-  },
-  render: ({ ...props }) => {
-    return (
-      <div className="p-6">
-        <div className="flex flex-row flex-wrap gap-6">
-          <div className="flex flex-col gap-y-lg">
-            <ButtonSocial {...props} type="google" variant="solid">
-              Sign in with Google
-            </ButtonSocial>
-            <ButtonSocial {...props} type="facebook" variant="solid">
-              Sign in with Facebook
-            </ButtonSocial>
-            <ButtonSocial {...props} type="apple" variant="solid">
-              Sign in with Apple
-            </ButtonSocial>
-            <ButtonSocial {...props} type="twitter" variant="solid">
-              Sign in with Twitter
-            </ButtonSocial>
-          </div>
-
-          <div className="flex flex-col gap-y-lg ">
-            <ButtonSocial {...props} type="google" variant="solid" />
-            <ButtonSocial {...props} type="facebook" variant="solid" />
-            <ButtonSocial {...props} type="apple" variant="solid" />
-            <ButtonSocial {...props} type="twitter" variant="solid" />
-          </div>
-
-          <div className="flex flex-col gap-y-lg">
-            <ButtonSocial {...props} type="google" variant="outlined">
-              Sign in with Google
-            </ButtonSocial>
-            <ButtonSocial {...props} type="facebook" variant="outlined">
-              Sign in with Facebook
-            </ButtonSocial>
-            <ButtonSocial {...props} type="apple" variant="outlined">
-              Sign in with Apple
-            </ButtonSocial>
-            <ButtonSocial {...props} type="twitter" variant="outlined">
-              Sign in with Twitter
-            </ButtonSocial>
-          </div>
-
-          <div className="flex flex-col gap-y-lg ">
-            <ButtonSocial {...props} type="google" variant="outlined" />
-            <ButtonSocial {...props} type="facebook" variant="outlined" />
-            <ButtonSocial {...props} type="apple" variant="outlined" />
-            <ButtonSocial {...props} type="twitter" variant="outlined" />
-          </div>
-
-          <div className="flex flex-col gap-y-lg">
-            <ButtonSocial {...props} type="google">
-              Sign in with Google
-            </ButtonSocial>
-            <ButtonSocial {...props} type="facebook">
-              Sign in with Facebook
-            </ButtonSocial>
-            <ButtonSocial {...props} type="apple">
-              Sign in with Apple
-            </ButtonSocial>
-            <ButtonSocial {...props} type="twitter">
-              Sign in with Twitter
-            </ButtonSocial>
-          </div>
-
-          <div className="flex flex-col gap-y-lg ">
-            <ButtonSocial {...props} type="google" />
-            <ButtonSocial {...props} type="facebook" />
-            <ButtonSocial {...props} type="apple" />
-            <ButtonSocial {...props} type="twitter" />
-          </div>
-        </div>
-      </div>
-    );
   },
 };
 
