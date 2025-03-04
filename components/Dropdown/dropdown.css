@@ -49,6 +49,15 @@
   @apply cursor-not-allowed text-base-secondary_disabled;
 }
 
+.hlc-dropdown-menu .hlc-dropdown-menu-item-checked {
+  & > .hlc-dropdown-menu-item-content {
+    @apply bg-surface-base-secondary;
+  }
+  & > .hlc-dropdown-menu-item-content:hover {
+    @apply bg-surface-base-secondary_hover;
+  }
+}
+
 .hlc-dropdown-menu .hlc-dropdown-menu-item-divider {
   @apply h-[1px] my-xs bg-surface-base-secondary_disabled overflow-hidden;
 }

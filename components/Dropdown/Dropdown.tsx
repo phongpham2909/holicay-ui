@@ -5,17 +5,27 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { PREFIX_CLASS } from '@/variables/app';
 import { cloneElement } from '@/utilities';
 import { Checkbox } from '../Checkbox';
-
-import './dropdown.css';
 import { Icon } from '../Icon';
 
+import './dropdown.css';
+
 type PropsWithChildren<P> = P & { children?: React.ReactNode };
+
+export type DropdownPlacement =
+  | 'bottom'
+  | 'bottomLeft'
+  | 'bottomRight'
+  | 'top'
+  | 'topLeft'
+  | 'topRight';
+
+export type DropdownMenuItemType = 'header' | 'footer' | 'divider' | 'button' | 'checkbox';
 
 export interface DropdownMenuItem {
   key?: string;
   label?: React.ReactNode;
   disabled?: boolean;
-  type?: 'header' | 'footer' | 'divider' | 'button' | 'checkbox';
+  type?: DropdownMenuItemType;
   icon?: React.ReactNode;
 }
 
@@ -41,7 +51,7 @@ export interface DropdownProps {
   prefixCls?: string;
   className?: string;
   dropdownClassName?: string;
-  placement?: 'bottom' | 'bottomLeft' | 'bottomRight' | 'top' | 'topLeft' | 'topRight';
+  placement?: DropdownPlacement;
 }
 
 export const Dropdown = ({
@@ -153,6 +163,7 @@ export const Dropdown = ({
 
   const enhancedChildren = cloneElement(children, {
     ref: buttonRef,
+    disabled,
     className: clsx(
       (children.props as Record<string, any>)?.className,
       `${prefixCls}-dropdown-trigger`,
@@ -246,6 +257,9 @@ export const Dropdown = ({
                               `${prefixCls}-dropdown-menu-item`,
                               `${prefixCls}-dropdown-menu-item-${item.type}`,
                               {
+                                [`${prefixCls}-dropdown-menu-item-checked`]: selectedKeys.includes(
+                                  item.key || ''
+                                ),
                                 [`${prefixCls}-dropdown-menu-item-disabled`]: item.disabled,
                               }
                             )}
@@ -289,14 +303,21 @@ export const Dropdown = ({
                               'items-center justify-between': selectedKey === item.key,
                             })}
                           >
-                            <span>
-                              {item.icon}
-                              {item.label}
-                            </span>
-                            {selectedKey === item.key && (
-                              <span className={`${prefixCls}-dropdown-menu-item-state`}>
-                                <Icon name="icon-check" size="xl" />
-                              </span>
+                            {selectedKey === item.key ? (
+                              <>
+                                <span>
+                                  {item.icon}
+                                  {item.label}
+                                </span>
+                                <span className={`${prefixCls}-dropdown-menu-item-state`}>
+                                  <Icon name="icon-check" size="xl" />
+                                </span>
+                              </>
+                            ) : (
+                              <>
+                                {item.icon}
+                                {item.label}
+                              </>
                             )}
                           </div>
                         </li>
