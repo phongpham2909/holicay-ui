@@ -5,7 +5,7 @@ import { fn } from '@storybook/test';
 import { TimePicker } from '@/components';
 
 const meta = {
-  title: 'Pending/TimePicker',
+  title: 'Components/TimePicker',
   component: TimePicker,
   parameters: {
     layout: 'centered',
