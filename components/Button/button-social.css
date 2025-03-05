@@ -1,10 +1,10 @@
 .hlc-btn-social {
   @apply font-semibold font-primary rounded-md shadow-xs transition-colors duration-200 ease-out;
   &.hlc-btn-social-sm {
-    @apply px-[15px] py-[5px] text-sm;
+    @apply px-[15px] py-[7px] text-sm;
   }
   &.hlc-btn-social-md {
-    @apply px-[15px] py-[9px] text-base;
+    @apply px-[15px] py-[7px] text-base;
   }
   &.hlc-btn-social-lg {
     @apply px-[15px] py-[9px] text-base;
@@ -19,15 +19,15 @@
   }
 
   &.hlc-btn-social-icon-only.hlc-btn-social-sm {
-    @apply min-w-8;
+    @apply min-w-9;
   }
 
   &.hlc-btn-social-icon-only.hlc-btn-social-md {
-    @apply min-w-[44px];
+    @apply min-w-10;
   }
 
   &.hlc-btn-social-icon-only.hlc-btn-social-lg {
-    @apply min-w-[44px];
+    @apply min-w-11;
   }
 
   &.hlc-btn-social-icon.hlc-btn-social-sm > .hlc-social-icon > svg {
@@ -51,9 +51,9 @@
     &:focus-visible {
       @apply outline outline-2 outline-offset-2 outline-primary-400;
     }
-  }
-  &.hlc-btn-social-default.hlc-btn-social-google > .hlc-social-icon {
-    @apply text-base-primary_disabled;
+    &.hlc-btn-social-default > .hlc-social-icon {
+      @apply text-base-primary_disabled;
+    }
   }
 
   &.hlc-btn-social-solid.hlc-btn-social-facebook {
