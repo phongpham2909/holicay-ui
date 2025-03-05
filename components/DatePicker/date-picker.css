@@ -38,6 +38,9 @@
 .hlc-date-picker-popper .react-datepicker__day--outside-month {
   @apply text-base-primary_disabled;
 }
+.hlc-date-picker-popper .react-datepicker__day--disabled {
+  @apply text-base-primary_disabled;
+}
 
 .hlc-date-picker-popper .react-datepicker__day:not([aria-disabled='true']):hover {
   @apply rounded-sm bg-surface-base-secondary_hover;

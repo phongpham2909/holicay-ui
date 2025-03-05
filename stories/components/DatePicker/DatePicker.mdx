@@ -1,0 +1,49 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+
+import * as DatePickerStories from './DatePicker.stories';
+
+<Meta of={DatePickerStories} />
+
+# DatePicker
+
+- [Overview](#overview)
+- [Usage](#usage)
+- [Props](#props)
+- [Variants](#variants)
+
+## Overview
+
+A `DatePicker` is used to select a date. By clicking the input box, you can select a date from a popup calendar.
+
+## Usage
+
+```js
+import { DatePicker } from '@holicay/design-system';
+```
+
+<Canvas of={DatePickerStories.Base} layout="centered" />
+
+## Props
+
+<Controls />
+
+## Variants
+
+### Basic Usage
+
+By default, the `DatePicker` is localised to the user's browser locale whilst the calendar's initial date is set to
+`today`.
+
+<Canvas of={DatePickerStories.Default} />
+
+### Limit Date Range
+
+Limit the range of available dates by using `minDate` and `maxDate`.
+
+<Canvas of={DatePickerStories.MinMaxDate} />
+
+### Disabled
+
+A disabled state of the `DatePicker`. You can also set as array to disable one of input.
+
+<Canvas of={DatePickerStories.Disabled} />
