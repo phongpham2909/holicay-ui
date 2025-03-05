@@ -16,6 +16,7 @@
     "generate:misc-icons": "svgr --config-file svgr.misc-icons.config.js -- public/misc-icons"
   },
   "dependencies": {
+    "@hookform/resolvers": "^4.1.3",
     "clsx": "^2.1.1",
     "framer-motion": "^12.4.7",
     "lodash": "^4.17.21",
@@ -24,11 +25,13 @@
     "next": "15.1.4",
     "react": "^19.0.0",
     "react-datepicker": "^8.1.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@emotion/is-prop-valid": "^1.3.1",
     "@chromatic-com/storybook": "^3.2.3",
+    "@emotion/is-prop-valid": "^1.3.1",
     "@eslint/compat": "^1.2.6",
     "@eslint/eslintrc": "^3",
     "@iconify/react": "^5.2.0",
