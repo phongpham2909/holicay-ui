@@ -13,7 +13,7 @@ const meta = {
   },
   tags: ['autodocs'],
   args: {
-    onClick: fn(),
+    onChange: fn(),
   },
 } satisfies Meta<typeof TimePicker>;
 
@@ -21,11 +21,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Base: Story = {
-  tags: ['!dev'],
   args: {
     size: 'md',
-    type: 'pill',
-    shape: 'rounded',
-    label: 'Holicay',
   },
 };
