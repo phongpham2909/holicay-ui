@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { DatePicker, DatePickerValue } from '@/components';
-import moment from 'moment';
+import { RangePicker, RangePickerValue } from '@/components';
 
 const meta = {
   title: 'Components/DatePicker',
-  component: DatePicker,
+  component: RangePicker,
   parameters: {
     chromatic: { disableSnapshot: false },
   },
@@ -16,15 +16,15 @@ const meta = {
       control: false,
       description: 'The selected date value',
       table: {
-        type: { summary: 'Date | null' },
-        defaultValue: { summary: 'null' },
+        type: { summary: '[Date | null, Date | null]' },
+        defaultValue: { summary: '[null, null]' },
       },
     },
     onChange: {
       action: 'Date changed',
       description: 'Callback function triggered when the date changes',
       table: {
-        type: { summary: '(date: Date | null) => void' },
+        type: { summary: '(date: [Date | null, Date | null]) => void' },
       },
     },
     size: {
@@ -126,39 +126,40 @@ const meta = {
     },
   },
   args: {
-    size: 'md',
     onChange: fn(),
   },
-} satisfies Meta<typeof DatePicker>;
+} satisfies Meta<typeof RangePicker>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Base = {
-  tags: ['!dev'],
-} satisfies Story;
-
-export const Default: Story = {
+export const RangeDatePicker: Story = {
+  name: 'Range Picker- Single month',
+  args: {
+    size: 'md',
+    monthsShown: 1,
+  },
   render: (args) => {
-    const [dateSelected, setDateSelected] = useState<DatePickerValue>(new Date());
+    const [dateSelected, setDateSelected] = useState<RangePickerValue>([null, null]);
 
-    return <DatePicker {...args} value={dateSelected} onChange={setDateSelected} />;
+    return (
+      <RangePicker {...args} value={dateSelected} onChange={setDateSelected} className="min-w-64" />
+    );
   },
 };
 
-export const Disabled = {
+export const RangeDatePickerWithMultipleMonths: Story = {
+  name: 'Range Picker - Multiple months',
   args: {
-    value: new Date(),
-    disabled: true,
+    size: 'md',
+    monthsShown: 2,
   },
-} satisfies Story;
+  render: (args) => {
+    const [dateSelected, setDateSelected] = useState<RangePickerValue>([null, null]);
 
-export const MinMaxDate = {
-  name: 'Min & Max Date',
-  args: {
-    value: new Date(),
-    minDate: moment().toDate(),
-    maxDate: moment().add(3, 'years').toDate(),
+    return (
+      <RangePicker {...args} value={dateSelected} onChange={setDateSelected} className="min-w-64" />
+    );
   },
-} satisfies Story;
+};

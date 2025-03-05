@@ -1,6 +1,7 @@
 import { Meta, Canvas, Controls } from '@storybook/blocks';
 
 import * as DatePickerStories from './DatePicker.stories';
+import * as RangePickerStories from './RangePicker.stories';
 
 <Meta of={DatePickerStories} />
 
@@ -34,16 +35,24 @@ import { DatePicker } from '@holicay/design-system';
 By default, the `DatePicker` is localised to the user's browser locale whilst the calendar's initial date is set to
 `today`.
 
-<Canvas of={DatePickerStories.Default} />
+<Canvas of={DatePickerStories.Default} layout="centered" />
 
 ### Limit Date Range
 
 Limit the range of available dates by using `minDate` and `maxDate`.
 
-<Canvas of={DatePickerStories.MinMaxDate} />
+<Canvas of={DatePickerStories.MinMaxDate} layout="centered" />
 
 ### Disabled
 
 A disabled state of the `DatePicker`. You can also set as array to disable one of input.
 
-<Canvas of={DatePickerStories.Disabled} />
+<Canvas of={DatePickerStories.Disabled} layout="centered" />
+
+### Date Range for Single month
+
+<Canvas of={RangePickerStories.RangeDatePicker} layout="centered" />
+
+### Date Range for Multiple months
+
+<Canvas of={RangePickerStories.RangeDatePickerWithMultipleMonths} layout="centered" />
