@@ -67,7 +67,7 @@ export const Dropdown = ({
   children,
 }: PropsWithChildren<DropdownProps>) => {
   // * Hooks
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const childRef = useRef<HTMLElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   // * States
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -82,17 +82,17 @@ export const Dropdown = ({
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        (!buttonRef.current?.contains(event.target as Node) &&
+        (!childRef.current?.contains(event.target as Node) &&
           !dropdownRef.current?.contains(event.target as Node)) ||
-        (!buttonRef.current?.contains(event.target as Node) && !dropdownRef.current)
+        (!childRef.current?.contains(event.target as Node) && !dropdownRef.current)
       ) {
         resetStates();
       }
     };
 
     const updateDropdownPosition = () => {
-      if (buttonRef.current) {
-        const rect = buttonRef.current.getBoundingClientRect();
+      if (childRef.current) {
+        const rect = childRef.current.getBoundingClientRect();
         let top = rect.bottom + window.scrollY;
         let left = rect.left + window.scrollX;
 
@@ -159,10 +159,17 @@ export const Dropdown = ({
     menu?.onMultipleSelect?.(newSelectedValues);
   };
 
+  const { menuItems, menuHeaderItems } = useMemo(() => {
+    return {
+      menuItems: menu.items?.filter((item) => item.type !== 'header') || [],
+      menuHeaderItems: menu.items?.filter((item) => item.type === 'header') || [],
+    };
+  }, [menu.items]);
+
   if (!children || !React.isValidElement(children)) return null;
 
   const enhancedChildren = cloneElement(children, {
-    ref: buttonRef,
+    ref: childRef,
     disabled,
     className: clsx(
       (children.props as Record<string, any>)?.className,
@@ -179,13 +186,6 @@ export const Dropdown = ({
       handleTrigger();
     },
   });
-
-  const { menuItems, menuHeaderItems } = useMemo(() => {
-    return {
-      menuItems: menu.items?.filter((item) => item.type !== 'header') || [],
-      menuHeaderItems: menu.items?.filter((item) => item.type === 'header') || [],
-    };
-  }, [menu.items]);
 
   return (
     <>
