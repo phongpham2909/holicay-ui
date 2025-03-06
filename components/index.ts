@@ -15,3 +15,4 @@ export * from './Tag';
 export * from './TextArea';
 export * from './TimePicker';
 export * from './Toggle';
+export * from './Tooltip';

@@ -1,0 +1,55 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+
+import * as TooltipStories from './Tooltip.stories';
+
+<Meta of={TooltipStories} />
+
+# Tooltip
+
+- [Overview](#overview)
+- [Usage](#usage)
+- [Props](#props)
+- [Variants](#variants)
+
+## Overview
+
+Tooltips are a specific type of popover that displays information related to an element when said element recieves focus
+or the hover.
+
+## Usage
+
+```js
+import { Tooltip } from '@holicay/design-system';
+```
+
+<Canvas of={TooltipStories.Base} layout="centered" />
+
+## Props
+
+<Controls />
+
+## Variants
+
+### HideArrow
+
+Support show, hide arrow in the center.
+
+<Canvas of={TooltipStories.HideArrow} layout="centered" />
+
+### Placement
+
+There are `12` placement options available.
+
+<Canvas of={TooltipStories.Placement} layout="centered" />
+
+### Trigger
+
+Tooltip trigger mode.
+
+<Canvas of={TooltipStories.Trigger} layout="centered" />
+
+### Color
+
+Tooltip theme color.
+
+<Canvas of={TooltipStories.Color} layout="centered" />
