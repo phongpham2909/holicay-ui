@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import moment from 'moment';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { RangePicker, RangePickerValue } from '@/components';
+import { Button, RangePicker, RangePickerValue } from '@/components';
+import moment from 'moment';
 
 const meta = {
   title: 'In-Progress/DatePicker',
@@ -135,7 +135,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const RangeDatePicker: Story = {
-  name: 'Range Picker- Single month',
+  name: 'Range Picker - Single month',
   args: {
     size: 'md',
     monthsShown: 1,
@@ -163,3 +163,60 @@ export const RangeDatePickerWithMultipleMonths: Story = {
     );
   },
 };
+
+const defaultStartDate = moment().toDate();
+const defaultEndDate = moment(defaultStartDate).startOf('day').add(7, 'days').toDate();
+const defaultDates: RangePickerValue = [defaultStartDate, defaultEndDate];
+
+export const RangeDatePickerWithExtraFooter = {
+  name: 'Range Picker- Extra Footer',
+  args: {
+    size: 'md',
+    monthsShown: 2,
+  },
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [originalDates, setOriginalDates] = useState<RangePickerValue>(defaultDates);
+    const [datesSelected, setDatesSelected] = useState<RangePickerValue>(originalDates);
+
+    const handleClickOutside = () => {
+      setIsOpen(false);
+      setDatesSelected(originalDates);
+    };
+
+    const handleCancel = () => {
+      handleClickOutside();
+    };
+
+    const handleChange = (dates: RangePickerValue) => {
+      setDatesSelected(dates);
+    };
+
+    const handleApply = () => {
+      setOriginalDates(datesSelected);
+      setIsOpen(false);
+    };
+
+    return (
+      <RangePicker
+        {...args}
+        open={isOpen}
+        value={datesSelected}
+        onChange={handleChange}
+        onClickOutside={handleClickOutside}
+        onInputClick={() => setIsOpen(true)}
+        shouldCloseOnSelect={false}
+        renderExtraFooter={() => (
+          <div className="inline-flex items-center justify-end gap-x-lg w-full">
+            <Button type="secondary" color="gray" className="min-w-28" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button type="primary" className="min-w-28" onClick={handleApply}>
+              Apply
+            </Button>
+          </div>
+        )}
+      />
+    );
+  },
+} satisfies Story;

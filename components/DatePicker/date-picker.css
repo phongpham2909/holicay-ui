@@ -6,6 +6,10 @@
   @apply flex flex-col gap-y-xs py-xl px-2xl;
 }
 
+.hlc-date-picker-popper .react-datepicker__children-container {
+  @apply m-0 p-0 h-full w-full;
+}
+
 .hlc-date-picker-popper .react-datepicker__month-container > .react-datepicker__header {
   @apply bg-surface-base-primary border-b-0 rounded-tl-lg m-0 p-0;
 
@@ -70,6 +74,6 @@
   }
 }
 
-.hlc-date-picker-input.react-datepicker-ignore-onclickoutside {
+.hlc-date-picker-input.hlc-range-picker-open {
   @apply outline outline-2 outline-offset-2 outline-primary-400;
 }

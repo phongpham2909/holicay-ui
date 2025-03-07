@@ -14,40 +14,32 @@ export type DatePickerSize = 'sm' | 'md' | 'lg';
 export type DatePickerValue = Date | null;
 
 export interface DatePickerProps extends Omit<ReactDatePickerProps, 'value' | 'onChange'> {
+  size?: DatePickerSize;
   value?: DatePickerValue;
   onChange?: (date: DatePickerValue) => void;
-  size?: DatePickerSize;
   prefixCls?: string;
+  renderExtraFooter?: () => React.ReactNode;
 }
 
 export const DatePicker = ({
-  value,
-  onChange,
+  open,
   size = 'lg',
+  value,
   placeholderText = 'Select date',
+  renderExtraFooter,
   popperClassName,
   wrapperClassName,
   prefixCls = PREFIX_CLASS,
   ...rest
 }: DatePickerProps) => {
-  const [dateSelected, setDateSelected] = useState<DatePickerValue>(value || null);
-
-  const handleChange = (
-    date: DatePickerValue,
-    _event?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>
-  ) => {
-    setDateSelected(date);
-    onChange?.(date);
-  };
-
   return (
     // @ts-ignore
     <ReactDatePicker
       {...rest}
       portalId="root"
       dateFormat="DD-MM-YYYY"
-      selected={dateSelected}
-      onChange={handleChange}
+      open={open}
+      selected={value}
       calendarStartDay={1}
       showPopperArrow={false}
       renderCustomHeader={({
@@ -87,14 +79,26 @@ export const DatePicker = ({
           type="secondary"
           color="gray"
           prefixIcon={<Icon name="icon-calendar" size="xl" />}
+          className={clsx({
+            [`${prefixCls}-range-picker-open`]: open,
+          })}
         >
-          {!!dateSelected ? moment(dateSelected).format('MMM DD, YYYY') : placeholderText}
+          {!!value ? moment(value).format('MMM DD, YYYY') : placeholderText}
         </Button>
       }
       popperPlacement="bottom-end"
       popperClassName={clsx(`${prefixCls}-date-picker-popper`, popperClassName)}
       wrapperClassName={clsx(`${prefixCls}-date-picker-wrapper`, wrapperClassName)}
       className={clsx(`${prefixCls}-date-picker-input`)}
-    />
+    >
+      {!!renderExtraFooter && (
+        <div
+          className="inline-flex border-t border-base-secondary rounded-b-lg p-xl w-full"
+          onMouseDown={(e) => e.stopPropagation()}
+        >
+          {renderExtraFooter()}
+        </div>
+      )}
+    </ReactDatePicker>
   );
 };

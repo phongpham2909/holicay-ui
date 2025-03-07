@@ -2,6 +2,10 @@
   @apply -mt-xxs inline-flex border border-base-secondary bg-surface-base-primary rounded-lg shadow-md;
 }
 
+.hlc-range-picker-popper .react-datepicker:has(.react-datepicker__children-container) {
+  @apply pb-[73px];
+}
+
 .hlc-range-picker-popper .react-datepicker__month-container {
   @apply flex flex-col gap-y-xs py-xl px-2xl;
   & > .react-datepicker__month {
@@ -26,6 +30,10 @@
       @apply font-medium;
     }
   }
+}
+
+.hlc-range-picker-popper .react-datepicker__children-container {
+  @apply absolute bottom-0 m-0 p-0 h-[73px] w-full;
 }
 
 .hlc-range-picker-popper .react-datepicker__month-container + .react-datepicker__month-container {
@@ -115,6 +123,6 @@
   }
 }
 
-.hlc-range-picker-input.react-datepicker-ignore-onclickoutside {
+.hlc-range-picker-input.hlc-range-picker-open {
   @apply outline outline-2 outline-offset-2 outline-primary-400;
 }

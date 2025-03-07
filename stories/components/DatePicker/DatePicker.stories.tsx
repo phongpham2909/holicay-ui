@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { DatePicker, DatePickerValue } from '@/components';
+import { Button, DatePicker, DatePickerValue } from '@/components';
 import moment from 'moment';
 
 const meta = {
@@ -160,5 +160,59 @@ export const MinMaxDate = {
     value: new Date(),
     minDate: moment().toDate(),
     maxDate: moment().add(3, 'years').toDate(),
+  },
+} satisfies Story;
+
+const defaultDate = moment().toDate();
+
+export const ExtraFooter = {
+  name: 'Extra Footer',
+  args: {
+    value: new Date(),
+  },
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [originalDate, setOriginalDate] = useState<DatePickerValue>(defaultDate);
+    const [dateSelected, setDateSelected] = useState<DatePickerValue>(originalDate);
+
+    const handleClickOutside = () => {
+      setIsOpen(false);
+      setDateSelected(originalDate);
+    };
+
+    const handleCancel = () => {
+      handleClickOutside();
+    };
+
+    const handleChange = (date: DatePickerValue) => {
+      setDateSelected(date);
+    };
+
+    const handleApply = () => {
+      setOriginalDate(dateSelected);
+      setIsOpen(false);
+    };
+
+    return (
+      <DatePicker
+        {...args}
+        open={isOpen}
+        value={dateSelected}
+        onChange={handleChange}
+        onClickOutside={handleClickOutside}
+        onInputClick={() => setIsOpen(true)}
+        shouldCloseOnSelect={false}
+        renderExtraFooter={() => (
+          <div className="inline-flex items-center justify-between gap-x-lg w-full">
+            <Button type="secondary" color="gray" fullWidth onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button type="primary" fullWidth onClick={handleApply}>
+              Apply
+            </Button>
+          </div>
+        )}
+      />
+    );
   },
 } satisfies Story;

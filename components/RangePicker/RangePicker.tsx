@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import moment from 'moment';
 import clsx from 'clsx';
 import ReactDatePicker, { DatePickerProps as ReactDatePickerProps } from 'react-datepicker';
@@ -14,18 +14,18 @@ export type RangePickerSize = 'sm' | 'md' | 'lg';
 export type RangePickerValue = [Date | null, Date | null];
 
 export interface RangeDatePickerProps extends Omit<ReactDatePickerProps, 'value' | 'onChange'> {
+  size?: RangePickerSize;
   value?: RangePickerValue;
   onChange?: (date: RangePickerValue) => void;
-  size?: RangePickerSize;
   prefixCls?: string;
+  renderExtraFooter?: () => React.ReactNode;
 }
 
 export const RangePicker = ({
   size = 'lg',
-  value,
-  onChange,
-  onClickOutside,
-  onCalendarClose,
+  open,
+  value = [null, null],
+  renderExtraFooter,
   monthsShown = 2,
   className,
   popperClassName,
@@ -33,20 +33,7 @@ export const RangePicker = ({
   prefixCls = PREFIX_CLASS,
   ...rest
 }: RangeDatePickerProps) => {
-  const [dateSelected, setDateSelected] = useState<RangePickerValue>(value || [null, null]);
-
-  const handleChange = (
-    date: RangePickerValue,
-    _event?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>
-  ) => {
-    const [startDate, endDate] = date;
-    setDateSelected(date);
-    if (!!startDate && !!endDate) {
-      onChange?.(date);
-    }
-  };
-
-  const [startDate, endDate] = dateSelected;
+  const [startDate, endDate] = value;
 
   return (
     // @ts-ignore
@@ -54,14 +41,13 @@ export const RangePicker = ({
       {...rest}
       portalId="root"
       dateFormat="DD-MM-YYYY"
+      open={open}
       selected={startDate}
       startDate={startDate}
       endDate={endDate}
-      onChange={handleChange}
       selectsRange
       monthsShown={monthsShown}
       calendarStartDay={1}
-      // shouldCloseOnSelect={false}
       disabledKeyboardNavigation
       focusSelectedMonth={false}
       showPopperArrow={false}
@@ -102,6 +88,9 @@ export const RangePicker = ({
           type="secondary"
           color="gray"
           prefixIcon={<Icon name="icon-calendar" size="xl" />}
+          className={clsx({
+            [`${prefixCls}-range-picker-open`]: open,
+          })}
         >
           <span className="flex items-center gap-x-xs">
             <span
@@ -122,24 +111,19 @@ export const RangePicker = ({
           </span>
         </Button>
       }
-      onClickOutside={(e) => {
-        if (!startDate || !endDate) {
-          onChange?.(value || [null, null]);
-          setDateSelected(value || [null, null]);
-        }
-        onClickOutside?.(e);
-      }}
-      onCalendarClose={() => {
-        if (!startDate || !endDate) {
-          onChange?.(value || [null, null]);
-          setDateSelected(value || [null, null]);
-        }
-        onCalendarClose?.();
-      }}
       popperPlacement="bottom-end"
       popperClassName={clsx(`${prefixCls}-range-picker-popper`, popperClassName)}
       wrapperClassName={clsx(`${prefixCls}-range-picker-wrapper`, wrapperClassName)}
       className={clsx(`${prefixCls}-range-picker-input`, className)}
-    />
+    >
+      {!!renderExtraFooter && (
+        <div
+          className="inline-flex border-t border-base-secondary rounded-b-lg p-xl w-full"
+          onMouseDown={(e) => e.stopPropagation()}
+        >
+          {renderExtraFooter()}
+        </div>
+      )}
+    </ReactDatePicker>
   );
 };
