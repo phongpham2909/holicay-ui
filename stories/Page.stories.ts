@@ -4,6 +4,7 @@ import { expect, userEvent, within } from '@storybook/test';
 import { Page } from './Page';
 
 const meta = {
+  tags: ['!dev'],
   title: 'Application Components/Page',
   component: Page,
   parameters: {

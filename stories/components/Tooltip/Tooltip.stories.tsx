@@ -5,7 +5,7 @@ import { fn } from '@storybook/test';
 import { Icon, Button, Tooltip } from '@/components';
 
 const meta = {
-  title: 'Components/Tooltip',
+  title: 'Testing/Tooltip',
   component: Tooltip,
   parameters: {
     layout: 'centered',

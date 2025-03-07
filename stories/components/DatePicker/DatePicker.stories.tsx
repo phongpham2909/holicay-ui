@@ -6,7 +6,7 @@ import { DatePicker, DatePickerValue } from '@/components';
 import moment from 'moment';
 
 const meta = {
-  title: 'Components/DatePicker',
+  title: 'In-Progress/DatePicker',
   component: DatePicker,
   parameters: {
     chromatic: { disableSnapshot: false },

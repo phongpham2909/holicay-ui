@@ -1,21 +1,27 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { TimePicker } from '@/components';
+import { Slider } from '@/components';
 
 const meta = {
-  title: 'In-Progress/TimePicker',
-  component: TimePicker,
+  title: 'In-Progress/Slider',
+  component: Slider,
   parameters: {
     layout: 'centered',
     chromatic: { disableSnapshot: false },
   },
+
   tags: ['autodocs'],
-  args: {
-    onChange: fn(),
+
+  argTypes: {
+    size: {
+      control: 'inline-radio',
+      options: ['sm', 'md', 'lg'],
+      description: 'Set the size of tag',
+    },
   },
-} satisfies Meta<typeof TimePicker>;
+  // args: { onClick: fn() },
+} satisfies Meta<typeof Slider>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -23,5 +29,6 @@ type Story = StoryObj<typeof meta>;
 export const Base: Story = {
   args: {
     size: 'md',
+    label: 'Holicay',
   },
 };

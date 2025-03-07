@@ -6,7 +6,7 @@ import { fn } from '@storybook/test';
 import { RangePicker, RangePickerValue } from '@/components';
 
 const meta = {
-  title: 'Components/DatePicker',
+  title: 'In-Progress/DatePicker',
   component: RangePicker,
   parameters: {
     chromatic: { disableSnapshot: false },
