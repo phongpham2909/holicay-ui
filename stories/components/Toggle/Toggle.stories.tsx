@@ -1,21 +1,17 @@
+import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 import { Toggle } from '@/components';
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'In-Progress/Toggle',
+  title: 'Testing/Toggle',
   component: Toggle,
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    // 👇 All Toggle stories expect a label arg
     label: {
       control: 'text',
       description: 'Customize label',
@@ -56,17 +52,19 @@ const meta = {
       description: 'Trigger when clicked',
     },
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onChange: fn() },
 } satisfies Meta<typeof Toggle>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Checked: Story = {
   args: {
-    // checked: true,
+    checked: true,
+  },
+  render: (args) => {
+    const [checked, setChecked] = useState(args.checked);
+    return <Toggle {...args} checked={checked} onChange={(c) => setChecked(c)} />;
   },
 };
 
@@ -77,23 +75,23 @@ export const Disabled: Story = {
   },
 };
 
-export const CheckedAndDisabled: Story = {
+export const WithLabel: Story = {
   args: {
-    checked: true,
-    disabled: true,
+    label: 'Remember Me',
+  },
+  render: (args) => {
+    const [checked, setChecked] = useState(args.checked);
+    return <Toggle {...args} checked={checked} onChange={(c) => setChecked(c)} />;
   },
 };
 
-export const LabelAndHelperText: Story = {
+export const WithLabelAndHelperText: Story = {
   args: {
     label: 'Remember Me',
     helperText: 'Save my login details for next time',
   },
-};
-
-export const Loading: Story = {
-  args: {
-    checked: true,
-    loading: true,
+  render: (args) => {
+    const [checked, setChecked] = useState(args.checked);
+    return <Toggle {...args} checked={checked} onChange={(c) => setChecked(c)} />;
   },
 };
