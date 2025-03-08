@@ -1,0 +1,51 @@
+.hlc-slider {
+  @apply relative flex items-center select-none touch-none w-[320px] h-2xl;
+}
+
+.hlc-slider-track {
+  @apply relative flex-grow h-md bg-fill-base-primary_subtle rounded-md;
+}
+
+.hlc-slider-range {
+  @apply absolute h-full bg-fill-brand-green-primary rounded-md;
+}
+
+.hlc-slider-thumb {
+  @apply relative block border-2 border-brand-green-solid w-6 h-6 bg-surface-base-primary rounded-3xl;
+}
+
+.hlc-slider-thumb:focus {
+  @apply outline-none;
+}
+
+.hlc-slider-thumb > .hlc-tooltip {
+  @apply absolute -top-[44px] -left-[10px] min-w-10 bg-surface-base-primary text-base-secondary text-center text-xs font-primary font-semibold px-lg py-md rounded-md shadow-lg;
+  & > .hlc-tooltip-arrow {
+    @apply absolute z-[1] block pointer-events-none w-4 h-4 overflow-hidden;
+  }
+  & > .hlc-tooltip-arrow::before {
+    content: '';
+    inset-inline: 0;
+    @apply absolute z-0 w-2 h-2 m-auto bg-white;
+    transform: translateY(50%) rotate(-135deg);
+  }
+  &.hlc-tooltip-placement-top {
+    @apply -top-[44px] bottom-auto;
+  }
+  &.hlc-tooltip-placement-bottom {
+    @apply -bottom-[44px] top-auto;
+  }
+  &.hlc-tooltip-placement-bottom > .hlc-tooltip-arrow {
+    @apply -top-md;
+  }
+}
+
+.hlc-slider-thumb > .hlc-tooltip-label {
+  @apply absolute -top-[34px] -left-[5px] text-base-primary text-center text-base font-primary font-medium;
+  &.hlc-tooltip-placement-top {
+    @apply -top-[34px] bottom-auto;
+  }
+  &.hlc-tooltip-placement-bottom {
+    @apply -bottom-[34px] top-auto;
+  }
+}

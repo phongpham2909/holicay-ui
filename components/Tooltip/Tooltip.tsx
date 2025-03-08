@@ -7,24 +7,29 @@ import { PREFIX_CLASS } from '@/variables/app';
 
 import './tooltip.css';
 
+type TooltipPlacement =
+  | 'top'
+  | 'topLeft'
+  | 'topRight'
+  | 'bottom'
+  | 'bottomLeft'
+  | 'bottomRight'
+  | 'left'
+  | 'leftTop'
+  | 'leftBottom'
+  | 'right'
+  | 'rightTop'
+  | 'rightBottom';
+
+type TooltipColor = 'dark' | 'light';
+type TooltipTrigger = 'hover' | 'click' | 'focus';
+
 export interface TooltipProps {
   title: React.ReactNode;
   description?: React.ReactNode;
-  color?: 'dark' | 'light';
-  placement?:
-    | 'top'
-    | 'topLeft'
-    | 'topRight'
-    | 'bottom'
-    | 'bottomLeft'
-    | 'bottomRight'
-    | 'left'
-    | 'leftTop'
-    | 'leftBottom'
-    | 'right'
-    | 'rightTop'
-    | 'rightBottom';
-  trigger?: 'hover' | 'click' | 'focus';
+  color?: TooltipColor;
+  trigger?: TooltipTrigger;
+  placement?: TooltipPlacement;
   showArrow?: boolean;
   disabled?: boolean;
   defaultOpen?: boolean;

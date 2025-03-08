@@ -160,6 +160,8 @@ const meta = {
       },
     },
     prefixCls: {
+      control: { type: 'text' },
+      description: 'CSS prefix class for custom styles.',
       table: {
         disable: true,
       },
