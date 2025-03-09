@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 import { Button, DatePicker, DatePickerValue } from '@/components';
-import moment from 'moment';
 
 const meta = {
   title: 'In-Progress/DatePicker',
@@ -137,6 +137,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Base = {
   tags: ['!dev'],
+  render: (args) => {
+    const [dateSelected, setDateSelected] = useState<DatePickerValue>(new Date());
+
+    return <DatePicker {...args} value={dateSelected} onChange={setDateSelected} />;
+  },
 } satisfies Story;
 
 export const Default: Story = {
