@@ -4,7 +4,7 @@ import { Slider } from '@/components';
 import { useState } from 'react';
 
 const meta = {
-  title: 'In-Progress/Slider',
+  title: 'Testing/Slider',
   component: Slider,
   parameters: {
     layout: 'centered',
@@ -16,12 +16,30 @@ const meta = {
     value: {
       control: { type: 'object' },
       description: 'Current value(s) of the slider as an array.',
+      table: {
+        type: { summary: 'number[]' },
+      },
     },
     tooltip: {
       control: { type: 'object' },
-      description: 'Tooltip settings (placement, formatter, formatterLabel).',
+      description: 'Configures tooltip behavior (placement, formatting).',
+      table: {
+        type: {
+          summary: `{
+            placement?: "top" | "bottom";
+            formatter?: (value: number) => React.ReactNode | null;
+            formatterLabel?: (value: number) => React.ReactNode | null;
+          }`,
+        },
+      },
     },
-    onChange: { action: 'changed', description: 'Callback when the slider value changes.' },
+    onChange: {
+      action: 'changed',
+      description: 'Callback when the slider value changes.',
+      table: {
+        type: { summary: '(value: number[]) => void' },
+      },
+    },
     className: { control: { type: 'text' }, description: 'Custom class for styling.' },
     prefixCls: {
       control: { type: 'text' },
@@ -65,7 +83,7 @@ export const Range: Story = {
   },
 };
 
-export const RangeWithLabel: Story = {
+export const RangeWithLabelTooltip: Story = {
   args: {
     max: 100,
     step: 5,
