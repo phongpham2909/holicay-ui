@@ -10,13 +10,7 @@ const meta = {
     layout: 'centered',
     chromatic: { disableSnapshot: false },
   },
-  argTypes: {
-    size: {
-      control: 'inline-radio',
-      options: ['sm', 'md', 'lg'],
-      description: 'Set the size of tag',
-    },
-  },
+  argTypes: {},
   // args: { onClick: fn() },
 } satisfies Meta<typeof ProgressBar>;
 
@@ -26,5 +20,14 @@ type Story = StoryObj<typeof meta>;
 
 export const ProgressBarBase: Story = {
   name: 'Progress Bar',
-  args: {},
+  args: {
+    value: 10,
+  },
+  render: (args) => {
+    return (
+      <div className="my-10">
+        <ProgressBar {...args} className="w-80" />
+      </div>
+    );
+  },
 };
