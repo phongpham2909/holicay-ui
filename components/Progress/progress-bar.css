@@ -1,11 +1,53 @@
+.hlc-progress-bar-wrapper {
+  @apply relative;
+}
+
 .hlc-progress-bar {
-  @apply relative h-md overflow-hidden bg-fill-base-tertiary_subtle rounded-md;
+  @apply relative overflow-hidden h-md bg-fill-base-tertiary_subtle rounded-md;
   /* Fix overflow clipping in Safari */
   /* https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0 */
   transform: translateZ(0);
 }
 
 .hlc-progress-bar-indicator {
-  @apply w-full h-full bg-fill-brand-green-primary rounded-md;
+  @apply relative w-full h-full bg-fill-brand-green-primary rounded-md;
   transition: transform 660ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.hlc-progress-bar-tooltip {
+  @apply absolute -top-[44px] min-w-10 bg-surface-base-primary text-base-secondary text-center text-xs font-primary font-semibold px-lg py-md rounded-md shadow-lg;
+  & > .hlc-tooltip-arrow {
+    @apply absolute z-[1] block pointer-events-none w-4 h-4 overflow-hidden;
+  }
+  & > .hlc-tooltip-arrow::before {
+    content: '';
+    inset-inline: 0;
+    @apply absolute z-0 w-2 h-2 m-auto bg-white;
+    transform: translateY(50%) rotate(-135deg);
+  }
+  &.hlc-tooltip-placement-top {
+    @apply -top-[44px] bottom-auto;
+  }
+  &.hlc-tooltip-placement-bottom {
+    @apply -bottom-[44px] top-auto;
+  }
+  &.hlc-tooltip-placement-bottom > .hlc-tooltip-arrow {
+    @apply -top-md;
+  }
+}
+
+.hlc-progress-bar-tooltip-label {
+  @apply text-base-secondary text-center text-base font-primary font-medium;
+}
+
+.hlc-progress-bar-wrapper:has(.hlc-tooltip-label-placement-left) {
+  @apply inline-flex items-center flex-row-reverse gap-x-lg;
+}
+
+.hlc-progress-bar-wrapper:has(.hlc-tooltip-label-placement-right) {
+  @apply inline-flex items-center gap-x-lg;
+}
+
+.hlc-progress-bar-wrapper:has(.hlc-tooltip-label-placement-bottomRight) {
+  @apply inline-flex flex-col items-end gap-y-md;
 }
