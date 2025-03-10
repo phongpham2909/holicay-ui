@@ -5,7 +5,9 @@ import { PREFIX_CLASS } from '@/variables/app';
 
 import './progress-bar.css';
 
-type TooltipPlacement = 'top' | 'bottom' | 'right' | 'left' | 'bottomRight';
+const progressZero = 2.5;
+
+type TooltipPlacement = 'top' | 'bottom' | 'right' | 'left' | 'bottomRight' | 'bottomLeft';
 
 interface ProgressBarTooltip {
   showArrow?: boolean;
@@ -21,11 +23,7 @@ export interface ProgressBarProps extends RadixUIProgress.ProgressProps {
 }
 
 export const ProgressBar = ({
-  tooltip = {
-    showArrow: true,
-    placement: 'bottom',
-    formatter: (v) => `${v}%`,
-  },
+  tooltip,
   value,
   className,
   wrapperClassName,
@@ -35,8 +33,6 @@ export const ProgressBar = ({
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
 
-  const progressZero = 2.5;
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setProgress(value === 0 ? progressZero : value || progressZero);
@@ -44,9 +40,24 @@ export const ProgressBar = ({
     return () => clearTimeout(timer);
   }, [value]);
 
+  if (!tooltip) {
+    return (
+      <RadixUIProgress.Root
+        {...rest}
+        value={progress}
+        className={clsx(`${prefixCls}-progress-bar`, className)}
+      >
+        <RadixUIProgress.Indicator
+          className={`${prefixCls}-progress-bar-indicator`}
+          style={{ transform: `translateX(-${100 - progress}%)` }}
+        />
+      </RadixUIProgress.Root>
+    );
+  }
+
   return (
     <div className={clsx(`${prefixCls}-progress-bar-wrapper`, wrapperClassName)}>
-      {!!tooltip?.formatter && (
+      {!tooltip?.formatterLabel && !!tooltip?.formatter && (
         <div
           ref={tooltipRef}
           className={clsx(`${prefixCls}-progress-bar-tooltip`, {
@@ -76,7 +87,7 @@ export const ProgressBar = ({
         />
       </RadixUIProgress.Root>
 
-      {!!tooltip?.formatterLabel && (
+      {!!tooltip?.formatterLabel && !tooltip?.formatter && (
         <div
           ref={tooltipRef}
           className={clsx(`${prefixCls}-progress-bar-tooltip-label`, {

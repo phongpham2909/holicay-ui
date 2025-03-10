@@ -3,7 +3,7 @@
 }
 
 .hlc-progress-bar {
-  @apply relative overflow-hidden h-md bg-fill-base-tertiary_subtle rounded-md;
+  @apply relative overflow-hidden h-md w-full bg-fill-base-tertiary_subtle rounded-md;
   /* Fix overflow clipping in Safari */
   /* https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0 */
   transform: translateZ(0);
@@ -37,7 +37,7 @@
 }
 
 .hlc-progress-bar-tooltip-label {
-  @apply text-base-secondary text-center text-base font-primary font-medium;
+  @apply text-base-secondary text-center text-sm font-primary font-medium;
 }
 
 .hlc-progress-bar-wrapper:has(.hlc-tooltip-label-placement-left) {
@@ -50,4 +50,8 @@
 
 .hlc-progress-bar-wrapper:has(.hlc-tooltip-label-placement-bottomRight) {
   @apply inline-flex flex-col items-end gap-y-md;
+}
+
+.hlc-progress-bar-wrapper:has(.hlc-tooltip-label-placement-bottomLeft) {
+  @apply inline-flex flex-col items-start gap-y-md;
 }

@@ -1,0 +1,41 @@
+import { Meta, Canvas, ArgTypes, ArgsTable, Controls } from '@storybook/blocks';
+import * as ProgressStories from './Progress.stories';
+import * as ProgressCircleStories from './ProgressCircle.stories';
+import * as ProgressHalfCircleStories from './ProgressHalfCircle.stories';
+
+<Meta of={ProgressStories} />
+
+# Progress
+
+- [Overview](#overview)
+- [Usage](#usage)
+- [Props](#props)
+- [Variants](#variants)
+
+## Overview
+
+Display the current progress of an operation flow.
+If it will take a long time to complete an operation, you can use Progress to show the current progress and status.
+
+- When an operation will interrupt the current interface, or it needs to run in the background for more than 2 seconds.
+
+- When you need to display the completion percentage of an operation.
+
+## Usage
+
+```js
+import { ProgressBar, ProgressCircle } from '@holicay/design-system';
+```
+
+<Canvas of={ProgressStories.Base} />
+
+## Props
+
+<ArgTypes />
+
+## Variants
+
+<Canvas of={ProgressStories.ProgressBarWithTooltip} layout="centered" />
+<Canvas of={ProgressStories.ProgressBarWithLabel} layout="centered" />
+<Canvas of={ProgressCircleStories.ProgressCircleBase} layout="centered" />
+<Canvas of={ProgressHalfCircleStories.ProgressHalfCircleBase} layout="centered" />
