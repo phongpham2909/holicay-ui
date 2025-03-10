@@ -6,10 +6,10 @@ import { PREFIX_CLASS } from '@/variables/app';
 
 import './slider.css';
 
-type SliderTooltipPlacement = 'top' | 'bottom';
+type TooltipPlacement = 'top' | 'bottom';
 
 interface SliderTooltip {
-  placement?: SliderTooltipPlacement;
+  placement?: TooltipPlacement;
   formatter?: (value: number) => React.ReactNode | null;
   formatterLabel?: (value: number) => React.ReactNode | null;
 }
