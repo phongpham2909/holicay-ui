@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import * as RadixUIProgress from '@radix-ui/react-progress';
 import { PREFIX_CLASS } from '@/variables/app';
 
-import './progress-bar.css';
+import './progress.css';
 
 const progressZero = 2.5;
 
