@@ -1,14 +1,12 @@
 import React from 'react';
 
-import './progress-circle.css';
-
 interface ProgressCircleProps {
+  size?: number;
   percentage: number; // 0 to 100
   percentageSeperator?: string;
-  size?: number;
   strokeWidth?: number;
-  color?: string;
   strokeColor?: string;
+  hasBackground?: boolean;
   bgStrokeColor?: string;
   fontStyle?: {
     fontSize?: string;
@@ -18,29 +16,38 @@ interface ProgressCircleProps {
   };
 }
 
-export const ProgressCircle: React.FC<ProgressCircleProps> = ({
+export const ProgressCircle = ({
+  size = 200,
   percentage,
   percentageSeperator,
-  fontStyle,
-  size = 200,
   strokeWidth = 20,
   strokeColor = '#f25142',
   bgStrokeColor = '#F5F5F5',
-}) => {
+  hasBackground = true,
+  fontStyle,
+}: ProgressCircleProps) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (percentage / 100) * circumference;
 
   return (
-    <svg width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle
-        cx={size / 2}
-        cy={size / 2}
-        r={radius}
-        fill="none"
-        stroke={bgStrokeColor}
-        strokeWidth={strokeWidth}
-      />
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 200 200"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {hasBackground && (
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="none"
+          stroke={bgStrokeColor}
+          strokeWidth={strokeWidth}
+        />
+      )}
       <circle
         cx={size / 2}
         cy={size / 2}

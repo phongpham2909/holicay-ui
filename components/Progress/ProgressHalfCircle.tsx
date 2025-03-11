@@ -1,21 +1,22 @@
 import React from 'react';
 
-type ISemiCircleProgress = {
-  strokeWidth?: number;
-  strokeLinecap?: 'butt' | 'round' | 'square' | 'inherit';
-  percentage: number;
-  percentageSeperator?: string;
+export interface ProgressHalfCircleProps {
   size?: number;
+  percentage: number; // 0 to 100
+  percentageSeperator?: string;
+  strokeWidth?: number;
   strokeColor?: string;
+  strokeLinecap?: 'butt' | 'round' | 'square' | 'inherit';
+  hasBackground?: boolean;
+  bgStrokeColor?: string;
   fontStyle?: {
     fontSize?: string;
     fontFamily?: string;
     fontWeight?: string;
     fill?: string;
   };
-  hasBackground?: boolean;
-  bgStrokeColor?: string;
-};
+  className?: string;
+}
 
 export const ProgressHalfCircle = ({
   size = 200,
@@ -25,9 +26,9 @@ export const ProgressHalfCircle = ({
   strokeLinecap = 'round',
   strokeColor = '#f25142',
   bgStrokeColor = '#F5F5F5',
-  hasBackground = false,
+  hasBackground = true,
   fontStyle,
-}: ISemiCircleProgress) => {
+}: ProgressHalfCircleProps) => {
   if (percentage < 0 || percentage > 100) {
     throw new Error('Percentage must be between 0 and 100');
   }
