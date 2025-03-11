@@ -11,6 +11,9 @@ import {
   BadgeColor,
   BadgeShape,
 } from './constants';
+import { Dot, DotProps } from '../Dot';
+import { Icon, IconProps } from '../Icon';
+import { Avatar, AvatarProps } from '../Avatar';
 
 import './badge.css';
 
@@ -22,10 +25,12 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   size?: BadgeSize;
   color?: BadgeColor;
   shape?: BadgeShape;
-  count?: number;
   selected?: boolean;
   bordered?: boolean;
   closable?: boolean;
+  dotProps?: DotProps;
+  iconProps?: IconProps;
+  avatarProps?: AvatarProps;
   icon?: React.ReactNode;
   closeIcon?: React.ReactNode;
   prefixIcon?: React.ReactNode;
@@ -43,7 +48,9 @@ export const Badge = ({
   selected = false,
   bordered = true,
   closable = false,
-  count,
+  dotProps,
+  iconProps,
+  avatarProps,
   icon,
   closeIcon,
   prefixIcon,
@@ -54,11 +61,27 @@ export const Badge = ({
   children,
   ...rest
 }: PropsWithOptionalChildren<BadgeProps>) => {
+  const withDot = !!dotProps && (
+    <span className={clsx(`${prefixCls}-badge-prefix-icon`, `${prefixCls}-badge-with-dot`)}>
+      <Dot size="md" {...dotProps} />
+    </span>
+  );
+
+  const withIcon = !!iconProps && (
+    <span className={clsx(`${prefixCls}-badge-prefix-icon`, `${prefixCls}-badge-with-icon`)}>
+      <Icon size={size === 'sm' ? 'xs' : 'md'} {...iconProps} />
+    </span>
+  );
+
+  const withAvatar = !!avatarProps && (
+    <span className={clsx(`${prefixCls}-badge-prefix-icon`, `${prefixCls}-badge-with-avatar`)}>
+      <Avatar size={size === 'sm' ? '2xs' : 'xxs'} {...avatarProps} />
+    </span>
+  );
+
   const withPrefixIcon = (icon || prefixIcon) && (
     <span className={`${prefixCls}-badge-prefix-icon`}>{icon || prefixIcon}</span>
   );
-
-  const withCount = !!count && <span className={`${prefixCls}-badge-count`}>{count}</span>;
 
   const withSuffixIcon = !!suffixIcon && (
     <span className={`${prefixCls}-badge-suffix-icon`}>{suffixIcon}</span>
@@ -86,11 +109,9 @@ export const Badge = ({
         }
       )}
     >
-      {withPrefixIcon}
+      {withPrefixIcon || withDot || withAvatar || withIcon}
 
       {children || label}
-
-      {withCount}
 
       {withSuffixIcon || withCloseIcon}
     </span>

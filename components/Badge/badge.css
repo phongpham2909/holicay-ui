@@ -1,23 +1,26 @@
 .hlc-badge {
-  @apply cursor-default inline-flex items-center font-primary text-base-secondary border-[1.5px] border-base-primary bg-surface-base-primary align-bottom transition-all duration-200 ease-out;
+  @apply cursor-default inline-flex items-center font-primary text-base-secondary border-none bg-surface-base-primary align-bottom transition-all duration-200 ease-out;
+  box-shadow: 0 0 0 1.5px var(--color-gray-300);
 }
 
 .hlc-badge.hlc-badge-selected {
-  @apply text-brand-green-primary_active border-base-primary_active bg-surface-base-primary_active;
+  @apply text-brand-green-primary_active bg-surface-base-primary_active;
+  box-shadow: 0 0 0 1.5px var(--color-gray-500);
 }
 
 .hlc-badge.hlc-badge-solid.hlc-badge-selected {
-  @apply text-white border-brand-green-solid_hover bg-fill-brand-green-primary;
+  @apply text-white bg-fill-brand-green-primary;
+  box-shadow: 0 0 0 1.5px var(--color-secondary-600);
 }
 
 .hlc-badge-sm {
-  @apply text-xs font-medium px-[5px] h-[18px];
+  @apply text-xs font-medium px-sm h-[18px];
 }
 .hlc-badge-md {
-  @apply text-sm font-medium px-[7px] h-[22px];
+  @apply text-xs font-medium px-md h-[22px];
 }
 .hlc-badge-lg {
-  @apply text-sm font-medium px-[9px] h-[24px];
+  @apply text-sm font-medium px-[10px] h-[24px];
 }
 
 .hlc-badge-rounded {
@@ -28,6 +31,10 @@
   @apply rounded-sm;
 }
 
+.hlc-badge-square.hlc-badge-sm {
+  @apply rounded-xs;
+}
+
 .hlc-badge > .hlc-badge-prefix-icon,
 .hlc-badge > .hlc-badge-suffix-icon,
 .hlc-badge > .hlc-badge-close-icon {
@@ -36,125 +43,102 @@
 
 .hlc-badge.hlc-badge-sm > .hlc-badge-prefix-icon {
   @apply me-xs;
-  & > .hlc-avatar {
-    @apply w-3 h-3;
-  }
 }
 .hlc-badge.hlc-badge-md > .hlc-badge-prefix-icon {
   @apply me-xs;
-  & > .hlc-avatar {
-    @apply w-4 h-4;
-  }
 }
 .hlc-badge.hlc-badge-lg > .hlc-badge-prefix-icon {
   @apply me-sm;
-  & > .hlc-avatar {
-    @apply w-4 h-4;
-  }
 }
 
-.hlc-badge > .hlc-badge-suffix-icon,
-.hlc-badge.hlc-badge-md > .hlc-badge-suffix-icon {
+.hlc-badge.hlc-badge-sm > .hlc-badge-suffix-icon {
   @apply ms-xs;
 }
+.hlc-badge.hlc-badge-md > .hlc-badge-suffix-icon,
 .hlc-badge.hlc-badge-lg > .hlc-badge-suffix-icon {
   @apply ms-sm;
 }
 
-.hlc-badge > .hlc-badge-prefix-icon > .hlc-dot,
-.hlc-badge.hlc-badge-md > .hlc-badge-prefix-icon > .hlc-dot,
-.hlc-badge.hlc-badge-lg > .hlc-badge-prefix-icon > .hlc-dot {
+.hlc-badge > .hlc-badge-with-dot > .hlc-dot {
   @apply m-xxs;
-}
-
-.hlc-badge > .hlc-badge-count {
-  @apply font-medium rounded-xxs ms-[3px] bg-fill-base-primary_subtle;
-}
-
-.hlc-badge.hlc-badge-sm > .hlc-badge-count {
-  @apply px-xs text-xs min-w-4;
-}
-
-.hlc-badge.hlc-badge-md > .hlc-badge-count {
-  @apply px-[5px] py-[1px] text-xs min-w-[18px];
-}
-
-.hlc-badge.hlc-badge-lg > .hlc-badge-count {
-  @apply px-sm text-sm min-w-5;
 }
 
 .hlc-badge > .hlc-badge-close-icon {
   @apply cursor-pointer m-[3px] ms-[3px];
 }
 
-.hlc-badge.hlc-badge-sm:has(.hlc-badge-count) {
-  @apply !pr-xs;
+.hlc-badge.hlc-badge-sm {
+  &:has(.hlc-badge-with-dot) {
+    @apply pl-sm pr-md;
+  }
+  &:has(.hlc-badge-with-avatar) {
+    @apply pl-xs pr-md;
+  }
+  &:has(.hlc-badge-prefix-icon.hlc-badge-with-icon) {
+    @apply pl-sm pr-md;
+  }
+  &:has(.hlc-badge-suffix-icon.hlc-badge-with-icon) {
+    @apply pl-md pr-sm;
+  }
 }
 
-.hlc-badge.hlc-badge-md:has(.hlc-badge-count) {
-  @apply !pr-[3px];
+.hlc-badge.hlc-badge-md {
+  &:has(.hlc-badge-with-dot) {
+    @apply pl-sm pr-md;
+  }
+  &:has(.hlc-badge-with-avatar) {
+    @apply pl-[3px] pr-md;
+  }
+  &:has(.hlc-badge-prefix-icon.hlc-badge-with-icon) {
+    @apply pl-sm pr-md;
+  }
+  &:has(.hlc-badge-suffix-icon.hlc-badge-with-icon) {
+    @apply pl-md pr-sm;
+  }
 }
 
-.hlc-badge.hlc-badge-lg:has(.hlc-badge-count) {
-  @apply !pr-sm;
-}
-
-.hlc-badge.hlc-badge-sm:has(.hlc-badge-close-icon):not(.hlc-badge-prefix-icon) {
-  @apply pl-sm pr-xs;
-}
-
-.hlc-badge.hlc-badge-md:has(.hlc-badge-close-icon):not(.hlc-badge-prefix-icon) {
-  @apply pl-[9px] pr-xs;
-}
-
-.hlc-badge.hlc-badge-lg:has(.hlc-badge-close-icon):not(.hlc-badge-prefix-icon) {
-  @apply pl-md pr-sm;
-}
-
-.hlc-badge.hlc-badge-sm:has(.hlc-badge-prefix-icon):not(.hlc-badge-close-icon) {
-  @apply pl-[3px] pr-[7px];
-}
-
-.hlc-badge.hlc-badge-md:has(.hlc-badge-prefix-icon):not(.hlc-badge-close-icon) {
-  @apply pl-xxs pr-[7px];
-}
-
-.hlc-badge.hlc-badge-lg:has(.hlc-badge-prefix-icon):not(.hlc-badge-close-icon) {
-  @apply pl-[3px] pr-[9px];
-}
-
-.hlc-badge.hlc-badge-sm:has(.hlc-badge-prefix-icon):has(.hlc-badge-close-icon) {
-  @apply px-xs;
-}
-
-.hlc-badge.hlc-badge-md:has(.hlc-badge-prefix-icon):has(.hlc-badge-close-icon) {
-  @apply pl-[5px] pr-xs;
-}
-
-.hlc-badge.hlc-badge-lg:has(.hlc-badge-prefix-icon):has(.hlc-badge-close-icon) {
-  @apply pl-md pr-xs;
+.hlc-badge.hlc-badge-lg {
+  &:has(.hlc-badge-with-dot) {
+    @apply pl-md pr-[10px];
+  }
+  &:has(.hlc-badge-with-avatar) {
+    @apply pl-xs pr-[10px];
+  }
+  &:has(.hlc-badge-prefix-icon.hlc-badge-with-icon) {
+    @apply pl-sm pr-[10px];
+  }
+  &:has(.hlc-badge-suffix-icon.hlc-badge-with-icon) {
+    @apply pl-[10px] pr-sm;
+  }
 }
 
 .hlc-badge.hlc-badge-primary:not(.hlc-badge-solid) {
-  @apply text-brand-red-primary border-brand-red-secondary;
+  @apply text-brand-red-primary;
+  box-shadow: 0 0 0 1.5px var(--color-primary-200);
 }
 .hlc-badge.hlc-badge-gray:not(.hlc-badge-solid) {
-  @apply text-base-secondary border-base-secondary;
+  @apply text-base-secondary;
+  box-shadow: 0 0 0 1.5px var(--color-gray-200);
 }
 .hlc-badge.hlc-badge-error:not(.hlc-badge-solid) {
-  @apply text-error-primary border-error-secondary;
+  @apply text-error-primary;
+  box-shadow: 0 0 0 1.5px var(--color-error-200);
 }
 .hlc-badge.hlc-badge-warning:not(.hlc-badge-solid) {
-  @apply text-warning-primary border-warning-secondary;
+  @apply text-warning-primary;
+  box-shadow: 0 0 0 1.5px var(--color-warning-200);
 }
 .hlc-badge.hlc-badge-success:not(.hlc-badge-solid) {
-  @apply text-success-primary border-success-secondary;
+  @apply text-success-primary;
+  box-shadow: 0 0 0 1.5px var(--color-success-200);
 }
 .hlc-badge.hlc-badge-additional:not(.hlc-badge-solid) {
-  @apply text-additional-primary border-additional-secondary;
+  @apply text-additional-primary;
+  box-shadow: 0 0 0 1.5px var(--color-additional-200);
 }
 .hlc-badge.hlc-badge-info:not(.hlc-badge-solid) {
-  @apply text-info-primary border-info-secondary;
+  @apply text-info-primary;
+  box-shadow: 0 0 0 1.5px var(--color-info-200);
 }
 
 .hlc-badge.hlc-badge-pill.hlc-badge-primary {
@@ -180,7 +164,11 @@
 }
 
 .hlc-badge.hlc-badge-solid {
-  @apply text-white border-none;
+  @apply text-white border-none shadow-none;
+}
+
+.hlc-badge.hlc-badge-solid > .hlc-badge-with-dot > .hlc-dot {
+  @apply bg-white;
 }
 
 .hlc-badge.hlc-badge-solid.hlc-badge-primary {

@@ -1,36 +1,281 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
 
-import { Badge, Avatar, Icon, Dot } from '@/components';
+import { Badge, BadgeProps } from '@/components';
+import { BADGE_SIZES, BADGE_TYPES, BADGE_COLORS, BADGE_SHAPES } from '@/components/Badge/constants';
 import { images } from '@/variables/images';
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
   title: 'In-Progress/Badge',
   component: Badge,
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',
   },
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    // 👇 All Button stories expect a label arg
+    label: { control: 'text', description: 'Text content inside the badge' },
+    type: {
+      control: 'select',
+      options: BADGE_TYPES,
+      description: 'Type of the badge',
+    },
     size: {
-      control: 'inline-radio',
-      options: ['sm', 'md', 'lg'],
-      description: 'Set the size of tag',
+      control: 'select',
+      options: BADGE_SIZES,
+      description: 'Size of the badge',
+    },
+    color: {
+      control: 'select',
+      options: BADGE_COLORS,
+      description: 'Color of the badge',
+    },
+    shape: {
+      control: 'select',
+      options: BADGE_SHAPES,
+      description: 'Shape of the badge',
+    },
+    selected: {
+      control: 'boolean',
+      description: 'Whether the badge is selected',
+    },
+    bordered: {
+      control: 'boolean',
+      description: 'Whether the badge has a border',
+    },
+    closable: {
+      control: 'boolean',
+      description: 'Whether the badge has a close button',
+    },
+    icon: {
+      control: 'object',
+      description: 'Icon to be displayed inside the badge',
+    },
+    closeIcon: {
+      control: 'object',
+      description: 'Close icon for the badge',
+    },
+    prefixIcon: {
+      control: 'object',
+      description: 'Prefix icon for the badge',
+    },
+    suffixIcon: {
+      control: 'object',
+      description: 'Suffix icon for the badge',
+    },
+    dotProps: {
+      control: 'object',
+      description: 'Props for the Dot component',
+    },
+    iconProps: {
+      control: 'object',
+      description: 'Props for the Icon component',
+    },
+    avatarProps: {
+      control: 'object',
+      description: 'Props for the Avatar component',
+    },
+    prefixCls: {
+      control: 'text',
+      description: 'Prefix class name for styling',
+      table: {
+        disable: true,
+      },
+    },
+    onClose: {
+      action: 'closed',
+      description: 'Callback fired when the close icon is clicked',
     },
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  // args: { onClick: fn() },
 } satisfies Meta<typeof Badge>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+const BadgeItems = (props: BadgeProps) => (
+  <div className="flex flex-col gap-y-4">
+    <div className="flex items-center gap-x-4">
+      <Badge {...props} color="gray" />
+      <Badge
+        {...props}
+        color="gray"
+        dotProps={{
+          color: 'gray',
+        }}
+      />
+      <Badge
+        {...props}
+        color="gray"
+        avatarProps={{
+          src: images.HLC_AVATAR_0,
+          alt: '',
+        }}
+      />
+      <Badge
+        {...props}
+        color="gray"
+        iconProps={{
+          name: 'icon-car-02',
+        }}
+      />
+    </div>
+
+    <div className="flex items-center gap-x-4">
+      <Badge {...props} color="primary" />
+      <Badge
+        {...props}
+        color="primary"
+        dotProps={{
+          color: 'primary',
+        }}
+      />
+      <Badge
+        {...props}
+        color="primary"
+        avatarProps={{
+          src: images.HLC_AVATAR_1,
+          alt: '',
+        }}
+      />
+      <Badge
+        {...props}
+        color="primary"
+        iconProps={{
+          name: 'icon-car-02',
+        }}
+      />
+    </div>
+
+    <div className="flex items-center gap-x-4">
+      <Badge {...props} color="error" />
+      <Badge
+        {...props}
+        color="error"
+        dotProps={{
+          color: 'error',
+        }}
+      />
+      <Badge
+        {...props}
+        color="error"
+        avatarProps={{
+          src: images.HLC_AVATAR_2,
+          alt: '',
+        }}
+      />
+      <Badge
+        {...props}
+        color="error"
+        iconProps={{
+          name: 'icon-car-02',
+        }}
+      />
+    </div>
+
+    <div className="flex items-center gap-x-4">
+      <Badge {...props} color="warning" />
+      <Badge
+        {...props}
+        color="warning"
+        dotProps={{
+          color: 'warning',
+        }}
+      />
+      <Badge
+        {...props}
+        color="warning"
+        avatarProps={{
+          src: images.HLC_AVATAR_3,
+          alt: '',
+        }}
+      />
+      <Badge
+        {...props}
+        color="warning"
+        iconProps={{
+          name: 'icon-car-02',
+        }}
+      />
+    </div>
+
+    <div className="flex items-center gap-x-4">
+      <Badge {...props} color="success" />
+      <Badge
+        {...props}
+        color="success"
+        dotProps={{
+          color: 'success',
+        }}
+      />
+      <Badge
+        {...props}
+        color="success"
+        avatarProps={{
+          src: images.HLC_AVATAR_4,
+          alt: '',
+        }}
+      />
+      <Badge
+        {...props}
+        color="success"
+        iconProps={{
+          name: 'icon-car-02',
+        }}
+      />
+    </div>
+
+    <div className="flex items-center gap-x-4">
+      <Badge {...props} color="additional" />
+      <Badge
+        {...props}
+        color="additional"
+        dotProps={{
+          color: 'additional',
+        }}
+      />
+      <Badge
+        {...props}
+        color="additional"
+        avatarProps={{
+          src: images.HLC_AVATAR_5,
+          alt: '',
+        }}
+      />
+      <Badge
+        {...props}
+        color="additional"
+        iconProps={{
+          name: 'icon-car-02',
+        }}
+      />
+    </div>
+
+    <div className="flex items-center gap-x-4">
+      <Badge {...props} color="info" />
+      <Badge
+        {...props}
+        color="info"
+        dotProps={{
+          color: 'info',
+        }}
+      />
+      <Badge
+        {...props}
+        color="info"
+        avatarProps={{
+          src: images.HLC_AVATAR_6,
+          alt: '',
+        }}
+      />
+      <Badge
+        {...props}
+        color="info"
+        iconProps={{
+          name: 'icon-car-02',
+        }}
+      />
+    </div>
+  </div>
+);
+
 export const Base: Story = {
   tags: ['!dev'],
   args: {
@@ -50,86 +295,7 @@ export const BadgeRoundedPill: Story = {
     label: 'Holicay',
   },
   render: ({ ...props }) => {
-    return (
-      <div className="flex flex-col gap-y-4">
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="gray" />
-          <Badge {...props} color="gray" prefixIcon={<Dot color="gray" size="md" />} />
-          <Badge
-            {...props}
-            color="gray"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="gray" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="primary" />
-          <Badge {...props} color="primary" prefixIcon={<Dot color="primary" size="md" />} />
-          <Badge
-            {...props}
-            color="primary"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="primary" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="error" />
-          <Badge {...props} color="error" prefixIcon={<Dot color="error" size="md" />} />
-          <Badge
-            {...props}
-            color="error"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="error" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="warning" />
-          <Badge {...props} color="warning" prefixIcon={<Dot color="warning" size="md" />} />
-          <Badge
-            {...props}
-            color="warning"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="warning" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="success" />
-          <Badge {...props} color="success" prefixIcon={<Dot color="success" size="md" />} />
-          <Badge
-            {...props}
-            color="success"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="success" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="additional" />
-          <Badge {...props} color="additional" prefixIcon={<Dot color="additional" size="md" />} />
-          <Badge
-            {...props}
-            color="additional"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="additional" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="info" />
-          <Badge {...props} color="info" prefixIcon={<Dot color="info" size="md" />} />
-          <Badge
-            {...props}
-            color="info"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="info" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-      </div>
-    );
+    return <BadgeItems {...props} />;
   },
 };
 
@@ -142,86 +308,7 @@ export const BadgeRoundedOutline: Story = {
     label: 'Holicay',
   },
   render: ({ ...props }) => {
-    return (
-      <div className="flex flex-col gap-y-4">
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="gray" />
-          <Badge {...props} color="gray" prefixIcon={<Dot color="gray" size="md" />} />
-          <Badge
-            {...props}
-            color="gray"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="gray" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="primary" />
-          <Badge {...props} color="primary" prefixIcon={<Dot color="primary" size="md" />} />
-          <Badge
-            {...props}
-            color="primary"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} />}
-          />
-          <Badge {...props} color="primary" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="error" />
-          <Badge {...props} color="error" prefixIcon={<Dot color="error" size="md" />} />
-          <Badge
-            {...props}
-            color="error"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="error" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="warning" />
-          <Badge {...props} color="warning" prefixIcon={<Dot color="warning" size="md" />} />
-          <Badge
-            {...props}
-            color="warning"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="warning" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="success" />
-          <Badge {...props} color="success" prefixIcon={<Dot color="success" size="md" />} />
-          <Badge
-            {...props}
-            color="success"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="success" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="additional" />
-          <Badge {...props} color="additional" prefixIcon={<Dot color="additional" size="md" />} />
-          <Badge
-            {...props}
-            color="additional"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="additional" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="info" />
-          <Badge {...props} color="info" prefixIcon={<Dot color="info" size="md" />} />
-          <Badge
-            {...props}
-            color="info"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="info" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-      </div>
-    );
+    return <BadgeItems {...props} />;
   },
 };
 
@@ -234,86 +321,7 @@ export const BadgeRoundedSolid: Story = {
     label: 'Holicay',
   },
   render: ({ ...props }) => {
-    return (
-      <div className="flex flex-col gap-y-4">
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="gray" />
-          <Badge {...props} color="gray" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="gray"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="gray" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="primary" />
-          <Badge {...props} color="primary" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="primary"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="primary" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="error" />
-          <Badge {...props} color="error" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="error"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="error" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="warning" />
-          <Badge {...props} color="warning" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="warning"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="warning" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="success" />
-          <Badge {...props} color="success" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="success"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="success" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="additional" />
-          <Badge {...props} color="additional" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="additional"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="additional" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="info" />
-          <Badge {...props} color="info" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="info"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="info" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-      </div>
-    );
+    return <BadgeItems {...props} />;
   },
 };
 
@@ -326,86 +334,7 @@ export const BadgeSquarePill: Story = {
     label: 'Holicay',
   },
   render: ({ ...props }) => {
-    return (
-      <div className="flex flex-col gap-y-4">
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="gray" />
-          <Badge {...props} color="gray" prefixIcon={<Dot color="gray" size="md" />} />
-          <Badge
-            {...props}
-            color="gray"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="gray" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="primary" />
-          <Badge {...props} color="primary" prefixIcon={<Dot color="primary" size="md" />} />
-          <Badge
-            {...props}
-            color="primary"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="primary" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="error" />
-          <Badge {...props} color="error" prefixIcon={<Dot color="error" size="md" />} />
-          <Badge
-            {...props}
-            color="error"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="error" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="warning" />
-          <Badge {...props} color="warning" prefixIcon={<Dot color="warning" size="md" />} />
-          <Badge
-            {...props}
-            color="warning"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="warning" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="success" />
-          <Badge {...props} color="success" prefixIcon={<Dot color="success" size="md" />} />
-          <Badge
-            {...props}
-            color="success"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="success" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="additional" />
-          <Badge {...props} color="additional" prefixIcon={<Dot color="additional" size="md" />} />
-          <Badge
-            {...props}
-            color="additional"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="additional" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="info" />
-          <Badge {...props} color="info" prefixIcon={<Dot color="info" size="md" />} />
-          <Badge
-            {...props}
-            color="info"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="info" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-      </div>
-    );
+    return <BadgeItems {...props} />;
   },
 };
 
@@ -418,86 +347,7 @@ export const BadgeSquareOutline: Story = {
     label: 'Holicay',
   },
   render: ({ ...props }) => {
-    return (
-      <div className="flex flex-col gap-y-4">
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="gray" />
-          <Badge {...props} color="gray" prefixIcon={<Dot color="gray" size="md" />} />
-          <Badge
-            {...props}
-            color="gray"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="gray" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="primary" />
-          <Badge {...props} color="primary" prefixIcon={<Dot color="primary" size="md" />} />
-          <Badge
-            {...props}
-            color="primary"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="primary" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="error" />
-          <Badge {...props} color="error" prefixIcon={<Dot color="error" size="md" />} />
-          <Badge
-            {...props}
-            color="error"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="error" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="warning" />
-          <Badge {...props} color="warning" prefixIcon={<Dot color="warning" size="md" />} />
-          <Badge
-            {...props}
-            color="warning"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="warning" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="success" />
-          <Badge {...props} color="success" prefixIcon={<Dot color="success" size="md" />} />
-          <Badge
-            {...props}
-            color="success"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="success" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="additional" />
-          <Badge {...props} color="additional" prefixIcon={<Dot color="additional" size="md" />} />
-          <Badge
-            {...props}
-            color="additional"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="additional" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="info" />
-          <Badge {...props} color="info" prefixIcon={<Dot color="info" size="md" />} />
-          <Badge
-            {...props}
-            color="info"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="info" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-      </div>
-    );
+    return <BadgeItems {...props} />;
   },
 };
 
@@ -510,85 +360,6 @@ export const BadgeSquareSolid: Story = {
     label: 'Holicay',
   },
   render: ({ ...props }) => {
-    return (
-      <div className="flex flex-col gap-y-4">
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="gray" />
-          <Badge {...props} color="gray" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="gray"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="gray" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="primary" />
-          <Badge {...props} color="primary" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="primary"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="primary" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="error" />
-          <Badge {...props} color="error" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="error"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="error" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="warning" />
-          <Badge {...props} color="warning" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="warning"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="warning" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="success" />
-          <Badge {...props} color="success" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="success"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="success" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="additional" />
-          <Badge {...props} color="additional" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="additional"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="additional" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-
-        <div className="flex items-center gap-x-4">
-          <Badge {...props} color="info" />
-          <Badge {...props} color="info" prefixIcon={<Dot color="default" size="md" />} />
-          <Badge
-            {...props}
-            color="info"
-            prefixIcon={<Avatar size="xxs" src={images.HLC_AVATAR_0} alt="" />}
-          />
-          <Badge {...props} color="info" prefixIcon={<Icon name="icon-car-02" size="md" />} />
-        </div>
-      </div>
-    );
+    return <BadgeItems {...props} />;
   },
 };
