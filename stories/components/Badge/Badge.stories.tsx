@@ -5,33 +5,48 @@ import { BADGE_SIZES, BADGE_TYPES, BADGE_COLORS, BADGE_SHAPES } from '@/componen
 import { images } from '@/variables/images';
 
 const meta = {
-  title: 'In-Progress/Badge',
+  title: 'Testing/Badge',
   component: Badge,
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
   argTypes: {
     label: { control: 'text', description: 'Text content inside the badge' },
     type: {
       control: 'select',
       options: BADGE_TYPES,
       description: 'Type of the badge',
+      table: {
+        type: { summary: 'outline | solid | pill' },
+        defaultValue: { summary: 'pill' },
+      },
     },
     size: {
       control: 'select',
       options: BADGE_SIZES,
       description: 'Size of the badge',
+      table: {
+        type: { summary: 'sm | md | lg' },
+        defaultValue: { summary: 'md' },
+      },
     },
     color: {
       control: 'select',
       options: BADGE_COLORS,
       description: 'Color of the badge',
+      table: {
+        type: { summary: 'primary | gray | error | warning | success | additional | info' },
+        defaultValue: { summary: 'primary' },
+      },
     },
     shape: {
       control: 'select',
       options: BADGE_SHAPES,
       description: 'Shape of the badge',
+      table: {
+        type: { summary: 'rounded | square' },
+        defaultValue: { summary: 'rounded' },
+      },
     },
     selected: {
       control: 'boolean',
@@ -48,18 +63,30 @@ const meta = {
     icon: {
       control: 'object',
       description: 'Icon to be displayed inside the badge',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
     },
     closeIcon: {
       control: 'object',
       description: 'Close icon for the badge',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
     },
     prefixIcon: {
       control: 'object',
       description: 'Prefix icon for the badge',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
     },
     suffixIcon: {
       control: 'object',
       description: 'Suffix icon for the badge',
+      table: {
+        type: { summary: 'ReactNode' },
+      },
     },
     dotProps: {
       control: 'object',
@@ -76,6 +103,11 @@ const meta = {
     prefixCls: {
       control: 'text',
       description: 'Prefix class name for styling',
+      table: {
+        disable: true,
+      },
+    },
+    children: {
       table: {
         disable: true,
       },
@@ -282,6 +314,7 @@ export const Base: Story = {
     size: 'md',
     type: 'pill',
     shape: 'rounded',
+    color: 'primary',
     label: 'Holicay',
   },
 };

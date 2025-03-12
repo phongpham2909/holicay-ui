@@ -1,0 +1,68 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+
+import * as BadgeStories from './Badge.stories';
+
+<Meta of={BadgeStories} />
+
+# Badge
+
+- [Overview](#overview)
+- [Usage](#usage)
+- [Props](#props)
+- [Variants](#variants)
+
+## Overview
+
+Badges are used to highlight statuses, labels, and notifications. They come in different styles to match various design needs.
+
+## Usage
+
+To use a `Badge`, simply apply the appropriate variant class to match your design.
+
+```js
+import { Badge } from '@holicay/design-system';
+```
+
+<Canvas of={BadgeStories.Base} layout="centered" />
+
+## Props
+
+<Controls />
+
+## Variants
+
+### Rounded Pill Badge
+ - ✅ Fully rounded with a pill-like shape
+ - ✅ Best for soft, modern UI elements
+
+<Canvas of={BadgeStories.BadgeRoundedPill} />
+
+### Square Pill Badge
+ - ✅ Square but slightly rounded for a balanced look
+ - ✅ Ideal for structured labels
+
+<Canvas of={BadgeStories.BadgeSquarePill} />
+
+### Rounded Outline Badge
+ - ✅ Fully rounded but with only a border
+ - ✅ Perfect for minimal, subtle indicators
+
+<Canvas of={BadgeStories.BadgeRoundedOutline} />
+
+### Square Outline Badge
+ - ✅ Square with a border, clean and structured
+ - ✅ Ideal for small UI tags
+
+<Canvas of={BadgeStories.BadgeSquareOutline} />
+
+### Rounded Solid Badge
+ - ✅ Fully rounded, filled with a solid color
+ - ✅ Great for status labels
+
+<Canvas of={BadgeStories.BadgeRoundedSolid} />
+
+### Square Solid Badge
+ - ✅ Square-shaped with a solid fill
+ - ✅ Best for compact UI elements
+
+<Canvas of={BadgeStories.BadgeSquareSolid} />

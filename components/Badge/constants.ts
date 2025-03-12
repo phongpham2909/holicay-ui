@@ -8,6 +8,7 @@ export const BADGE_COLORS = [
   'success',
   'additional',
   'info',
+  'unknown',
 ] as const;
 export const BADGE_SHAPES = ['rounded', 'square'] as const;
 
